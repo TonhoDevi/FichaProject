@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#4a3728">
+    <title>Ficha de Personagem D&D 5e</title>
+    
+    <!-- Fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>Ficha de Personagem</h1>
+            <p>Dungeons & Dragons 5ª Edição</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir Ficha</button>
+            <button class="btn btn-secondary" onclick="showLoadModal()">📂 Carregar</button>
+            <button class="btn btn-secondary" onclick="saveCharacter()">💾 Salvar</button>
+            <button class="btn btn-danger" onclick="newCharacter()">➕ Nova Ficha</button>
+        </div>
+
+        <div class="save-indicator" id="saveIndicator">✓ Salvo automaticamente</div>
+
+        <div class="sheet-container">
+            <!-- Informações Básicas -->
+            <div class="character-info-grid">
+                <div class="input-group">
+                    <label class="input-label">Nome do Personagem</label>
+                    <input type="text" id="nomePersonagem" oninput="autoSave()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Classe e Nível</label>
+                    <input type="text" id="classeNivel" placeholder="Ex: Guerreiro 5" oninput="autoSave()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Nome do Jogador</label>
+                    <input type="text" id="nomeJogador" oninput="autoSave()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Raça</label>
+                    <input type="text" id="raca" oninput="autoSave()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Antecedente</label>
+                    <input type="text" id="antecedente" oninput="autoSave()">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Tendência</label>
+                    <input type="text" id="tendencia" oninput="autoSave()">
+                </div>
+            </div>
+
+            <div class="sheet-grid">
+                <!-- Coluna Esquerda -->
+                <div>
+                    <!-- Atributos -->
+                    <div class="section">
+                        <div class="section-title">Atributos</div>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profForca" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Força</div>
+                                <input type="number" class="stat-input" id="forca" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="forcaMod">+0</div>
+                                <div class="stat-save" id="forcaSave">TR: +0</div>
+                            </div>
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profDestreza" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Destreza</div>
+                                <input type="number" class="stat-input" id="destreza" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="destrezaMod">+0</div>
+                                <div class="stat-save" id="destrezaSave">TR: +0</div>
+                            </div>
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profConstituicao" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Constituição</div>
+                                <input type="number" class="stat-input" id="constituicao" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="constituicaoMod">+0</div>
+                                <div class="stat-save" id="constituicaoSave">TR: +0</div>
+                            </div>
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profInteligencia" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Inteligência</div>
+                                <input type="number" class="stat-input" id="inteligencia" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="inteligenciaMod">+0</div>
+                                <div class="stat-save" id="inteligenciaSave">TR: +0</div>
+                            </div>
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profSabedoria" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Sabedoria</div>
+                                <input type="number" class="stat-input" id="sabedoria" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="sabedoriaMod">+0</div>
+                                <div class="stat-save" id="sabedoriaSave">TR: +0</div>
+                            </div>
+                            <div class="stat-box">
+                                <input type="checkbox" class="stat-prof-check" id="profCarisma" onchange="calculateSavingThrows(); autoSave()">
+                                <div class="stat-label">Carisma</div>
+                                <input type="number" class="stat-input" id="carisma" value="10" oninput="calculateModifiers(); autoSave()">
+                                <div class="stat-value" id="carismaMod">+0</div>
+                                <div class="stat-save" id="carismaSave">TR: +0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Perícias -->
+                    <div class="section">
+                        <div class="section-title">Perícias</div>
+                        <div class="input-group" style="margin-bottom: 10px;">
+                            <label class="input-label">Bônus de Proficiência</label>
+                            <input type="number" id="bonusProficiencia" value="2" oninput="calculateSkills(); autoSave()">
+                        </div>
+                        <div class="skills-grid" id="skillsList"></div>
+                        
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--wood-accent);">
+                            <div class="input-group">
+                                <label class="input-label">Percepção Passiva</label>
+                                <input type="text" id="percepcaoPassiva" readonly style="background: rgba(141, 110, 99, 0.1); font-weight: 700; text-align: center;">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Intuição Passiva</label>
+                                <input type="text" id="intuicaoPassiva" readonly style="background: rgba(141, 110, 99, 0.1); font-weight: 700; text-align: center;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ataques -->
+                    <div class="section">
+                        <div class="section-title">Ataques e Magias</div>
+                        <div class="attack-list" id="attackList"></div>
+                        <button class="btn btn-secondary" onclick="addAttack()" style="width: 100%; margin-top: 10px;">+ Adicionar Ataque</button>
+                    </div>
+
+                    <!-- Equipamento -->
+                    <div class="section">
+                        <div class="section-title">Equipamento</div>
+                        <div class="input-group">
+                            <label class="input-label">Carga Máxima</label>
+                            <input type="text" id="cargaMaxima" placeholder="Ex: 150 kg" oninput="autoSave()">
+                        </div>
+                        <textarea id="equipamento" oninput="autoSave()" placeholder="Liste seu equipamento..."></textarea>
+                        <div class="moedas-grid">
+                            <div class="input-group">
+                                <label class="input-label">PC</label>
+                                <input type="number" id="pc" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PE</label>
+                                <input type="number" id="pe" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PL</label>
+                                <input type="number" id="pl" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PO</label>
+                                <input type="number" id="po" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PP</label>
+                                <input type="number" id="pp" value="0" oninput="autoSave()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna Direita -->
+                <div>
+                    <!-- Combate -->
+                    <div class="section">
+                        <div class="section-title">Combate</div>
+                        <div class="combat-grid">
+                            <div class="input-group">
+                                <label class="input-label">CA</label>
+                                <input type="number" id="ca" value="10" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">Iniciativa</label>
+                                <input type="number" id="iniciativa" value="0" oninput="autoSave()">
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <label class="input-label" style="margin-bottom: 8px;">Deslocamento</label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <label class="input-label" style="font-size: 0.65rem;">Andar</label>
+                                    <input type="text" id="deslocAndar" value="30" oninput="autoSave()">
+                                </div>
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <label class="input-label" style="font-size: 0.65rem;">Nadar</label>
+                                    <input type="text" id="deslocNadar" value="30" oninput="autoSave()">
+                                </div>
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <label class="input-label" style="font-size: 0.65rem;">Voar</label>
+                                    <input type="text" id="deslocVoar" value="-" oninput="autoSave()">
+                                </div>
+                                <div class="input-group" style="margin-bottom: 0;">
+                                    <label class="input-label" style="font-size: 0.65rem;">Escalar</label>
+                                    <input type="text" id="deslocEscalar" value="15" oninput="autoSave()">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group" style="margin-top: 15px;">
+                            <label class="input-label">Dados de Vida</label>
+                            <input type="text" id="dadosVida" placeholder="5d8" oninput="autoSave()">
+                        </div>
+                        
+                        <div class="hp-grid">
+                            <div class="input-group">
+                                <label class="input-label">PV Totais</label>
+                                <input type="number" id="pvTotais" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PV Atuais</label>
+                                <input type="number" id="pvAtuais" value="0" oninput="autoSave()">
+                            </div>
+                            <div class="input-group">
+                                <label class="input-label">PV Temporários</label>
+                                <input type="number" id="pvTemp" value="0" oninput="autoSave()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Idiomas -->
+                    <div class="section">
+                        <div class="section-title">Idiomas e Proficiências</div>
+                        <textarea id="idiomas" oninput="autoSave()" placeholder="Liste idiomas e proficiências..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Características -->
+            <div class="section">
+                <div class="section-title">Características e Habilidades</div>
+                <textarea id="caracteristicas" oninput="autoSave()" style="min-height: 120px;" placeholder="Habilidades de classe, traços raciais, talentos..."></textarea>
+            </div>
+
+            <!-- Aparência -->
+            <div class="section">
+                <div class="section-title">Aparência</div>
+                <div class="aparencia-grid">
+                    <div class="input-group">
+                        <label class="input-label">Idade</label>
+                        <input type="text" id="idade" oninput="autoSave()">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Altura</label>
+                        <input type="text" id="altura" oninput="autoSave()">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Peso</label>
+                        <input type="text" id="peso" oninput="autoSave()">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Olhos</label>
+                        <input type="text" id="olhos" oninput="autoSave()">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Pele</label>
+                        <input type="text" id="pele" oninput="autoSave()">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">Cabelos</label>
+                        <input type="text" id="cabelos" oninput="autoSave()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tesouro -->
+            <div class="section">
+                <div class="section-title">Tesouro</div>
+                <textarea id="tesouro" oninput="autoSave()" placeholder="Itens mágicos, tesouros valiosos..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Carregar -->
+    <div class="modal" id="loadModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Carregar Personagem</h2>
+            <div id="characterList"></div>
+            <button class="btn btn-secondary" onclick="hideLoadModal()" style="width: 100%; margin-top: 15px;">Fechar</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
