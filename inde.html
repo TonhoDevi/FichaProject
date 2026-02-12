@@ -201,6 +201,9 @@
                                 </select>
                             </div>
                             <div class="input-group">
+                                <label class="input-label">Bônus de Magia</label>
+                                <input type="number" id="extraBonusMagia" value="0" oninput="updateMagicAtribute(document.getElementById('habilidadeMagia').value); autoSave()">
+                            <div class="input-group">
                                 <label class="input-label">CD Magia</label>
                                 <input type="number" id="cdMagia" value="8" oninput="calculateMagicCd()">
                             </div>
@@ -304,17 +307,18 @@
                         <textarea id="idiomas" oninput="autoSave()" placeholder="Liste idiomas e proficiências..."></textarea>
                     </div>
                 </div>
-            </div>
+                
 
-            <!-- Características -->
-            <div class="section">
-                <div class="section-title">Características e Habilidades</div>
-                <textarea id="caracteristicas" oninput="autoSave()" style="min-height: 120px;" placeholder="Habilidades de classe, traços raciais, talentos..."></textarea>
-            </div>
-            <!-- Tesouro -->
-            <div class="section">
-                <div class="section-title">Tesouro</div>
-                <textarea id="tesouro" oninput="autoSave()" placeholder="Itens mágicos, tesouros valiosos..."></textarea>
+                <!-- Características -->
+                <div class="section">
+                    <div class="section-title">Características e Habilidades</div>
+                    <textarea id="caracteristicas" oninput="autoSave()" style="min-height: 120px;" placeholder="Habilidades de classe, traços raciais, talentos..."></textarea>
+                </div>
+                <!-- Tesouro -->
+                <div class="section">
+                    <div class="section-title">Tesouro</div>
+                    <textarea id="tesouro" oninput="autoSave()" placeholder="Itens mágicos, tesouros valiosos..."></textarea>
+                </div>
             </div>
         </div>
     </div>

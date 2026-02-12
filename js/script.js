@@ -25,10 +25,6 @@ const SKILLS = [
     { name: 'Sobrevivência', attr: 'sabedoria' },
     { name: 'Vigor', attr: 'constituicao' }
 ];
-
-const ATTRIBUTES = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
-var magicAttributes = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
-
 // ========================================
 // VARIÁVEIS GLOBAIS
 // ========================================
@@ -150,25 +146,26 @@ function updateSkillProf(skillName, level) {
     autoSave();
 }
 
-function calculateMagicCd(attributeName) {
-    const bonusMagia = parseInt(document.getElementById('bonusMagia').value) || 0;
+function calculateMagicCd() {
     const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
     const bonusAtributo = parseInt(document.getElementById(document.getElementById('habilidadeMagia').value).value) || 10;
+    const extraBonus = parseInt(document.getElementById('extraBonusMagia').value) || 0;
     const cdBase = 8;
-    const cdTotal = cdBase + bonusMagia + bonusProficiencia + getModifier(bonusAtributo);
+    const cdTotal = cdBase + bonusProficiencia + getModifier(bonusAtributo) + extraBonus;
     document.getElementById('cdMagia').value = cdTotal;
 }
-function calculateMagicBonus(attributeName) {
-    const bonusMagia = parseInt(document.getElementById('bonusMagia').value) || 0;
+function calculateMagicBonus() { 0;
     const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
     const bonusAtributo = parseInt(document.getElementById(document.getElementById('habilidadeMagia').value).value) || 10;
-    const totalBonus = bonusProficiencia + bonusMagia + getModifier(bonusAtributo);
-    document.getElementById('bonusMagia').value = totalBonus >= 0 ? `+${totalBonus}` : `${totalBonus}`;
+    const extraBonus = parseInt(document.getElementById('extraBonusMagia').value) || 0;
+    const totalBonus = bonusProficiencia + getModifier(bonusAtributo) + extraBonus;
+    document.getElementById('bonusMagia').value = totalBonus;
 }
 
 function updateMagicAtribute(attributeName){
-    calculateMagicBonus(attributeName);
-    calculateMagicCd(attributeName);
+    habilidadeMagia = attributeName;
+    calculateMagicBonus();
+    calculateMagicCd();
 }
 
 // ========================================
@@ -261,6 +258,7 @@ function getCurrentCharacter() {
         cabelos: document.getElementById('cabelos').value,
         tesouro: document.getElementById('tesouro').value,
         habilidadeMagia: document.getElementById('habilidadeMagia').value,
+        extraBonusMagia: document.getElementById('extraBonusMagia').value,
         cdMagia: document.getElementById('cdMagia').value,
         bonusMagia: document.getElementById('bonusMagia').value,
         espacos1: document.getElementById('espacos1').value,
@@ -326,6 +324,7 @@ function loadCharacterData(char) {
     document.getElementById('cabelos').value = char.cabelos || '';
     document.getElementById('tesouro').value = char.tesouro || '';
     document.getElementById('habilidadeMagia').value = char.habilidadeMagia || '';
+    document.getElementById('extraBonusMagia').value = char.extraBonusMagia || 0;
     document.getElementById('cdMagia').value = char.cdMagia || '8';
     document.getElementById('bonusMagia').value = char.bonusMagia || '+0';
     document.getElementById('espacos1').value = char.espacos1 || '';
