@@ -281,16 +281,30 @@ input[type="number"] {
     border-radius: 8px;
     position: relative;
 }
+.stat-box.proficient {
+    background: linear-gradient(135deg, rgba(160, 82, 45, 0.25), rgba(139, 69, 19, 0.25));
+    border-color: var(--rust);
+    box-shadow: 0 0 10px rgba(160, 82, 45, 0.3);
+}
 
 .stat-prof-check {
     position: absolute;
     top: 8px;
     left: 8px;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 20px;
     cursor: pointer;
-    min-width: 16px;
-    min-height: 16px;
+    min-width: 12px;
+    min-height: 20px;
+    accent-color: var(--rust);
+    transform: scale(1.2);
+}
+
+/* Melhorar visibilidade quando marcado */
+.stat-prof-check:checked {
+    background-color: var(--medium-wood);
+    filter: drop-shadow(0 0 3px var(--rust));
+    /*faz a box mudar de cor para indicar que está marcada, cor mais escura */
 }
 
 .stat-label {
@@ -305,7 +319,7 @@ input[type="number"] {
 .stat-input {
     text-align: center;
     margin-bottom: 8px;
-    font-size: 1.2rem;
+    font-size: 2.0rem;
     font-weight: 700;
     -webkit-appearance: none;
     -moz-appearance: textfield;
@@ -320,10 +334,15 @@ input[type="number"] {
 }
 
 .stat-save {
-    font-size: 0.75rem;
+    font-size: 1.0rem;
     color: var(--medium-wood);
     margin-top: 4px;
     font-weight: 600;
+    padding: 4px 8px;
+    border: 1px solid var(--wood-accent);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    display: inline-block;
 }
 
 /* ========================================
@@ -652,6 +671,70 @@ input[type="number"] {
         size: A4;
         margin: 10mm;
     }
+}
+
+/* ========================================
+   BLOCO DE BÔNUS (Inspiração, Heroico, Proficiência)
+======================================== */
+.bonus-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-around;
+    background: linear-gradient(135deg, rgba(139, 111, 71, 0.15), rgba(184, 149, 106, 0.15));
+    border: 3px solid var(--wood-accent);
+    border-radius: 8px;
+    padding: 10px 10px;
+}
+
+.bonus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bonus-check {
+    appearance: none;
+    width: 60px;
+    height: 30px;
+    cursor: pointer;
+    border: 2px solid var(--rust);
+    border-radius: 6px;
+    position: relative;
+}
+
+.bonus-check:checked {
+    filter: drop-shadow(0 0 3px var(--rust));
+}
+
+.bonus-check:checked::after {
+    content: "👑";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+}
+
+
+.bonus-label {
+    font-size: 1.0rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--dark-wood);
+    text-align: center;
+}
+
+.bonus-value {
+    width: 60px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 8px;
+    border: 2px solid var(--wood-accent);
+    border-radius: 5px;
 }
 
 /* ========================================

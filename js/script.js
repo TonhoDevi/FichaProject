@@ -26,6 +26,9 @@ const SKILLS = [
     { name: 'Vigor', attr: 'constituicao' }
 ];
 
+const ATTRIBUTES = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
+var magicAttributes = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
+
 // ========================================
 // VARIÁVEIS GLOBAIS
 // ========================================
@@ -73,6 +76,8 @@ function calculateModifiers() {
     });
     calculateSavingThrows();
     calculateSkills();
+    calculateMagicBonus();
+    calculateMagicCd();
 }
 
 function calculateSavingThrows() {
@@ -82,7 +87,18 @@ function calculateSavingThrows() {
     attrs.forEach(attr => {
         const value = parseInt(document.getElementById(attr).value) || 10;
         const mod = getModifier(value);
-        const isProficient = document.getElementById(`prof${attr.charAt(0).toUpperCase() + attr.slice(1)}`).checked;
+        const checkboxId = `prof${attr.charAt(0).toUpperCase() + attr.slice(1)}`;
+        const checkbox = document.getElementById(checkboxId);
+        const isProficient = checkbox.checked;
+        
+        // Mudar cor da caixa do atributo
+        const statBox = checkbox.closest('.stat-box');
+        if (isProficient) {
+            statBox.classList.add('proficient');
+        } else {
+            statBox.classList.remove('proficient');
+        }
+        
         const saveBonus = mod + (isProficient ? profBonus : 0);
         const saveStr = saveBonus >= 0 ? `+${saveBonus}` : `${saveBonus}`;
         document.getElementById(`${attr}Save`).textContent = `TR: ${saveStr}`;
@@ -134,6 +150,27 @@ function updateSkillProf(skillName, level) {
     autoSave();
 }
 
+function calculateMagicCd(attributeName) {
+    const bonusMagia = parseInt(document.getElementById('bonusMagia').value) || 0;
+    const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
+    const bonusAtributo = parseInt(document.getElementById(document.getElementById('habilidadeMagia').value).value) || 10;
+    const cdBase = 8;
+    const cdTotal = cdBase + bonusMagia + bonusProficiencia + getModifier(bonusAtributo);
+    document.getElementById('cdMagia').value = cdTotal;
+}
+function calculateMagicBonus(attributeName) {
+    const bonusMagia = parseInt(document.getElementById('bonusMagia').value) || 0;
+    const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
+    const bonusAtributo = parseInt(document.getElementById(document.getElementById('habilidadeMagia').value).value) || 10;
+    const totalBonus = bonusProficiencia + bonusMagia + getModifier(bonusAtributo);
+    document.getElementById('bonusMagia').value = totalBonus >= 0 ? `+${totalBonus}` : `${totalBonus}`;
+}
+
+function updateMagicAtribute(attributeName){
+    calculateMagicBonus(attributeName);
+    calculateMagicCd(attributeName);
+}
+
 // ========================================
 // GERENCIAMENTO DE ATAQUES
 // ========================================
@@ -182,6 +219,8 @@ function getCurrentCharacter() {
         raca: document.getElementById('raca').value,
         antecedente: document.getElementById('antecedente').value,
         tendencia: document.getElementById('tendencia').value,
+        inspiracao: document.getElementById('inspiracao').checked,
+        pontoHeroico: document.getElementById('pontoHeroico').checked,
         forca: document.getElementById('forca').value,
         destreza: document.getElementById('destreza').value,
         constituicao: document.getElementById('constituicao').value,
@@ -221,6 +260,18 @@ function getCurrentCharacter() {
         pele: document.getElementById('pele').value,
         cabelos: document.getElementById('cabelos').value,
         tesouro: document.getElementById('tesouro').value,
+        habilidadeMagia: document.getElementById('habilidadeMagia').value,
+        cdMagia: document.getElementById('cdMagia').value,
+        bonusMagia: document.getElementById('bonusMagia').value,
+        espacos1: document.getElementById('espacos1').value,
+        espacos2: document.getElementById('espacos2').value,
+        espacos3: document.getElementById('espacos3').value,
+        espacos4: document.getElementById('espacos4').value,
+        espacos5: document.getElementById('espacos5').value,
+        espacos6: document.getElementById('espacos6').value,
+        espacos7: document.getElementById('espacos7').value,
+        espacos8: document.getElementById('espacos8').value,
+        espacos9: document.getElementById('espacos9').value,
         skillProficiencies: skillProficiencies,
         attacks: attacks
     };
@@ -233,6 +284,8 @@ function loadCharacterData(char) {
     document.getElementById('raca').value = char.raca || '';
     document.getElementById('antecedente').value = char.antecedente || '';
     document.getElementById('tendencia').value = char.tendencia || '';
+    document.getElementById('inspiracao').checked = char.inspiracao || false;
+    document.getElementById('pontoHeroico').checked = char.pontoHeroico || false;
     document.getElementById('forca').value = char.forca || 10;
     document.getElementById('destreza').value = char.destreza || 10;
     document.getElementById('constituicao').value = char.constituicao || 10;
@@ -272,6 +325,18 @@ function loadCharacterData(char) {
     document.getElementById('pele').value = char.pele || '';
     document.getElementById('cabelos').value = char.cabelos || '';
     document.getElementById('tesouro').value = char.tesouro || '';
+    document.getElementById('habilidadeMagia').value = char.habilidadeMagia || '';
+    document.getElementById('cdMagia').value = char.cdMagia || '8';
+    document.getElementById('bonusMagia').value = char.bonusMagia || '+0';
+    document.getElementById('espacos1').value = char.espacos1 || '';
+    document.getElementById('espacos2').value = char.espacos2 || '';
+    document.getElementById('espacos3').value = char.espacos3 || '';
+    document.getElementById('espacos4').value = char.espacos4 || '';
+    document.getElementById('espacos5').value = char.espacos5 || '';
+    document.getElementById('espacos6').value = char.espacos6 || '';
+    document.getElementById('espacos7').value = char.espacos7 || '';
+    document.getElementById('espacos8').value = char.espacos8 || '';
+    document.getElementById('espacos9').value = char.espacos9 || '';
     
     skillProficiencies = char.skillProficiencies || {};
     attacks = char.attacks || [];

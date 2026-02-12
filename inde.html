@@ -45,6 +45,10 @@
                     <label class="input-label">Nome do Jogador</label>
                     <input type="text" id="nomeJogador" oninput="autoSave()">
                 </div>
+            </div>
+
+            <!-- Segunda Linha - Raça, Tendência, Antecedente menores -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 15px; margin-bottom: 20px;">
                 <div class="input-group">
                     <label class="input-label">Raça</label>
                     <input type="text" id="raca" oninput="autoSave()">
@@ -56,6 +60,22 @@
                 <div class="input-group">
                     <label class="input-label">Tendência</label>
                     <input type="text" id="tendencia" oninput="autoSave()">
+                </div>
+                
+                <!-- Bloco de Inspiração/Heroico/Proficiência -->
+                <div class="bonus-box">
+                    <div class="bonus-item">
+                        <input type="checkbox" class="bonus-check" id="inspiracao" onchange="autoSave()">
+                        <label class="bonus-label" for="inspiracao">Inspiração</label>
+                    </div>
+                    <div class="bonus-item">
+                        <input type="checkbox" class="bonus-check" id="pontoHeroico" onchange="autoSave()">
+                        <label class="bonus-label" for="pontoHeroico">Ponto Heroico</label>
+                    </div>
+                    <div class="bonus-item">
+                        <input type="number" class="bonus-value" id="bonusProficiencia" value="2" oninput="calculateSkills(); autoSave()">
+                        <label class="bonus-label">Proficiência</label>
+                    </div>
                 </div>
             </div>
 
@@ -114,10 +134,7 @@
                     <!-- Perícias -->
                     <div class="section">
                         <div class="section-title">Perícias</div>
-                        <div class="input-group" style="margin-bottom: 10px;">
-                            <label class="input-label">Bônus de Proficiência</label>
-                            <input type="number" id="bonusProficiencia" value="2" oninput="calculateSkills(); autoSave()">
-                        </div>
+                        
                         <div class="skills-grid" id="skillsList"></div>
                         
                         <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--wood-accent);">
@@ -173,7 +190,7 @@
                         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px;">
                             <div class="input-group">
                                 <label class="input-label">Habilidade</label>
-                                <select id="habilidadeMagia" oninput="autoSave()">
+                                <select id="habilidadeMagia" onchange="updateMagicAtribute(this.value); autoSave()">
                                     <option value="">-</option>
                                     <option value="forca">FOR</option>
                                     <option value="destreza">DES</option>
@@ -185,11 +202,11 @@
                             </div>
                             <div class="input-group">
                                 <label class="input-label">CD Magia</label>
-                                <input type="number" id="cdMagia" value="8" oninput="autoSave()">
+                                <input type="number" id="cdMagia" value="8" oninput="calculateMagicCd()">
                             </div>
                             <div class="input-group">
                                 <label class="input-label">Bônus Ataque</label>
-                                <input type="text" id="bonusMagia" value="+0" oninput="autoSave()">
+                                <input type="text" id="bonusMagia" value="+0" oninput="calculateMagicBonus()">
                             </div>
                         </div>
 
