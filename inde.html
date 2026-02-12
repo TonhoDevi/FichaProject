@@ -187,17 +187,17 @@
                     <div class="section">
                         <div class="section-title">Magias</div>
                         
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                        <div style="display: grid; grid-template-columns: 1fr; margin-bottom: 1px;">
                             <div class="input-group">
                                 <label class="input-label">Habilidade</label>
                                 <select id="habilidadeMagia" onchange="updateMagicAtribute(this.value); autoSave()">
                                     <option value="">-</option>
-                                    <option value="forca">FOR</option>
-                                    <option value="destreza">DES</option>
-                                    <option value="constituicao">CON</option>
-                                    <option value="inteligencia">INT</option>
-                                    <option value="sabedoria">SAB</option>
-                                    <option value="carisma">CAR</option>
+                                    <option value="forca">FORÇA</option>
+                                    <option value="destreza">DESTREZA</option>
+                                    <option value="constituicao">CONSTITUIÇÃO</option>
+                                    <option value="inteligencia">INTELIGÊNCIA</option>
+                                    <option value="sabedoria">SABEDORIA</option>
+                                    <option value="carisma">CARISMA</option>
                                 </select>
                             </div>
                             <div class="input-group">
@@ -213,7 +213,7 @@
                             </div>
                         </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
                             <div class="input-group">
                                 <label class="input-label">Nível 1</label>
                                 <input type="text" id="espacos1" placeholder="○○○" oninput="autoSave()">
