@@ -69,12 +69,12 @@
                         <label class="bonus-label" for="inspiracao">Inspiração</label>
                     </div>
                     <div class="bonus-item">
-                        <input type="checkbox" class="bonus-check" id="pontoHeroico" onchange="autoSave()">
-                        <label class="bonus-label" for="pontoHeroico">Ponto Heroico</label>
-                    </div>
-                    <div class="bonus-item">
                         <input type="number" class="bonus-value" id="bonusProficiencia" value="2" oninput="calculateSkills(); autoSave()">
                         <label class="bonus-label">Proficiência</label>
+                    </div>
+                    <div class="bonus-item">
+                        <input type="checkbox" class="bonus-check" id="pontoHeroico" onchange="autoSave()">
+                        <label class="bonus-label" for="pontoHeroico">Ponto Heroico</label>
                     </div>
                 </div>
             </div>
@@ -98,35 +98,35 @@
                                 <div class="stat-label">Destreza</div>
                                 <input type="number" class="stat-input" id="destreza" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="destrezaMod">+0</div>
-                                <div class="stat-save" id="destrezaSave">TR: +0</div>
+                                <div class="stat-save" id="destrezaSave">+0</div>
                             </div>
                             <div class="stat-box">
                                 <input type="checkbox" class="stat-prof-check" id="profConstituicao" onchange="calculateSavingThrows(); autoSave()">
                                 <div class="stat-label">Constituição</div>
                                 <input type="number" class="stat-input" id="constituicao" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="constituicaoMod">+0</div>
-                                <div class="stat-save" id="constituicaoSave">TR: +0</div>
+                                <div class="stat-save" id="constituicaoSave">+0</div>
                             </div>
                             <div class="stat-box">
                                 <input type="checkbox" class="stat-prof-check" id="profInteligencia" onchange="calculateSavingThrows(); autoSave()">
                                 <div class="stat-label">Inteligência</div>
                                 <input type="number" class="stat-input" id="inteligencia" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="inteligenciaMod">+0</div>
-                                <div class="stat-save" id="inteligenciaSave">TR: +0</div>
+                                <div class="stat-save" id="inteligenciaSave">+0</div>
                             </div>
                             <div class="stat-box">
                                 <input type="checkbox" class="stat-prof-check" id="profSabedoria" onchange="calculateSavingThrows(); autoSave()">
                                 <div class="stat-label">Sabedoria</div>
                                 <input type="number" class="stat-input" id="sabedoria" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="sabedoriaMod">+0</div>
-                                <div class="stat-save" id="sabedoriaSave">TR: +0</div>
+                                <div class="stat-save" id="sabedoriaSave">+0</div>
                             </div>
                             <div class="stat-box">
                                 <input type="checkbox" class="stat-prof-check" id="profCarisma" onchange="calculateSavingThrows(); autoSave()">
                                 <div class="stat-label">Carisma</div>
                                 <input type="number" class="stat-input" id="carisma" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="carismaMod">+0</div>
-                                <div class="stat-save" id="carismaSave">TR: +0</div>
+                                <div class="stat-save" id="carismaSave">+0</div>
                             </div>
                         </div>
                     </div>
@@ -140,11 +140,11 @@
                         <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid var(--wood-accent);">
                             <div class="input-group">
                                 <label class="input-label">Percepção Passiva</label>
-                                <input type="text" id="percepcaoPassiva" readonly style="background: rgba(141, 110, 99, 0.1); font-weight: 700; text-align: center;">
+                                <input type="text" id="percepcaoPassiva">
                             </div>
                             <div class="input-group">
                                 <label class="input-label">Intuição Passiva</label>
-                                <input type="text" id="intuicaoPassiva" readonly style="background: rgba(141, 110, 99, 0.1); font-weight: 700; text-align: center;">
+                                <input type="text" id="intuicaoPassiva">
                             </div>
                         </div>
                     </div>

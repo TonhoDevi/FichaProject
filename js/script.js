@@ -97,7 +97,7 @@ function calculateSavingThrows() {
         
         const saveBonus = mod + (isProficient ? profBonus : 0);
         const saveStr = saveBonus >= 0 ? `+${saveBonus}` : `${saveBonus}`;
-        document.getElementById(`${attr}Save`).textContent = `TR: ${saveStr}`;
+        document.getElementById(`${attr}Save`).textContent = `${saveStr}`;
     });
 }
 

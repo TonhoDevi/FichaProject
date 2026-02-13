@@ -4,19 +4,32 @@
 ======================================== */
 :root {
     /* === CORES PRINCIPAIS === */
-    --cor1: #1a0000;        /* Preto avermelhado profundo */
-    --cor2: #e3d950;        /* Amarelo claro (fosco) */
-    --cor3: #DC143C;        /* Vermelho intenso (crimson) */
-    --cor4: #ffe100;        /* Amarelo claro (Brilhante) */
-    --cor5: #2d0a0a;        /* Marrom escuro avermelhado */
-    --cor6: #4a0e0e;        /* Marrom médio avermelhado */
-    --cor7: #1c1c1c;        /* Cinza quase preto */
-    --cor8: #f5e6d3;        /* Pergaminho claro (contraste) */
-    --cor9: #8B4513;        /* Marrom sela */
-    --cor10: #A52A2A;       /* Marrom avermelhado médio */
-    --cor11: #ff0000;   
-    --cor12: #000000;       /* Preto */
-    
+    --cor1: #000000;        /* gradienete grandona */
+    --cor2: #ebdd18;        /* Bordas de fora */
+    --cor3: #c4b214;        /*detalhinhos  */
+    --cor4: #5b0606;        /* titulo que nao muda */
+    --cor5: #a27209;        /*fundo la fora  */
+    --cor6: #ff0000bb;        /* placa */
+    --cor7: #620f0f;        /* efeito da placa */
+    --cor8: #ffe1e1;        /* texto que muda */
+    --cor9: #070000;        /* nada */
+    --cor10: #baa32d;       /* nada */
+    --cor11: #dbcd15;       /* bordas de dentro */
+    --cor12: #a71414;       /* caixinhas de dentro dos atributo */
+    --cor13: #ddd6a3;       /* fundo  */
+    --cor14: #ba9620;       /* fundo de dentro */
+    --cor15: #820b0b;       /* fundo das caixinhas */
+    --cor16: #5b0909;       /* fundo das caixona dos atributo */
+    --cor17: #880f0f;       /* caixinha do negoço que gira  sla */
+    --cor18: #c1af0f;       /* nome dos atributos */
+    --cor19: #efff0a;       /* bonus de pericia */
+    --cor20: #870505;       /* testpo que nao muda */
+    --cor21: #270101;       /* fundo das coroas */
+    --cor22: #c5a60a;       /* fundo da proficiencs */
+    --cor23: #dcb30d;       /* check atributo */
+    --cor24: #890000;     
+    --cor25: #380000;       /* atributo chekado */
+
     /* === CORES DE TRANSPARÊNCIA === */
     --transp-escuro: rgba(26, 0, 0, 0.95);
     --transp-escuro-medio: rgba(26, 0, 0, 0.8);
@@ -36,7 +49,7 @@
     --brilho-crimson-leve: rgba(220, 20, 60, 0.02);
     --brilho-crimson-medio: rgba(220, 20, 60, 0.1);
     --brilho-crimson-forte: rgba(220, 20, 60, 0.2);
-    --brilho-laranja: rgba(255, 69, 0, 0.5);
+    --brilho-laranja: rgba(233, 13, 13, 0.5);
     
     /* === SOMBRAS === */
     --sombra-preta: rgba(0, 0, 0, 0.8);
@@ -44,10 +57,10 @@
     --sombra-preta-leve: rgba(0, 0, 0, 0.5);
     --sombra-vermelho: rgba(139, 0, 0, 0.3);
     --sombra-crimson: rgba(220, 20, 60, 0.4);
-    --sombra-crimson-forte: rgba(220, 20, 60, 0.6);
-    --sombra-crimson-intensa: rgba(220, 20, 60, 0.8);
-    --sombra-crimson-total: rgba(220, 20, 60, 0.9);
-    --sombra-laranja: rgba(220, 20, 60, 0.5);
+    --sombra-crimson-forte: rgba(220, 50, 20, 0.6);
+    --sombra-crimson-intensa: rgba(50, 13, 88, 0.8);
+    --sombra-crimson-total: rgba(139, 6, 6, 0.9);
+    --sombra-laranja: rgba(220, 20, 20, 0.5);
     
     /* === CORES PARA IMPRESSÃO === */
     --impressao-preto: #000;
@@ -260,21 +273,20 @@ body::before {
    CONTAINER DA FICHA
 ======================================== */
 .sheet-container {
-    background: 
-        linear-gradient(135deg, var(--transp-escuro), var(--transp-marrom)),
+    background: linear-gradient(135deg, var(--cor13));
+        /*linear-gradient(135deg, var(--cor13)),
         repeating-linear-gradient(
             0deg,
             transparent,
             transparent 2px,
             var(--brilho-vermelho-medio) 2px,
-            var(--brilho-vermelho-medio) 4px
-        );
+            var(--brilho-vermelho-medio) 4px );*/
     padding: 40px;
     border-radius: 0;
     border: 4px solid var(--cor2);
-    box-shadow: 
+    /*box-shadow: 
         0 15px 60px var(--sombra-preta-forte),
-        inset 0 0 100px var(--brilho-crimson-medio);
+        inset 0 0 100px var(--brilho-crimson-medio); */
     position: relative;
 }
 
@@ -311,7 +323,7 @@ body::before {
    SEÇÕES
 ======================================== */
 .section {
-    background: linear-gradient(135deg, var(--transp-preto-forte), var(--transp-escuro-leve));
+    background: linear-gradient(135deg, var(--cor14));
     padding: 15px;
     border-radius: 0;
     border: 2px solid var(--cor11);
@@ -337,14 +349,13 @@ body::before {
 .section-title {
     font-family: 'Cinzel', serif;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 899;
     color: var(--cor4);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin-bottom: 10px;
     padding-bottom: 5px;
     border-bottom: 2px solid var(--cor11);
-    text-shadow: 0 0 10px var(--sombra-laranja);
 }
 
 /* ========================================
@@ -358,11 +369,10 @@ body::before {
     display: block;
     font-size: 0.75rem;
     font-weight: 600;
-    color: var(--cor2);
+    color: var(--cor20);
     margin-bottom: 3px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-shadow: 1px 1px 2px var(--sombra-preta);
 }
 
 input, textarea, select {
@@ -370,7 +380,7 @@ input, textarea, select {
     padding: 8px 12px;
     border: 2px solid var(--cor11);
     border-radius: 0;
-    background: var(--transp-escuro-medio);
+    background: var(--cor15);
     font-family: 'Crimson Text', serif;
     font-size: 1rem;
     color: var(--cor8);
@@ -384,9 +394,6 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
     outline: none;
     border-color: var(--cor3);
-    box-shadow: 
-        0 0 15px var(--sombra-laranja),
-        inset 0 0 10px var(--brilho-crimson-forte);
     background: var(--transp-marrom-escuro);
 }
 
@@ -418,9 +425,9 @@ input[type="number"] {
 .stat-box {
     text-align: center;
     padding: 15px;
-    background: linear-gradient(135deg, var(--transp-marrom), var(--transp-escuro-medio));
+    background: linear-gradient(135deg, var(--cor16));
     border: 3px solid var(--cor2);
-    border-radius: 0;
+    border-radius: 0px;
     position: relative;
     transition: all 0.3s ease;
     clip-path: polygon(
@@ -445,15 +452,12 @@ input[type="number"] {
 }
 
 .stat-box.proficient {
-    background: linear-gradient(135deg, var(--transp-vermelho), var(--transp-crimson));
-    border-color: var(--cor3);
-    box-shadow: 
-        0 0 20px var(--sombra-crimson-forte),
-        inset 0 0 30px var(--brilho-crimson-forte);
+    background: linear-gradient(135deg, var(--cor24));
+    border: 3px solid var(--cor25);
 }
 
 .stat-box.proficient::before {
-    background: var(--cor3);
+    background: var(--cor25);
 }
 
 /* Checkbox triangular customizado */
@@ -480,11 +484,8 @@ input[type="number"] {
 }
 
 .stat-prof-check:checked {
-    background: var(--cor3);
+    background: var(--cor23);
     border-color: var(--cor2);
-    box-shadow: 
-        0 0 15px var(--sombra-crimson-intensa),
-        inset 0 0 10px var(--brilho-laranja);
 }
 
 .stat-prof-check:checked::after {
@@ -494,7 +495,7 @@ input[type="number"] {
     left: 50%;
     transform: translate(-50%, -45%);
     font-size: 14px;
-    color: var(--cor12);
+    color: var(--cor21);
 }
 
 .stat-label {
@@ -503,8 +504,7 @@ input[type="number"] {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 8px;
-    color: var(--cor4);
-    text-shadow: 0 0 5px var(--sombra-laranja);
+    color: var(--cor18);
 }
 
 .stat-input {
@@ -516,7 +516,7 @@ input[type="number"] {
     -moz-appearance: textfield;
     min-height: 40px;
     background: var(--cor12);
-    color: var(--cor4);
+    color: var(--cor19);
     border: 2px solid var(--cor2);
 }
 
@@ -573,10 +573,10 @@ input[type="number"] {
     min-width: 100px;
     padding: 4px 8px;
     font-size: 0.8rem;
-    border: 2px solid var(--cor1);
+    border: 2px solid var(--cor11);
     min-height: 36px;
     background: var(--transp-preto-total);
-    color: var(--cor8);
+    color: var(--cor2);
 }
 
 .skill-name {
@@ -587,10 +587,9 @@ input[type="number"] {
 
 .skill-value {
     font-weight: 700;
-    color: var(--cor4);
+    color: var(--cor19);
     min-width: 30px;
     text-align: right;
-    text-shadow: 0 0 5px var(--sombra-laranja);
 }
 
 /* ========================================
@@ -781,8 +780,8 @@ input[type="number"] {
     gap: 10px;
     align-items: center;
     justify-content: space-around;
-    background: linear-gradient(135deg, var(--transp-marrom), var(--transp-escuro-medio));
-    border: 3px solid var(--cor2);
+    background: linear-gradient(135deg, var(--cor17));
+    border: 3px solid var(--cor9);
     border-radius: 0;
     padding: 10px;
     clip-path: polygon(
@@ -809,18 +808,15 @@ input[type="number"] {
     height: 50px;
     cursor: pointer;
     background: var(--transp-escuro-medio);
-    border: 3px solid var(--cor2);
+    border: 3px solid var(--cor9);
     position: relative;
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     transition: all 0.3s ease;
 }
 
 .bonus-check:checked {
-    background: var(--cor3);
-    border-color: var(--cor4);
-    box-shadow: 
-        0 0 20px var(--sombra-crimson-total),
-        inset 0 0 15px var(--brilho-laranja);
+    background: var(--cor21);
+    border-color: var(--cor2);
     transform: rotate(45deg);
 }
 
@@ -838,7 +834,7 @@ input[type="number"] {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: var(--cor3);
+    color: var(--cor10);
     text-align: center;
     text-shadow: 0 0 5px var(--sombra-laranja);
 }
@@ -849,9 +845,9 @@ input[type="number"] {
     font-size: 1.2rem;
     font-weight: 700;
     padding: 8px;
-    border: 2px solid var(--cor2);
+    border: 2px solid var(--cor4);
     border-radius: 0;
-    background: var(--transp-preto-total);
+    background: var(--cor22);
     color: var(--cor4);
 }
 
