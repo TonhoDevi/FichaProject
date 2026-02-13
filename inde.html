@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#4a3728">
     <title>Ficha de Personagem D&D 5e</title>
     
@@ -149,13 +150,6 @@
                         </div>
                     </div>
 
-                    <!-- Ataques -->
-                    <div class="section">
-                        <div class="section-title">Ataques e Magias</div>
-                        <div class="attack-list" id="attackList"></div>
-                        <button class="btn btn-secondary" onclick="addAttack()" style="width: 100%; margin-top: 10px;">+ Adicionar Ataque</button>
-                    </div>
-
                     <!-- Equipamento -->
                     <div class="section">
                         <div class="section-title">Equipamento</div>
@@ -183,6 +177,13 @@
                         </div>
                         <textarea id="equipamento" oninput="autoSave()" placeholder="Liste seu equipamento..."></textarea>
                     </div>
+                    <!-- Ataques -->
+                    <div class="section">
+                        <div class="section-title">Ataques e Magias</div>
+                        <div class="attack-list" id="attackList"></div>
+                        <button class="btn btn-secondary" onclick="addAttack()" style="width: 100%; margin-top: 10px;">+ Adicionar Ataque</button>
+                    </div>
+
                     <!-- Magias -->
                     <div class="section">
                         <div class="section-title">Magias</div>
@@ -203,6 +204,7 @@
                             <div class="input-group">
                                 <label class="input-label">Bônus de Magia</label>
                                 <input type="number" id="extraBonusMagia" value="0" oninput="updateMagicAtribute(document.getElementById('habilidadeMagia').value); autoSave()">
+                            </div>
                             <div class="input-group">
                                 <label class="input-label">CD Magia</label>
                                 <input type="number" id="cdMagia" value="8" oninput="calculateMagicCd()">
@@ -270,15 +272,15 @@
                             </div>
                             <div class = "input-group">
                                 <label class="input-label">Vida Máxima</label>
-                                <input type="number" id="vidaMaxima" value="0" oninput="autoSave()">
+                                <input type="number" id="pvTotais" value="0" oninput="autoSave()">
                             </div>
                             <div class="input-group">
                                 <label class="input-label">Vida Atual</label>
-                                <input type="number" id="vidaAtual" value="0" oninput="autoSave()">
+                                <input type="number" id="pvAtuais" value="0" oninput="autoSave()">
                             </div>
                             <div class="input-group">
                                 <label class="input-label">Vida Temporária</label>
-                                <input type="number" id="vidaTemporaria" value="0" oninput="autoSave()">
+                                <input type="number" id="pvTemp" value="0" oninput="autoSave()">
                             </div>
                             <div class="input-group">
                                 <label class="input-label">Andar</label>
@@ -307,7 +309,6 @@
                         <textarea id="idiomas" oninput="autoSave()" placeholder="Liste idiomas e proficiências..."></textarea>
                     </div>
                 </div>
-                
 
                 <!-- Características -->
                 <div class="section">
@@ -318,6 +319,7 @@
                 <div class="section">
                     <div class="section-title">Tesouro</div>
                     <textarea id="tesouro" oninput="autoSave()" placeholder="Itens mágicos, tesouros valiosos..."></textarea>
+                </div>
                 </div>
             </div>
         </div>

@@ -74,12 +74,12 @@ function calculateModifiers() {
     calculateSkills();
     calculateMagicBonus();
     calculateMagicCd();
-    updateMagicAtribute('constituicao');
+    updateMagicAtribute('carisma');
 }
 
 function calculateSavingThrows() {
     const attrs = ['forca', 'destreza', 'constituicao', 'inteligencia', 'sabedoria', 'carisma'];
-    const profBonus = parseInt(document.getElementById('bonusProficiencia').value) || 2;
+    const profBonus = parseInt(document.getElementById('bonusProficiencia').value) || 1;
     
     attrs.forEach(attr => {
         const value = parseInt(document.getElementById(attr).value) || 10;
@@ -164,7 +164,7 @@ function calculateMagicCd() {
     const cdTotal = cdBase + bonusProficiencia + getModifier(bonusAtributo) + extraBonus;
     document.getElementById('cdMagia').value = cdTotal;
 }
-function calculateMagicBonus() { 0;
+function calculateMagicBonus() {
     const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
     const bonusAtributo = parseInt(document.getElementById(document.getElementById('habilidadeMagia').value).value) || 10;
     const extraBonus = parseInt(document.getElementById('extraBonusMagia').value) || 0;
@@ -247,7 +247,6 @@ function getCurrentCharacter() {
         pvTotais: document.getElementById('pvTotais').value,
         pvAtuais: document.getElementById('pvAtuais').value,
         pvTemp: document.getElementById('pvTemp').value,
-        cargaMaxima: document.getElementById('cargaMaxima').value,
         equipamento: document.getElementById('equipamento').value,
         pc: document.getElementById('pc').value,
         pe: document.getElementById('pe').value,
@@ -256,12 +255,6 @@ function getCurrentCharacter() {
         pp: document.getElementById('pp').value,
         idiomas: document.getElementById('idiomas').value,
         caracteristicas: document.getElementById('caracteristicas').value,
-        idade: document.getElementById('idade').value,
-        altura: document.getElementById('altura').value,
-        peso: document.getElementById('peso').value,
-        olhos: document.getElementById('olhos').value,
-        pele: document.getElementById('pele').value,
-        cabelos: document.getElementById('cabelos').value,
         tesouro: document.getElementById('tesouro').value,
         habilidadeMagia: document.getElementById('habilidadeMagia').value,
         extraBonusMagia: document.getElementById('extraBonusMagia').value,
@@ -302,18 +295,17 @@ function loadCharacterData(char) {
     document.getElementById('profInteligencia').checked = char.profInteligencia || false;
     document.getElementById('profSabedoria').checked = char.profSabedoria || false;
     document.getElementById('profCarisma').checked = char.profCarisma || false;
-    document.getElementById('bonusProficiencia').value = char.bonusProficiencia || 2;
+    document.getElementById('bonusProficiencia').value = char.bonusProficiencia || 1;
     document.getElementById('ca').value = char.ca || 10;
     document.getElementById('iniciativa').value = char.iniciativa || 0;
     document.getElementById('deslocAndar').value = char.deslocAndar || '30';
-    document.getElementById('deslocNadar').value = char.deslocNadar || '30';
+    document.getElementById('deslocNadar').value = char.deslocNadar || '15';
     document.getElementById('deslocVoar').value = char.deslocVoar || '-';
     document.getElementById('deslocEscalar').value = char.deslocEscalar || '15';
     document.getElementById('dadosVida').value = char.dadosVida || '';
     document.getElementById('pvTotais').value = char.pvTotais || 0;
     document.getElementById('pvAtuais').value = char.pvAtuais || 0;
     document.getElementById('pvTemp').value = char.pvTemp || 0;
-    document.getElementById('cargaMaxima').value = char.cargaMaxima || '';
     document.getElementById('equipamento').value = char.equipamento || '';
     document.getElementById('pc').value = char.pc || 0;
     document.getElementById('pe').value = char.pe || 0;
@@ -322,12 +314,6 @@ function loadCharacterData(char) {
     document.getElementById('pp').value = char.pp || 0;
     document.getElementById('idiomas').value = char.idiomas || '';
     document.getElementById('caracteristicas').value = char.caracteristicas || '';
-    document.getElementById('idade').value = char.idade || '';
-    document.getElementById('altura').value = char.altura || '';
-    document.getElementById('peso').value = char.peso || '';
-    document.getElementById('olhos').value = char.olhos || '';
-    document.getElementById('pele').value = char.pele || '';
-    document.getElementById('cabelos').value = char.cabelos || '';
     document.getElementById('tesouro').value = char.tesouro || '';
     document.getElementById('habilidadeMagia').value = char.habilidadeMagia || '';
     document.getElementById('extraBonusMagia').value = char.extraBonusMagia || 0;
