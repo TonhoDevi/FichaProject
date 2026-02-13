@@ -74,6 +74,7 @@ function calculateModifiers() {
     calculateSkills();
     calculateMagicBonus();
     calculateMagicCd();
+    updateMagicAtribute('constituicao');
 }
 
 function calculateSavingThrows() {
@@ -145,6 +146,15 @@ function updateSkillProf(skillName, level) {
     calculateSkills();
     autoSave();
 }
+// ========================================
+// CÁLCULOS DE Magia
+// ========================================
+
+function updateMagicAtribute(attributeName){
+    habilidadeMagia = attributeName;
+    calculateMagicBonus();
+    calculateMagicCd();
+}
 
 function calculateMagicCd() {
     const bonusProficiencia = parseInt(document.getElementById('bonusProficiencia').value) || 2;
@@ -162,11 +172,7 @@ function calculateMagicBonus() { 0;
     document.getElementById('bonusMagia').value = totalBonus;
 }
 
-function updateMagicAtribute(attributeName){
-    habilidadeMagia = attributeName;
-    calculateMagicBonus();
-    calculateMagicCd();
-}
+
 
 // ========================================
 // GERENCIAMENTO DE ATAQUES
