@@ -859,6 +859,12 @@ input[type="number"] {
         background: var(--impressao-branco);
         border: 2px solid var(--impressao-borda);
     }
+    .input-label{
+        color: var(--impressao-preto) !important;
+    }
+    .input-group{
+        background-color: var(--impressao-branco) !important;
+    }
     
     .section {
         background: var(--impressao-branco);
