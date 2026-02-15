@@ -1310,6 +1310,13 @@ body > .app-container > .controls {
         padding: 12px;
     }
 
+    .stat-prof-check {
+        top: 56px;
+        left: 250px;
+        width: 36px;
+        height: 36px;
+    }
+
     .stat-input {
         font-size: 1.8rem;
     }
@@ -1375,7 +1382,7 @@ body > .app-container > .controls {
     }
 
     .sheet-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1f;
     }
 
     .stats-grid {
