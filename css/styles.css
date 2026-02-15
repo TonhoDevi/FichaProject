@@ -859,10 +859,10 @@ input[type="number"] {
         background: var(--impressao-branco);
         border: 2px solid var(--impressao-borda);
     }
-    .input-label{
+    .input-label {
         color: var(--impressao-preto) !important;
     }
-    .input-group{
+    .input-group input, .input-group textarea, .input-group select {
         background-color: var(--impressao-branco) !important;
     }
     
