@@ -23,7 +23,7 @@
     --cor17: #880f0f;       /* caixinha do negoço que gira  sla */
     --cor18: #c1af0f;       /* nome dos atributos */
     --cor19: #efff0a;       /* bonus de pericia */
-    --cor20: #870505;       /* testpo que nao muda */
+    --cor20: #460101;       /* testpo que nao muda */
     --cor21: #270101;       /* fundo das coroas */
     --cor22: #c5a60a;       /* fundo da proficiencs */
     --cor23: #dcb30d;       /* check atributo */
@@ -325,16 +325,6 @@ body::before {
     position: relative;
 }
 
-.section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    background: var(--cor3);
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
-}
 
 .section-title {
     font-family: 'Cinzel', serif;
@@ -561,7 +551,7 @@ input[type="number"] {
 
 .combat-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
 }
 
@@ -572,12 +562,292 @@ input[type="number"] {
     margin-top: 15px;
 }
 
+/* ========================================
+   MOEDAS COM ÍCONES COLORIDOS
+======================================== */
 .moedas-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-top: 10px;
 }
+
+.moeda-item {
+    position: relative;
+}
+
+.moeda-item .input-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.moeda-icon {
+    width: 20px;
+    height: 20px;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: inline-block;
+}
+
+.moeda-icon.cobre {
+    background: linear-gradient(135deg, #b87333, #8b4513);
+}
+
+.moeda-icon.prata {
+    background: linear-gradient(135deg, #c0c0c0, #808080);
+}
+
+.moeda-icon.electrum {
+    background: linear-gradient(135deg, #4ff974, #376f24);
+}
+
+.moeda-icon.ouro {
+    background: linear-gradient(135deg, #ffd700, #daa520);
+}
+
+.moeda-icon.platina {
+    background: linear-gradient(135deg, #1cfcfc, #a8a8a8);
+}
+
+/* ========================================
+   LISTA DE INVENTÁRIO
+======================================== */
+.inventory-list {
+    margin-top: 10px;
+}
+
+.inventory-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--cor11);
+    border-radius: 0;
+}
+
+.inventory-item input[type="number"] {
+    text-align: center;
+    font-weight: 700;
+}
+
+.inventory-item input[type="text"] {
+    flex: 1;
+}
+
+.inventory-item .delete-btn {
+    padding: 8px 15px;
+}
+
+@media (max-width: 768px) {
+    .inventory-item {
+        grid-template-columns: 80px 1fr auto;
+        gap: 8px;
+        padding: 8px;
+    }
+}
+
+/* ========================================
+   ITENS MÁGICOS
+======================================== */
+.magic-items-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.magic-item {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--cor11);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.magic-item-header {
+    display: grid;
+    grid-template-columns: 2fr auto 50px;
+    gap: 10px;
+    padding: 12px;
+    align-items: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    transition: all 0.3s ease;
+}
+
+.magic-item-header:hover {
+    background: linear-gradient(135deg, var(--cor15), var(--cor16));
+}
+
+.magic-item-header input[type="text"] {
+    background: var(--cor12);
+    border: 2px solid var(--cor2);
+    color: var(--cor19);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+.magic-item-sync {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.magic-item-sync input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    accent-color: var(--cor2);
+}
+
+.magic-item-expand {
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.magic-item-expand.active {
+    transform: rotate(180deg);
+}
+
+.magic-item-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.magic-item-description.active {
+    max-height: 500px;
+}
+
+.magic-item-description-content {
+    padding: 15px;
+}
+
+.magic-item-description textarea {
+    width: 100%;
+    min-height: 120px;
+    background: var(--cor15);
+    border: 2px solid var(--cor11);
+    color: var(--cor8);
+    font-size: 0.95rem;
+    padding: 10px;
+    resize: vertical;
+}
+
+.magic-item-actions {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.magic-item-actions .delete-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+
+.sync-label {
+    font-size: 0.7rem;
+    color: var(--cor10);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sync-status {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--cor2);
+    box-shadow: 0 0 5px var(--cor2);
+}
+
+.magic-item-sync input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+
+    appearance: none;        
+    -webkit-appearance: none;
+
+    background: var(--cor12);
+    border: 2px solid var(--cor2);
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+.magic-item-sync input[type="checkbox"]:checked::after {
+    content: "🔷";
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+
+    animation: syncEnter 0.4s ease forwards;
+}
+
+.magic-item-sync input[type="checkbox"]:checked {
+    animation: syncGlow 2s ease-in-out infinite;
+        background:
+        radial-gradient(circle at center,
+        var(--cor2) 20%,
+        var(--cor12) 70%);
+}
+
+
+@keyframes syncEnter {
+    0% {
+        transform: scale(0.2) rotate(-180deg);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2) rotate(20deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+@keyframes syncGlow {
+    0%, 100% {
+        box-shadow: 0 0 4px var(--cor2);
+    }
+    50% {
+        box-shadow:
+            0 0 10px var(--cor2),
+            0 0 18px var(--cor2);
+    }
+}
+
+
 
 /* ========================================
    ATAQUES
@@ -613,17 +883,249 @@ input[type="number"] {
 /* ========================================
    MAGIA
 ======================================== */
-
-.magia-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.spell-slot-grid {
+.spell-slots-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.spell-level-section {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--cor11);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.spell-level-header {
+    padding: 12px 15px;
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.spell-level-header:hover {
+    background: linear-gradient(135deg, var(--cor15), var(--cor16));
+}
+
+.spell-level-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.spell-level-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cor3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.spell-slots {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.slot-current,
+.slot-max {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    background: var(--cor12);
+    border: 2px solid var(--cor2);
+    color: var(--cor19);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 0;
+}
+
+.slot-separator {
+    color: var(--cor8);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.spell-expand-btn {
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.3s ease;
+}
+
+.spell-expand-btn.active {
+    transform: rotate(180deg);
+}
+
+.spell-level-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.spell-level-content.active {
+    max-height: 2000px;
+}
+
+.spell-list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+}
+
+/* ========================================
+   CARD DE MAGIA INDIVIDUAL
+======================================== */
+.spell-card {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--cor11);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.spell-card-header {
+    padding: 10px 12px;
+    background: linear-gradient(135deg, var(--cor16), var(--cor15));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.spell-card-header:hover {
+    background: linear-gradient(135deg, var(--cor15), var(--cor14));
+}
+
+.spell-card-header input[type="text"] {
+    flex: 1;
+    background: var(--cor12);
+    border: 2px solid var(--cor2);
+    color: var(--cor8);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+}
+
+.spell-card-expand {
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.spell-card-expand.active {
+    transform: rotate(180deg);
+}
+
+.spell-card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.spell-card-details.active {
+    max-height: 800px;
+}
+
+.spell-details-content {
+    padding: 15px;
+    display: grid;
+    gap: 12px;
+}
+
+.spell-details-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.spell-components {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.component-check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.component-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--cor2);
+}
+
+.component-check label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cor8);
+    cursor: pointer;
+}
+
+.concentration-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.concentration-check input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: var(--cor3);
+}
+
+.concentration-check label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cor3);
+    cursor: pointer;
+}
+
+.spell-description {
+    width: 100%;
+    min-height: 100px;
+    background: var(--cor15);
+    border: 2px solid var(--cor11);
+    color: var(--cor8);
+    font-size: 0.9rem;
+    padding: 10px;
+    resize: vertical;
+}
+
+.spell-card-actions {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.spell-card-actions .delete-btn {
+    padding: 6px 15px;
+    font-size: 0.85rem;
 }
 
 /* ========================================
@@ -920,6 +1422,83 @@ input[type="number"] {
 body > .app-container > .controls {
     display: none;
 }
+
+/* ========================================
+   SISTEMA DE ABAS
+======================================== */
+.tabs-container {
+    margin-top: 30px;
+}
+
+.tabs-header {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--cor11);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--cor20);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tab-btn:hover {
+    background: linear-gradient(135deg, var(--cor16), var(--cor14));
+    color: var(--cor3);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    border-bottom: 3px solid var(--cor2);
+    color: var(--cor8);
+    box-shadow: 0 -3px 10px var(--sombra-crimson);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cor2);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* ========================================
    IMPRESSÃO
 ======================================== */
@@ -1260,6 +1839,31 @@ body > .app-container > .controls {
         padding: 10px 15px;
         font-size: 0.85rem;
     }
+    .spell-slots-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .spell-details-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .slot-current,
+    .slot-max {
+        width: 45px;
+        font-size: 1rem;
+    }
+    .tabs-header {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tab-btn {
+        min-width: 100%;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
 
     /* Melhorar toque em checkboxes */
     input[type="checkbox"] {
@@ -1351,6 +1955,12 @@ body > .app-container > .controls {
         width: 60px;
         height: 60px;
     }
+
+    .magic-item-header {
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+    }
+
 }
 
 /* ========================================
