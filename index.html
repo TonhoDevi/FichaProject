@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <!-- CSS -->
-    <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="app-container">
@@ -22,12 +22,24 @@
             <p>Dungeons & Dragons 5ª Edição</p>
         </div>
 
-        <div class="controls">
-            <button class="btn btn-primary" onclick="window.print()">🖨️ Imprimir Ficha</button>
-            <button class="btn btn-secondary" onclick="showLoadModal()">📂 Carregar</button>
-            <button class="btn btn-secondary" onclick="saveCharacter()">💾 Salvar</button>
-            <button class="btn btn-danger" onclick="newCharacter()">➕ Nova Ficha</button>
+        <!-- Botão para abrir menu -->
+        <button class="menu-toggle" onclick="toggleMenu()" id="menuToggle">
+            ☰ Menu
+        </button>
+
+        <!-- Menu lateral -->
+        <div class="side-menu" id="sideMenu">
+            <button class="menu-close" onclick="toggleMenu()">✕</button>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="toggleMenu(); window.print() ">🖨️ Imprimir Ficha</button>
+                <button class="btn btn-secondary" onclick="showLoadModal(); toggleMenu()">📂 Carregar</button>
+                <button class="btn btn-secondary" onclick="saveCharacter(); toggleMenu()">💾 Salvar</button>
+                <button class="btn btn-danger" onclick="newCharacter()">➕ Nova Ficha</button>
+            </div>
         </div>
+
+        <!-- Overlay escuro quando menu aberto -->
+        <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
         <div class="save-indicator" id="saveIndicator">✓ Salvo automaticamente</div>
 
@@ -92,7 +104,7 @@
                                 <div class="stat-label">Força</div>
                                 <input type="number" class="stat-input" id="forca" value="10" oninput="calculateModifiers(); autoSave()">
                                 <div class="stat-value" id="forcaMod">+0</div>
-                                <div class="stat-save" id="forcaSave">TR: +0</div>
+                                <div class="stat-save" id="forcaSave">+0</div>
                             </div>
                             <div class="stat-box">
                                 <input type="checkbox" class="stat-prof-check" id="profDestreza" onchange="calculateSavingThrows(); autoSave()">

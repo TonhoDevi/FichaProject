@@ -214,6 +214,66 @@ function removeAttack(index) {
 // ========================================
 // SALVAR E CARREGAR PERSONAGENS
 // ========================================
+function cleanCurrentCharacter() {
+    document.getElementById('nomePersonagem').value = '';
+    document.getElementById('nomeJogador').value = '';
+    document.getElementById('classeNivel').value = '';
+    document.getElementById('raca').value = '';
+    document.getElementById('antecedente').value = '';
+    document.getElementById('tendencia').value = '';
+    document.getElementById('inspiracao').checked = false;
+    document.getElementById('pontoHeroico').checked = false;
+    document.getElementById('forca').value = 10;
+    document.getElementById('destreza').value = 10;
+    document.getElementById('constituicao').value = 10;
+    document.getElementById('inteligencia').value = 10;
+    document.getElementById('sabedoria').value = 10;
+    document.getElementById('carisma').value = 10;
+    document.getElementById('profForca').checked = false;
+    document.getElementById('profDestreza').checked = false;
+    document.getElementById('profConstituicao').checked = false;
+    document.getElementById('profInteligencia').checked = false;
+    document.getElementById('profSabedoria').checked = false;
+    document.getElementById('profCarisma').checked = false;
+    document.getElementById('bonusProficiencia').value = 1;
+    document.getElementById('ca').value = 10;
+    document.getElementById('iniciativa').value = 0;
+    document.getElementById('deslocAndar').value = '30';
+    document.getElementById('deslocNadar').value = '15';
+    document.getElementById('deslocVoar').value = '-';
+    document.getElementById('deslocEscalar').value = '15';
+    document.getElementById('dadosVida').value = '';
+    document.getElementById('pvTotais').value = 0;
+    document.getElementById('pvAtuais').value = 0;
+    document.getElementById('pvTemp').value = 0;
+    document.getElementById('equipamento').value = '';
+    document.getElementById('pc').value = 0;
+    document.getElementById('pe').value = 0;
+    document.getElementById('pl').value = 0;
+    document.getElementById('po').value = 0;
+    document.getElementById('pp').value = 0;
+    document.getElementById('idiomas').value = '';
+    document.getElementById('caracteristicas').value = '';
+    document.getElementById('tesouro').value = '';
+    document.getElementById('habilidadeMagia').value = '';
+    document.getElementById('extraBonusMagia').value = 0;
+    document.getElementById('cdMagia').value = '8';
+    document.getElementById('bonusMagia').value = '+0';
+    document.getElementById('espacos1').value = '';
+    document.getElementById('espacos2').value = '';
+    document.getElementById('espacos3').value = '';
+    document.getElementById('espacos4').value = '';
+    document.getElementById('espacos5').value = '';
+    document.getElementById('espacos6').value = '';
+    document.getElementById('espacos7').value = '';
+    document.getElementById('espacos8').value = '';
+    document.getElementById('espacos9').value = '';
+    skillProficiencies = {};
+    attacks = [];
+    renderAttacks();
+    calculateModifiers();
+}
+
 function getCurrentCharacter() {
     return {
         nomePersonagem: document.getElementById('nomePersonagem').value,
@@ -376,7 +436,7 @@ function autoSave() {
 function showSaveIndicator() {
     const indicator = document.getElementById('saveIndicator');
     indicator.classList.add('show');
-    setTimeout(() => {
+    setTimeout(() => {loadModal
         indicator.classList.remove('show');
     }, 2000);
 }
@@ -417,10 +477,11 @@ function hideLoadModal() {
 
 function loadCharacterByIndex(index) {
     const characters = JSON.parse(localStorage.getItem('dnd_characters') || '[]');
+    hideLoadModal();
     if (characters[index]) {
         loadCharacterData(characters[index]);
-        hideLoadModal();
     }
+    
 }
 
 function deleteCharacter(name, event) {
@@ -435,9 +496,39 @@ function deleteCharacter(name, event) {
 
 function newCharacter() {
     if (confirm('Criar nova ficha? Os dados não salvos serão perdidos.')) {
-        location.reload();
+        cleanCurrentCharacter();
+        hideLoadModal();
     }
 }
+
+// ========================================
+// MENU LATERAL
+// ========================================
+function toggleMenu() {
+    const menu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('menuOverlay');
+    const toggle = document.getElementById('menuToggle');
+    
+    menu.classList.toggle('active');
+    overlay.classList.toggle('active');
+    
+    // Mudar ícone do botão
+    if (menu.classList.contains('active')) {
+        toggle.textContent = '✕ Fechar';
+    } else {
+        toggle.textContent = '☰ Menu';
+    }
+}
+
+// Fechar menu com tecla ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const menu = document.getElementById('sideMenu');
+        if (menu.classList.contains('active')) {
+            toggleMenu();
+        }
+    }
+});
 
 // ========================================
 // INICIALIZAR QUANDO A PÁGINA CARREGAR

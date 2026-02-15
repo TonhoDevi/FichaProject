@@ -419,27 +419,10 @@ input[type="number"] {
     border: 3px solid var(--cor2);
     border-radius: 0px;
     position: relative;
-    transition: all 0.3s ease;
-    clip-path: polygon(
-        10px 0,
-        100% 0,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        0 100%,
-        0 10px
-    );
+    clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+    transition: all 0.3s ea3se;
 }
 
-.stat-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 15px;
-    height: 15px;
-    background: var(--cor2);
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
-}
 
 .stat-box.proficient {
     background: linear-gradient(135deg, var(--cor24));
@@ -450,32 +433,25 @@ input[type="number"] {
     background: var(--cor25);
 }
 
-/* Checkbox triangular customizado */
+/* Checkbox Exagono customizado */
 .stat-prof-check {
     appearance: none;
     position: absolute;
-    top: 37px;
-    left: 5.5px;
-    width: 25px;
+    top: 53.5px;
+    left: 190px;
+    width: 40px;
     height: 25px;
     cursor: pointer;
-    background: var(--cor12);
+    background: var(--cor21);
     border: 2px solid var(--cor2);
-    /* Exagono e cabeça para baixo */
-    clip-path: polygon(
-        10px 0,
-        100% 0,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        0 100%,
-        0 10px
-    ); 
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     transition: all 0.3s ease;
 }
 
 .stat-prof-check:checked {
     background: var(--cor2);
     border-color: var(--cor2);
+    transform: rotate(180deg);
 }
 
 .stat-prof-check:checked::after {
@@ -484,12 +460,12 @@ input[type="number"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -45%);
-    font-size: 14px;
+    font-size: 28px;
     color: var(--cor21);
 }
 
 .stat-label {
-    font-size: 0.7rem;
+    font-size: 1.0rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -522,20 +498,12 @@ input[type="number"] {
     color: var(--cor8);
     margin-top: 4px;
     font-weight: 600;
-    padding: 4px 8px;
+    padding: 4px 38px;
     border: 2px solid var(--cor2);
     border-radius: 0;
-    background: var(--cor12);
+    background: var(--cor21);
     display: inline-block;
-    clip-path: polygon(
-        3px 0,
-        100% 0,
-        100% calc(100% - 3px),
-        calc(100% - 3px) 100%,
-        0 100%,
-        0 3px
-    );
-}
+    transition: all 0.3s ease;}
 
 /* ========================================
    PERÍCIAS
@@ -840,7 +808,118 @@ input[type="number"] {
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     color: var(--cor24);
 }
+/* ========================================
+   MENU LATERAL RETRÁTIL
+======================================== */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    color: var(--cor8);
+    border: 2px solid var(--cor2);
+    border-radius: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--sombra-preta);
+    transition: all 0.3s ease;
+    min-height: 44px;
+    clip-path: polygon(
+        5px 0,
+        100% 0,
+        100% calc(100% - 5px),
+        calc(100% - 5px) 100%,
+        0 100%,
+        0 5px
+    );
+}
 
+.menu-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px var(--sombra-crimson-forte);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px; /* Escondido à direita */
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--cor1), var(--cor5));
+    border-left: 4px solid var(--cor2);
+    box-shadow: -5px 0 30px var(--sombra-preta-forte);
+    z-index: 1002;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.side-menu.active {
+    right: 0; /* Aparece */
+}
+
+.menu-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.menu-close:hover {
+    background: var(--cor6);
+    transform: rotate(90deg);
+}
+
+.side-menu .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.side-menu .btn {
+    width: 100%;
+    text-align: center;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Esconder controles originais se existirem */
+body > .app-container > .controls {
+    display: none;
+}
 /* ========================================
    IMPRESSÃO
 ======================================== */
@@ -849,7 +928,7 @@ input[type="number"] {
         background: var(--impressao-branco);
     }
     
-    .header, .controls, .save-indicator {
+    .header, .controls, .save-indicator, .menu-overlay, .menu-toggle, .side-menu {
         display: none !important;
     }
     
@@ -857,7 +936,6 @@ input[type="number"] {
         box-shadow: none;
         padding: 15px;
         background: var(--impressao-branco);
-        border: 2px solid var(--impressao-borda);
     }
     .input-label {
         color: var(--impressao-preto) !important;
@@ -865,15 +943,47 @@ input[type="number"] {
     .input-group input, .input-group textarea, .input-group select {
         background-color: var(--impressao-branco) !important;
     }
+
+    .bonus-box {
+        background: var(--cor13);
+    }
+
+    .bonus-label{
+        color: var(--impressao-preto) !important;
+        text-shadow: none !important;
+    }
     
     .section {
         background: var(--impressao-branco);
-        border: 1px solid var(--impressao-borda);
     }
+
+    .stat-box {
+        background: var(--cor13);
+    }
+
+    .stat-box.proficient {
+        background: var(--cor18);
+    }
+
+    .stat-label, .stat-value {
+        color: var(--impressao-preto) !important;
+        text-shadow: none !important;
+    }
+
+    .stat-
     
     * {
         color: var(--impressao-preto) !important;
         text-shadow: none !important;
+    }
+    input, 
+    textarea, 
+    select {
+        background: var(--impressao-branco) !important;
+        border: 1px solid var(--impressao-preto) !important;
+        color: var(--impressao-preto) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 }
 
@@ -919,6 +1029,23 @@ input[type="number"] {
         font-size: 0.9rem;
         width: 100%;
         min-width: auto;
+    }
+    
+    .menu-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .side-menu {
+        width: 280px;
+        right: -300px;
+    }
+
+    .side-menu .controls {
+        margin-top: 50px;
+        gap: 12px;
     }
 
     .sheet-container {
@@ -970,7 +1097,7 @@ input[type="number"] {
     }
 
     .stat-box {
-        padding: 10px 8px;
+        padding: 10px 10px;
     }
 
     .stat-label {
@@ -994,14 +1121,14 @@ input[type="number"] {
     }
 
     .stat-prof-check {
-        width: 20px;
-        height: 20px;
-        top: 30px;
-        left: 5px;
+        top: 32px;
+        left: 250px;
+        width: 25px;
+        height: 25px;
     }
 
     .stat-prof-check:checked::after {
-        font-size: 12px;
+        font-size: 18px;
     }
 
     .section {
