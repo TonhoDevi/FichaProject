@@ -1,0 +1,542 @@
+/* ========================================
+   CONTROLES E BOTÕES
+======================================== */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 0;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px var(--sombra-crimson-forte);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-height: 44px;
+    position: relative;
+    clip-path: polygon(
+        5px 0,
+        100% 0,
+        100% calc(100% - 5px),
+        calc(100% - 5px) 100%,
+        0 100%,
+        0 5px
+    );
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    color: var(--cor8);
+    border: 2px solid var(--cor2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px var(--sombra-crimson-forte),
+        0 0 30px var(--sombra-crimson);
+    background: linear-gradient(135deg, var(--cor6), var(--cor2));
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    color: var(--cor8);
+    border: 2px solid var(--cor2);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--sombra-crimson-forte);
+    background: linear-gradient(135deg, var(--cor6), var(--cor2));
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--cor1), var(--cor5));
+    color: var(--cor3);
+    border: 2px solid var(--cor2);
+}
+
+.delete-btn {
+    background: var(--cor5);
+    color: var(--cor8);
+    border: 2px solid var(--cor3);
+    padding: 5px 10px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: var(--cor3);
+    box-shadow: 0 0 15px var(--sombra-crimson-forte);
+}
+
+/* ========================================
+   SEÇÕES
+======================================== */
+.section {
+    background: linear-gradient(135deg, var(--cor14));
+    padding: 15px;
+    border-radius: 0;
+    border: 2px solid var(--cor11);
+    border-left: 6px solid var(--cor11);
+    box-shadow: 
+        inset 0 2px 8px var(--sombra-preta-leve),
+        0 4px 15px var(--sombra-vermelho);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 899;
+    color: var(--cor4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--cor11);
+}
+
+/* ========================================
+   INPUTS E FORMULÁRIOS
+======================================== */
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--cor20);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid var(--cor11);
+    border-radius: 0;
+    background: var(--cor15);
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    color: var(--cor8);
+    transition: all 0.3s ease;
+    min-height: 40px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--cor3);
+    background: var(--transp-marrom-escuro);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ========================================
+   GRIDS DE INFORMAÇÃO
+======================================== */
+.character-info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.combat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.hp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* ========================================
+   MODAL
+======================================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--transp-preto-completo);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, var(--cor5), var(--cor1));
+    padding: 30px;
+    border-radius: 0;
+    border: 4px solid var(--cor11);
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 
+        0 20px 60px var(--sombra-preta-forte),
+        0 0 50px var(--transp-crimson);
+    max-height: 80vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: var(--cor3);
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px var(--sombra-crimson-intensa);
+}
+
+.character-item {
+    padding: 12px;
+    background: var(--transp-escuro-medio);
+    border: 2px solid var(--cor11);
+    border-left: 4px solid var(--cor3);
+    border-radius: 0;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.character-item:hover {
+    background: var(--transp-marrom-escuro);
+    transform: translateX(5px);
+    box-shadow: 0 0 20px var(--sombra-crimson);
+}
+
+.character-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cor3);
+}
+
+.character-details {
+    font-size: 0.9rem;
+    color: var(--cor8);
+}
+
+/* ========================================
+   MENU LATERAL
+======================================== */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    color: var(--cor8);
+    border: 2px solid var(--cor2);
+    border-radius: 0;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px var(--sombra-preta);
+    transition: all 0.3s ease;
+    min-height: 44px;
+    clip-path: polygon(
+        5px 0,
+        100% 0,
+        100% calc(100% - 5px),
+        calc(100% - 5px) 100%,
+        0 100%,
+        0 5px
+    );
+}
+
+.menu-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px var(--sombra-crimson-forte);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--cor1), var(--cor5));
+    border-left: 4px solid var(--cor2);
+    box-shadow: -5px 0 30px var(--sombra-preta-forte);
+    z-index: 1002;
+    transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.side-menu.active {
+    right: 0;
+}
+
+.menu-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.menu-close:hover {
+    background: var(--cor6);
+    transform: rotate(90deg);
+}
+
+.side-menu .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.side-menu .btn {
+    width: 100%;
+    text-align: center;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body > .app-container > .controls {
+    display: none;
+}
+
+/* ========================================
+   SISTEMA DE ABAS
+======================================== */
+.tabs-container {
+    margin-top: 30px;
+}
+
+.tabs-header {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--cor11);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--cor20);
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tab-btn:hover {
+    background: linear-gradient(135deg, var(--cor16), var(--cor14));
+    color: var(--cor3);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    border-bottom: 3px solid var(--cor2);
+    color: var(--cor8);
+    box-shadow: 0 -3px 10px var(--sombra-crimson);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--cor2);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ========================================
+   INDICADOR DE SALVAMENTO
+======================================== */
+.save-indicator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    padding: 12px 20px;
+    background: var(--cor2);
+    color: var(--cor8);
+    border-radius: 0;
+    border: 2px solid var(--cor3);
+    font-weight: 700;
+    box-shadow: 
+        0 4px 20px var(--sombra-preta),
+        0 0 30px var(--sombra-crimson-forte);
+    display: none;
+    animation: fadeIn 0.3s;
+    z-index: 999;
+}
+
+.save-indicator.show {
+    display: block;
+}
+
+/* ========================================
+   BLOCO DE BÔNUS
+======================================== */
+.bonus-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-around;
+    background: linear-gradient(135deg, var(--cor17));
+    border: 3px solid var(--cor9);
+    border-radius: 0;
+    padding: 10px;
+    clip-path: polygon(
+        10px 0,
+        100% 0,
+        100% calc(100% - 10px),
+        calc(100% - 10px) 100%,
+        0 100%,
+        0 10px
+    );
+}
+
+.bonus-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bonus-check {
+    appearance: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background: var(--transp-escuro-medio);
+    border: 3px solid var(--cor9);
+    position: relative;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    transition: all 0.3s ease;
+}
+
+.bonus-check:checked {
+    background: var(--cor21);
+    border-color: var(--cor2);
+    transform: rotate(45deg);
+}
+
+.bonus-check:checked::after {
+    content: "👑";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 28px;
+}
+
+.bonus-label {
+    font-size: 1.0rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--cor10);
+    text-align: center;
+    text-shadow: 0 0 5px var(--sombra-laranja);
+}
+
+.bonus-value {
+    width: 64px;
+    height: 60px;
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 890;
+    padding: 0px;
+    border-radius: 0px;
+    background: var(--cor22);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    color: var(--cor24);
+}

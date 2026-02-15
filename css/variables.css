@@ -1,0 +1,69 @@
+/* ========================================
+   VARIÁVEIS DE COR - PALETA PRETA E VERMELHA
+   TODAS AS CORES DO PROJETO ESTÃO AQUI!
+======================================== */
+:root {
+    /* === CORES PRINCIPAIS === */
+    --cor1: #000000;        /* gradiente grandona */
+    --cor2: #ebdd18;        /* Bordas de fora */
+    --cor3: #dcc70a;        /* detalhinhos */
+    --cor4: #5b0606;        /* titulo que nao muda */
+    --cor5: #a27209;        /* fundo la fora */
+    --cor6: #ff0000bb;      /* placa */
+    --cor7: #620f0f;        /* efeito da placa */
+    --cor8: #fffce1;        /* texto que muda */
+    --cor9: #070000;        /* nada */
+    --cor10: #baa32d;       /* nada */
+    --cor11: #dbcd15;       /* bordas de dentro */
+    --cor12: #a71414;       /* caixinhas de dentro dos atributo */
+    --cor13: #ddd6a3;       /* fundo */
+    --cor14: #ba9620;       /* fundo de dentro */
+    --cor15: #820b0b;       /* fundo das caixinhas */
+    --cor16: #5b0909;       /* fundo das caixona dos atributo */
+    --cor17: #880f0f;       /* caixinha do negoço que gira sla */
+    --cor18: #c1af0f;       /* nome dos atributos */
+    --cor19: #efff0a;       /* bonus de pericia */
+    --cor20: #460101;       /* texto que nao muda */
+    --cor21: #270101;       /* fundo das coroas */
+    --cor22: #c5a60a;       /* fundo da proficiencia */
+    --cor23: #dcb30d;       /* check atributo */
+    --cor24: #890000;       
+    --cor25: #380000;       /* atributo chekado */
+
+    /* === CORES DE TRANSPARÊNCIA === */
+    --transp-escuro: rgba(26, 0, 0, 0.95);
+    --transp-escuro-medio: rgba(26, 0, 0, 0.8);
+    --transp-escuro-leve: rgba(26, 0, 0, 0.6);
+    --transp-marrom: rgba(45, 10, 10, 0.6);
+    --transp-marrom-escuro: rgba(45, 10, 10, 0.9);
+    --transp-vermelho: rgba(139, 0, 0, 0.5);
+    --transp-crimson: rgba(220, 20, 60, 0.3);
+    --transp-preto: rgba(0, 0, 0, 0.6);
+    --transp-preto-total: rgba(0, 0, 0, 0.8);
+    --transp-preto-forte: rgba(0, 0, 0, 0.9);
+    --transp-preto-completo: rgba(0, 0, 0, 0.95);
+    
+    /* === CORES DE EFEITO === */
+    --brilho-vermelho-leve: rgba(139, 0, 0, 0.03);
+    --brilho-vermelho-medio: rgba(139, 0, 0, 0.05);
+    --brilho-crimson-leve: rgba(220, 20, 60, 0.02);
+    --brilho-crimson-medio: rgba(220, 20, 60, 0.1);
+    --brilho-crimson-forte: rgba(220, 20, 60, 0.2);
+    --brilho-laranja: rgba(233, 13, 13, 0.5);
+    
+    /* === SOMBRAS === */
+    --sombra-preta: rgba(0, 0, 0, 0.8);
+    --sombra-preta-forte: rgba(0, 0, 0, 0.9);
+    --sombra-preta-leve: rgba(0, 0, 0, 0.5);
+    --sombra-vermelho: rgba(139, 0, 0, 0.3);
+    --sombra-crimson: rgba(220, 20, 60, 0.4);
+    --sombra-crimson-forte: rgba(220, 50, 20, 0.6);
+    --sombra-crimson-intensa: rgba(50, 13, 88, 0.8);
+    --sombra-crimson-total: rgba(139, 6, 6, 0.9);
+    --sombra-laranja: rgba(220, 20, 20, 0.5);
+    
+    /* === CORES PARA IMPRESSÃO === */
+    --impressao-preto: #000;
+    --impressao-branco: white;
+    --impressao-borda: #000;
+}

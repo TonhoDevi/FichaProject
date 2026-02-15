@@ -1,0 +1,203 @@
+/* ========================================
+   RESET E BASE
+======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, var(--cor1) 0%, var(--cor5) 50%, var(--cor1) 100%);
+    font-family: 'Crimson Text', serif;
+    color: var(--cor8);
+    min-height: 100vh;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: pan-y;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            var(--brilho-vermelho-leve) 10px,
+            var(--brilho-vermelho-leve) 20px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            var(--brilho-crimson-leve) 10px,
+            var(--brilho-crimson-leve) 20px
+        );
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ========================================
+   ANIMAÇÕES GLOBAIS
+======================================== */
+@keyframes shimmer {
+    0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes syncEnter {
+    0% {
+        transform: scale(0.2) rotate(-180deg);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2) rotate(20deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes syncGlow {
+    0%, 100% {
+        box-shadow: 0 0 4px var(--cor2);
+    }
+    50% {
+        box-shadow:
+            0 0 10px var(--cor2),
+            0 0 18px var(--cor2);
+    }
+}
+
+/* ========================================
+   LAYOUT PRINCIPAL
+======================================== */
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, var(--cor1) 0%, var(--cor6) 50%, var(--cor1) 100%);
+    border-radius: 0;
+    border: 3px solid var(--cor3);
+    border-top: 8px solid var(--cor3);
+    border-bottom: 8px solid var(--cor3);
+    box-shadow: 
+        0 10px 40px var(--sombra-preta),
+        inset 0 0 50px var(--brilho-crimson-forte);
+    position: relative;
+    overflow: hidden;
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%
+    );
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 20px,
+        var(--brilho-crimson-medio) 20px,
+        var(--brilho-crimson-medio) 40px
+    );
+    animation: shimmer 30s linear infinite;
+}
+
+.header h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: 3.5rem;
+    color: var(--cor3);
+    text-shadow: 
+        3px 3px 6px var(--sombra-preta-forte),
+        0 0 30px var(--cor7),
+        0 0 50px var(--cor4);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 3px;
+}
+
+.header p {
+    color: var(--cor8);
+    font-size: 1.2rem;
+    font-style: italic;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px var(--sombra-preta);
+}
+
+/* ========================================
+   CONTAINER DA FICHA
+======================================== */
+.sheet-container {
+    background: linear-gradient(135deg, var(--cor13));
+    padding: 40px;
+    border-radius: 0;
+    border: 4px solid var(--cor11);
+    position: relative;
+}
+
+.sheet-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 50px,
+            var(--brilho-vermelho-leve) 50px,
+            var(--brilho-vermelho-leve) 51px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 50px,
+            var(--brilho-vermelho-leve) 50px,
+            var(--brilho-vermelho-leve) 51px
+        );
+    pointer-events: none;
+}
+
+.sheet-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
