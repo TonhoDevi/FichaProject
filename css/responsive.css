@@ -143,6 +143,11 @@
         grid-template-columns: 1fr;
         gap: 15px;
     }
+    
+    .sheet-grid-details {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 
     .character-info-grid {
         grid-template-columns: 1fr;
