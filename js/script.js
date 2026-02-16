@@ -69,11 +69,24 @@ function getCurrentCharacter() {
         slot8Max: document.getElementById('slot8Max').value,
         slot9Current: document.getElementById('slot9Current').value,
         slot9Max: document.getElementById('slot9Max').value,
+        idade: document.getElementById('idade').value,
+        altura: document.getElementById('altura').value,
+        peso: document.getElementById('peso').value,
+        caracteristicas: document.getElementById('caracteristicas').value,
+        personalidade: document.getElementById('personalidade').value,
+        ideais: document.getElementById('ideais').value,
+        vinculos: document.getElementById('vinculos').value,
+        defeitos: document.getElementById('defeitos').value,
+        historia: document.getElementById('historia').value,
+        anotacoes: document.getElementById('anotacoes').value,
+        individualsUnit: individualsUnit,
         spells: spells,
         inventoryItems: inventoryItems,
         magicItems: magicItems,
         skillProficiencies: skillProficiencies,
-        attacks: attacks
+        attacks: attacks,
+        characterImage: characterImageData
+
     };
 }
 
@@ -139,7 +152,19 @@ function loadCharacterData(char) {
     document.getElementById('slot8Max').value = char.slot8Max || '0';
     document.getElementById('slot9Current').value = char.slot9Current || '0';
     document.getElementById('slot9Max').value = char.slot9Max || '0';
-    
+    document.getElementById('idade').value = char.idade || '';
+    document.getElementById('altura').value = char.altura || '';
+    document.getElementById('peso').value = char.peso || '';
+    document.getElementById('caracteristicas').value = char.caracteristicas || '';
+    document.getElementById('personalidade').value = char.personalidade || '';
+    document.getElementById('ideais').value = char.ideais || '';
+    document.getElementById('vinculos').value = char.vinculos || '';
+    document.getElementById('defeitos').value = char.defeitos || '';
+    document.getElementById('historia').value = char.historia || '';
+    document.getElementById('anotacoes').value = char.anotacoes || '';
+    characterImageData = char.characterImage || null;
+    individualsUnit = char.individualsUnit || [];
+
     spells = char.spells || {
         truques: [], nivel1: [], nivel2: [], nivel3: [], nivel4: [],
         nivel5: [], nivel6: [], nivel7: [], nivel8: [], nivel9: []
@@ -160,6 +185,8 @@ function loadCharacterData(char) {
     renderSpells();
     renderAttacks();
     calculateModifiers();
+    renderIndiduals();
+    displayCharacterImage(characterImageData);
 }
 
 function saveCharacter() {

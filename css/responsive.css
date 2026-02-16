@@ -386,6 +386,20 @@
         margin-top: 8px;
     }
 
+    .image-preview {
+        width: 250px;
+        height: 330px;
+    }
+    
+    .image-controls {
+        width: 100%;
+    }
+    
+    .image-controls .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+
     input[type="checkbox"] {
         min-width: 24px;
         min-height: 24px;
@@ -401,6 +415,7 @@
         touch-action: manipulation;
         min-height: 44px;
     }
+     
 }
 
 /* ========================================

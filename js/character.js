@@ -31,6 +31,7 @@ const SKILLS = [
 // ========================================
 let skillProficiencies = {};
 let attacks = [];
+let characterImageData = null;
 
 // ========================================
 // INICIALIZAÇÃO DAS PERÍCIAS
@@ -207,4 +208,50 @@ function removeAttack(index) {
     attacks.splice(index, 1);
     renderAttacks();
     autoSave();
+}
+// ========================================
+// GERENCIAMENTO DE IMAGEM DO PERSONAGEM
+// ========================================
+
+document.getElementById('imageUpload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            characterImageData = event.target.result;
+            displayCharacterImage(characterImageData);
+            autoSave();
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+document.getElementById('imagePreview').addEventListener('click', function() {
+    document.getElementById('imageUpload').click();
+});
+
+function displayCharacterImage(imageData) {
+    const img = document.getElementById('characterImage');
+    const placeholder = document.getElementById('imagePlaceholder');
+    const removeBtn = document.getElementById('removeImageBtn');
+    
+    if (imageData) {
+        img.src = imageData;
+        img.style.display = 'block';
+        placeholder.style.display = 'none';
+        removeBtn.style.display = 'inline-block';
+    } else {
+        img.style.display = 'none';
+        placeholder.style.display = 'flex';
+        removeBtn.style.display = 'none';
+    }
+}
+
+function removeCharacterImage() {
+    if (confirm('Deseja remover a imagem do personagem?')) {
+        characterImageData = null;
+        displayCharacterImage(null);
+        document.getElementById('imageUpload').value = '';
+        autoSave();
+    }
 }

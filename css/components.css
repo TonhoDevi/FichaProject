@@ -392,7 +392,7 @@ body > .app-container > .controls {
     flex: 1;
     min-width: 150px;
     padding: 15px 20px;
-    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    background: linear-gradient(135deg, var(--cor13), var(--cor14));
     border: none;
     border-bottom: 3px solid transparent;
     color: var(--cor20);
@@ -407,12 +407,12 @@ body > .app-container > .controls {
 }
 
 .tab-btn:hover {
-    background: linear-gradient(135deg, var(--cor16), var(--cor14));
-    color: var(--cor3);
+    background: linear-gradient(135deg, var(--cor8), var(--cor14));
+    color: var(--cor9);
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, var(--cor5), var(--cor6));
+    background: linear-gradient(135deg, var(--cor25), var(--cor24));
     border-bottom: 3px solid var(--cor2);
     color: var(--cor8);
     box-shadow: 0 -3px 10px var(--sombra-crimson);
@@ -471,17 +471,10 @@ body > .app-container > .controls {
     align-items: center;
     justify-content: space-around;
     background: linear-gradient(135deg, var(--cor17));
-    border: 3px solid var(--cor9);
+    border: 0px solid var(--cor9);
     border-radius: 0;
     padding: 10px;
-    clip-path: polygon(
-        10px 0,
-        100% 0,
-        100% calc(100% - 10px),
-        calc(100% - 10px) 100%,
-        0 100%,
-        0 10px
-    );
+    clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
 }
 
 .bonus-item {
