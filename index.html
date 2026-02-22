@@ -36,12 +36,16 @@
         <div class="side-menu" id="sideMenu">
             <button class="menu-close" onclick="toggleMenu()">✕</button>
             <div class="controls">
-                <button class="btn btn-primary" onclick="toggleMenu(); window.print() ">🖨️ Imprimir Ficha</button>
-                <button class="btn btn-secondary" onclick="showLoadModal(); toggleMenu()">📂 Carregar</button>
                 <button class="btn btn-secondary" onclick="saveCharacter(); toggleMenu()">💾 Salvar</button>
                 <button class="btn btn-danger" onclick="newCharacter()">➕ Nova Ficha</button>
+                <button class="btn btn-primary" onclick="exportCharacterJSON(); toggleMenu()">💾 Baixar Ficha (.json)</button>
+                <button class="btn btn-secondary" onclick="showLoadModal(); toggleMenu()">📂 Carregar</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('importFileInput').click(); toggleMenu()">📂 Carregar Arquivo (.json)</button>
+                <button class="btn btn-primary" onclick="toggleMenu(); window.print() ">🖨️ Imprimir Ficha</button>
+    
             </div>
         </div>
+        <input type="file" id="importFileInput" accept=".json" onchange="importCharacterJSON(event)" style="display: none;">
 
         <!-- Overlay escuro quando menu aberto -->
         <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>

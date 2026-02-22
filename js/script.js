@@ -328,6 +328,144 @@ function switchTab(tabId) {
 }
 
 // ========================================
+// EXPORTAR/IMPORTAR JSON
+// ========================================
+
+
+function enableAutoBackup() {
+    setInterval(() => {
+        const char = getCurrentCharacter();
+        if (char.nomePersonagem) {
+            // Salvar no localStorage com timestamp
+            const backup = {
+                ...char,
+                backupDate: new Date().toISOString()
+            };
+            localStorage.setItem('dnd_auto_backup', JSON.stringify(backup));
+            console.log('Backup automático criado');
+        }
+    }, 5 * 60 * 1000); // 5 minutos
+}
+
+function validateCharacterData(data) {
+    const requiredFields = ['nomePersonagem'];
+    
+    for (const field of requiredFields) {
+        if (!(field in data)) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function exportCharacterJSON() {
+    const char = getCurrentCharacter();
+    
+    if (!char.nomePersonagem) {
+        alert('Por favor, preencha o nome do personagem antes de exportar.');
+        return;
+    }
+    
+
+    const json = JSON.stringify(char, null, 2);
+    
+
+    const blob = new Blob([json], { type: 'application/json' });
+    
+
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${sanitizeFileName(char.nomePersonagem)}.json`;
+    
+
+    document.body.appendChild(link);
+    link.click();
+    
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+
+    showExportSuccess();
+}
+
+
+function importCharacterJSON(event) {
+    const file = event.target.files[0];
+    
+    if (!file) return;
+    
+    if (!file.name.endsWith('.json')) {
+        alert('Por favor, selecione um arquivo .json válido.');
+        event.target.value = '';
+        return;
+    }
+    
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        try {
+            const characterData = JSON.parse(e.target.result);
+            
+            // VALIDAÇÃO
+            if (!validateCharacterData(characterData)) {
+                throw new Error('Estrutura do arquivo inválida');
+            }
+            
+            if (confirm(`Deseja carregar o personagem "${characterData.nomePersonagem}"?\n\nIsso substituirá os dados atuais não salvos.`)) {
+                loadCharacterData(characterData);
+                showImportSuccess(characterData.nomePersonagem);
+            }
+            
+        } catch (error) {
+            console.error('Erro ao importar:', error);
+            alert('Erro ao ler o arquivo.\nCertifique-se de que é um arquivo .json válido exportado desta aplicação.');
+        }
+        
+        event.target.value = '';
+    };
+    
+    reader.onerror = function() {
+        alert('Erro ao ler o arquivo.');
+        event.target.value = '';
+    };
+    
+    reader.readAsText(file);
+}
+
+function sanitizeFileName(name) {
+    return name
+        .replace(/[^a-z0-9áàâãéèêíïóôõöúçñ\s-]/gi, '') 
+        .replace(/\s+/g, '-') 
+        .toLowerCase()
+        .substring(0, 50);
+}
+
+function showExportSuccess() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.textContent = '✓ Ficha exportada com sucesso!';
+    indicator.classList.add('show');
+    setTimeout(() => {
+        indicator.classList.remove('show');
+        indicator.textContent = '✓ Salvo automaticamente';
+    }, 3000);
+}
+
+function showImportSuccess(characterName) {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.textContent = `✓ ${characterName} carregado!`;
+    indicator.classList.add('show');
+    setTimeout(() => {
+        indicator.classList.remove('show');
+        indicator.textContent = '✓ Salvo automaticamente';
+    }, 3000);
+}
+
+
+// ========================================
 // INICIALIZAÇÃO
 // ========================================
 initSkills();
@@ -336,3 +474,4 @@ renderInventory();
 renderMagicItems();
 renderSpells();
 renderAttacks();
+enableAutoBackup();
