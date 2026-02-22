@@ -692,6 +692,7 @@
 
 .placeholder-text {
     font-family: 'Cinzel', serif;
+    text-align: center;
     font-size: 0.9rem;
     color: var(--cor10);
     text-transform: uppercase;
