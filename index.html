@@ -2,647 +2,140 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="theme-color" content="#4a3728">
-    <title>Ficha de Personagem D&D 5e</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema completo de D&D 5e com fichas interativas e compêndio homebrew">
+    <title>D&D 5e Homebrew - Sistema Completo</title>
     
-    <!-- Fontes do Google -->
+    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <!-- CSS -->
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/variables.css">
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/character.css">
-<link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <div class="app-container">
-        <div class="header">
-            <h1>Ficha de Personagem</h1>
-            <p>Dungeons & Dragons 5ª Edição</p>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                🎲 D&D 5e Homebrew
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html" class="active">Início</a></li>
+                <li><a href="character-sheet.html">Ficha de Personagem</a></li>
+                <li><a href="compendium-races.html">Compêndio de Raças</a></li>
+            </ul>
+            <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
         </div>
+    </nav>
 
-        <!-- Botão para abrir menu -->
-        <button class="menu-toggle" onclick="toggleMenu()" id="menuToggle">
-            ☰ Menu
-        </button>
-
-        <!-- Menu lateral -->
-        <div class="side-menu" id="sideMenu">
-            <button class="menu-close" onclick="toggleMenu()">✕</button>
-            <div class="controls">
-                <button class="btn btn-secondary" onclick="saveCharacter(); toggleMenu()">💾 Salvar</button>
-                <button class="btn btn-danger" onclick="newCharacter()">➕ Nova Ficha</button>
-                <button class="btn btn-primary" onclick="exportCharacterJSON(); toggleMenu()">💾 Baixar Ficha (.json)</button>
-                <button class="btn btn-secondary" onclick="showLoadModal(); toggleMenu()">📂 Carregar</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('importFileInput').click(); toggleMenu()">📂 Carregar Arquivo (.json)</button>
-                <button class="btn btn-primary" onclick="toggleMenu(); window.print() ">🖨️ Imprimir Ficha</button>
-    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">D&D 5e Homebrew</h1>
+            <p class="hero-subtitle">Sistema Completo de Fichas e Compêndios</p>
+            <div class="hero-buttons">
+                <a href="character-sheet.html" class="btn btn-primary btn-large">
+                    📜 Criar Ficha
+                </a>
+                <a href="compendium-races.html" class="btn btn-secondary btn-large">
+                    📚 Ver Raças
+                </a>
             </div>
         </div>
-        <input type="file" id="importFileInput" accept=".json" onchange="importCharacterJSON(event)" style="display: none;">
+    </section>
 
-        <!-- Overlay escuro quando menu aberto -->
-        <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
-
-        <div class="save-indicator" id="saveIndicator">✓ Salvo automaticamente</div>
-
-                <!-- SISTEMA DE ABAS -->
-        <div class="tabs-container">
-            <div class="tabs-header">
-                <button class="tab-btn active" onclick="switchTab('tab1')">
-                    ⚔️ Principal
-                </button>
-                <button class="tab-btn" onclick="switchTab('tab2')">
-                    📜 Inventário
-                </button>
-                <button class="tab-btn" onclick="switchTab('tab3')">
-                    ✨ Habilidades
-                </button>
-                <button class="tab-btn" onclick="switchTab('tab4')">
-                    📖 Descrição
-                </button>
-            </div>
-        <!-- ABA 1: PRINCIPAL -->
-        <div class="tab-content active" id="tab1">
-            <div class="sheet-container">
-                <!-- Informações Básicas -->
-                <div class="character-info-grid">
-                    <div class="input-group">
-                        <label class="input-label">Nome do Personagem</label>
-                        <input type="text" id="nomePersonagem" oninput="autoSave()">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Classe e Nível</label>
-                        <input type="text" id="classeNivel" placeholder="Ex: Guerreiro 5" oninput="autoSave()">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Nome do Jogador</label>
-                        <input type="text" id="nomeJogador" oninput="autoSave()">
-                    </div>
-                </div>
-                <!-- Segunda Linha - Raça, Tendência, Antecedente menores -->
-                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 15px; margin-bottom: 20px;">
-                    <div class="input-group">
-                        <label class="input-label">Raça</label>
-                        <input type="text" id="raca" oninput="autoSave()">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Antecedente</label>
-                        <input type="text" id="antecedente" oninput="autoSave()">
-                    </div>
-                    <div class="input-group">
-                        <label class="input-label">Tendência</label>
-                        <input type="text" id="tendencia" oninput="autoSave()">
-                    </div>
-                    
-                    <!-- Bloco de Inspiração/Heroico/Proficiência -->
-                    <div class="bonus-box">
-                        <div class="bonus-item">
-                            <input type="checkbox" class="bonus-check" id="inspiracao" onchange="autoSave()">
-                            <label class="bonus-label" for="inspiracao">Inspiração</label>
-                        </div>
-                        <div class="bonus-item">
-                            <input type="number" class="bonus-value" id="bonusProficiencia" value="1" oninput="calculateModifiers(); autoSave()">
-                            <label class="bonus-label">Proficiência</label>
-                        </div>
-                        <div class="bonus-item">
-                            <input type="checkbox" class="bonus-check" id="pontoHeroico" onchange="autoSave()">
-                            <label class="bonus-label" for="pontoHeroico">Ponto Heroico</label>
-                        </div>
-                    </div>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Funcionalidades</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3>Ficha Interativa</h3>
+                    <p>Sistema completo de ficha de personagem com cálculos automáticos, salvamento local e exportação JSON.</p>
+                    <a href="ficha.html" class="feature-link">Criar Ficha →</a>
                 </div>
 
-                <div class="sheet-grid">
-                    <!-- Coluna Esquerda -->
-                    <div>
-                        <!-- Atributos -->
-                        <div class="section">
-                            <div class="section-title">Atributos</div>
-                            <div class="stats-grid">
-                                <div class="stat-box">
-                                    <div class="stat-label">Força</div>
-                                    <input type="number" class="stat-input" id="forca" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <input type="checkbox" class="stat-prof-check" id="profForca" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-value" id="forcaMod">+0</div>
-                                    <div class="stat-save" id="forcaSave">+0</div>
-                                </div>
-                                <div class="stat-box">
-                                    <input type="checkbox" class="stat-prof-check" id="profDestreza" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-label">Destreza</div>
-                                    <input type="number" class="stat-input" id="destreza" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <div class="stat-value" id="destrezaMod">+0</div>
-                                    <div class="stat-save" id="destrezaSave">+0</div>
-                                </div>
-                                <div class="stat-box">
-                                    <input type="checkbox" class="stat-prof-check" id="profConstituicao" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-label">Constituição</div>
-                                    <input type="number" class="stat-input" id="constituicao" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <div class="stat-value" id="constituicaoMod">+0</div>
-                                    <div class="stat-save" id="constituicaoSave">+0</div>
-                                </div>
-                                <div class="stat-box">
-                                    <input type="checkbox" class="stat-prof-check" id="profInteligencia" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-label">Inteligência</div>
-                                    <input type="number" class="stat-input" id="inteligencia" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <div class="stat-value" id="inteligenciaMod">+0</div>
-                                    <div class="stat-save" id="inteligenciaSave">+0</div>
-                                </div>
-                                <div class="stat-box">
-                                    <input type="checkbox" class="stat-prof-check" id="profSabedoria" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-label">Sabedoria</div>
-                                    <input type="number" class="stat-input" id="sabedoria" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <div class="stat-value" id="sabedoriaMod">+0</div>
-                                    <div class="stat-save" id="sabedoriaSave">+0</div>
-                                </div>
-                                <div class="stat-box">
-                                    <input type="checkbox" class="stat-prof-check" id="profCarisma" onchange="calculateSavingThrows(); autoSave()">
-                                    <div class="stat-label">Carisma</div>
-                                    <input type="number" class="stat-input" id="carisma" value="10" oninput="calculateModifiers(); autoSave()">
-                                    <div class="stat-value" id="carismaMod">+0</div>
-                                    <div class="stat-save" id="carismaSave">+0</div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧙</div>
+                    <h3>Compêndio de Raças</h3>
+                    <p>Todas as raças homebrew com descrições detalhadas, características e habilidades especiais.</p>
+                    <a href="compendium-races.html" class="feature-link">Ver Raças →</a>
+                </div>
 
-                        <!-- Perícias -->
-                        <div class="section">
-                            <div class="section-title">Perícias</div>
-                            
-                            <div class="skills-grid" id="skillsList"></div>
-                            
-                            <div class="sheet-grid"; style="grid-template-columns: 1fr 1fr;">
-                                <div>
-                                    <div class="input-group">
-                                        <label class="input-label">Percepção Passiva</label>
-                                        <input type="text" id="percepcaoPassiva">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="input-group">
-                                        <label class="input-label">Intuição Passiva</label>
-                                        <input type="text" id="intuicaoPassiva">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Coluna Direita -->
-                    <div>
-                        <!-- Combate -->
-                        <div class="section">
-                            <div class="section-title">Combate</div>
-                            <div class="combat-grid">
-                                <div class="input-group">
-                                    <label class="input-label">CA</label>
-                                    <input type="number" id="ca" value="10" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Iniciativa</label>
-                                    <input type="number" id="iniciativa" value="0" oninput="autoSave()">
-                                </div>
-                                <div class = "input-group">
-                                    <label class="input-label">Vida Máxima</label>
-                                    <input type="number" id="pvTotais" value="0" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Vida Atual</label>
-                                    <input type="number" id="pvAtuais" value="0" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Vida Temporária</label>
-                                    <input type="number" id="pvTemp" value="0" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Andar</label>
-                                    <input type="text" id="deslocAndar" value="30" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Nadar</label>
-                                    <input type="text" id="deslocNadar" value="15" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Voar</label>
-                                    <input type="text" id="deslocVoar" value="-" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Escalar</label>
-                                    <input type="text" id="deslocEscalar" value="15" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Dados de Vida</label>
-                                    <input type="text" id="dadosVida" placeholder="1d8" oninput="autoSave()">
-                                </div>
-                            </div>
-                            <!-- Idiomas -->
-                            <div class="section">
-                                <div class="section-title">Idiomas e Proficiências</div>
-                                <textarea id="idiomas" oninput="autoSave()" placeholder="Liste idiomas e proficiências..."></textarea>
-                            </div>
-                        </div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Sistema de Combate</h3>
+                    <p>Gerencie ataques, magias, slots de magia e recursos de combate de forma intuitiva.</p>
+                    <a href="character-sheet.html" class="feature-link">Começar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎒</div>
+                    <h3>Inventário Avançado</h3>
+                    <p>Sistema completo de gerenciamento de equipamentos, itens mágicos e moedas.</p>
+                    <a href="character-sheet.html" class="feature-link">Explorar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>História e Personalidade</h3>
+                    <p>Registre a história completa do seu personagem, características e conhecidos importantes.</p>
+                    <a href="character-sheet.html" class="feature-link">Criar →</a>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Salvar e Exportar</h3>
+                    <p>Salve localmente, exporte como JSON ou imprima sua ficha em formato profissional.</p>
+                    <a href="character-sheet.html" class="feature-link">Começar →</a>
                 </div>
             </div>
         </div>
-        <div class="tab-content" id="tab2">
-            <div class="sheet-container">
-                <!-- Equipamento -->
-                <div class="section">
-                    <div class="section-title">Equipamento</div>
-                    <div class="moedas-grid">
-                        <div class="moeda-item">
-                            <div class="input-group">
-                                <label class="input-label">
-                                    <span class="moeda-icon cobre"></span>
-                                    PC
-                                </label>
-                                <input type="number" id="pc" value="0" oninput="autoSave()">
-                            </div>
-                        </div>
-                        <div class="moeda-item">
-                            <div class="input-group">
-                                <label class="input-label">
-                                    <span class="moeda-icon prata"></span>
-                                    PP
-                                </label>
-                                <input type="number" id="pe" value="0" oninput="autoSave()">
-                            </div>
-                        </div>
-                        <div class="moeda-item">
-                            <div class="input-group">
-                                <label class="input-label">
-                                    <span class="moeda-icon electrum"></span>
-                                    PE
-                                </label>
-                                <input type="number" id="pl" value="0" oninput="autoSave()">
-                            </div>
-                        </div>
-                        <div class="moeda-item">
-                            <div class="input-group">
-                                <label class="input-label">
-                                    <span class="moeda-icon ouro"></span>
-                                    PO
-                                </label>
-                                <input type="number" id="po" value="0" oninput="autoSave()">
-                            </div>
-                        </div>
-                        <div class="moeda-item">
-                            <div class="input-group">
-                                <label class="input-label">
-                                    <span class="moeda-icon platina"></span>
-                                    PL
-                                </label>
-                                <input type="number" id="pp" value="0" oninput="autoSave()">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="inventory-list" id="inventoryList"></div>
-                    <button class="btn btn-secondary" onclick="addInventoryItem()" style="width: 100%; margin-top: 10px;">+ Adicionar Item</button>
-                </div>
-                <div class="section">
-                    <div class="section-title">Tesouro</div>
-                    <textarea id="tesouro" oninput="autoSave()" placeholder="Tesouros valiosos..."></textarea>
-                </div>
-                <div class="section">
-                    <div class="section-title">Itens Mágicos</div>
-                    <div class="magic-items-list" id="magicItemsList"></div>
-                    <button class="btn btn-secondary" onclick="addMagicItem()" style="width: 100%; margin-top: 10px;">+ Adicionar Item Mágico</button>
-                </div> 
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre o Projeto</h2>
+            <div class="about-content">
+                <p>
+                    Sistema completo de D&D 5e com foco em conteúdo homebrew. 
+                    Desenvolvido para facilitar a criação e gerenciamento de personagens, 
+                    com interface intuitiva e recursos avançados para jogadores e mestres.
+                </p>
+                <p>
+                    Todas as fichas são salvas localmente no seu navegador e podem ser 
+                    exportadas como arquivos JSON para backup ou compartilhamento.
+                </p>
             </div>
         </div>
-        <div class="tab-content active" id="tab3">
-            <div class="sheet-container">
-                <!-- Ataques -->
-                <div class="section">
-                    <div class="section-title">Ataques</div>
-                    <div class="attack-list" id="attackList"></div>
-                    <button class="btn btn-secondary" onclick="addAttack()" style="width: 100%; margin-top: 10px;">+ Adicionar Ataque</button>
-                </div>
+    </section>
 
-                <!-- Magias -->
-                <div class="section">
-                    <div class="section-title">Magias</div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;">
-                        <div class="input-group">
-                            <label class="input-label">Habilidade de Conjuração</label>
-                            <select id="habilidadeMagia" onchange="updateMagicAtribute(this.value); autoSave()">
-                                <option value="">-</option>
-                                <option value="forca">FORÇA</option>
-                                <option value="destreza">DESTREZA</option>
-                                <option value="constituicao">CONSTITUIÇÃO</option>
-                                <option value="inteligencia">INTELIGÊNCIA</option>
-                                <option value="sabedoria">SABEDORIA</option>
-                                <option value="carisma">CARISMA</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">Bônus Extra</label>
-                            <input type="number" id="extraBonusMagia" value="0" oninput="updateMagicAtribute(document.getElementById('habilidadeMagia').value); autoSave()">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">CD de Magia</label>
-                            <input type="number" id="cdMagia" value="8" readonly style="background: var(--cor12); font-weight: 700; color: var(--cor19);">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">Bônus de Ataque</label>
-                            <input type="text" id="bonusMagia" value="+0" readonly style="background: var(--cor12); font-weight: 700; color: var(--cor19);">
-                        </div>
-                    </div>
-
-                    <!-- Truques -->
-                    <div class="spell-level-section">
-                        <div class="spell-level-header" onclick="toggleSpellLevel('truques')">
-                            <div class="spell-level-title">Truques (Cantrips)</div>
-                            <button class="spell-expand-btn" id="expandTruques">▼</button>
-                        </div>
-                        <div class="spell-level-content" id="spellsTruques">
-                            <div class="spell-list" id="spellListTruques"></div>
-                            <button class="btn btn-secondary" onclick="addSpell('truques')" style="width: 100%; margin-top: 10px;">+ Adicionar Truque</button>
-                        </div>
-                    </div>
-
-                    <!-- Níveis 1-9 -->
-                    <div class="spell-slots-grid">
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel1')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 1</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot1Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot1Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel1">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel1">
-                                <div class="spell-list" id="spellListNivel1"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel1')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel2')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 2</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot2Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot2Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel2">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel2">
-                                <div class="spell-list" id="spellListNivel2"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel2')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel3')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 3</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot3Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot3Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel3">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel3">
-                                <div class="spell-list" id="spellListNivel3"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel3')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel4')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 4</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot4Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot4Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel4">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel4">
-                                <div class="spell-list" id="spellListNivel4"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel4')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel5')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 5</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot5Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot5Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel5">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel5">
-                                <div class="spell-list" id="spellListNivel5"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel5')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel6')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 6</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot6Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot6Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel6">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel6">
-                                <div class="spell-list" id="spellListNivel6"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel6')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel7')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 7</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot7Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot7Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel7">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel7">
-                                <div class="spell-list" id="spellListNivel7"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel7')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel8')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 8</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot8Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot8Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel8">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel8">
-                                <div class="spell-list" id="spellListNivel8"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel8')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-
-                        <div class="spell-level-section">
-                            <div class="spell-level-header" onclick="toggleSpellLevel('nivel9')">
-                                <div class="spell-level-info">
-                                    <span class="spell-level-title">Nível 9</span>
-                                    <div class="spell-slots">
-                                        <input type="number" class="slot-current" id="slot9Current" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                        <span class="slot-separator">/</span>
-                                        <input type="number" class="slot-max" id="slot9Max" value="0" min="0" oninput="autoSave(); event.stopPropagation();" onclick="event.stopPropagation()">
-                                    </div>
-                                </div>
-                                <button class="spell-expand-btn" id="expandNivel9">▼</button>
-                            </div>
-                            <div class="spell-level-content" id="spellsNivel9">
-                                <div class="spell-list" id="spellListNivel9"></div>
-                                <button class="btn btn-secondary" onclick="addSpell('nivel9')" style="width: 100%; margin-top: 10px;">+ Adicionar Magia</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 D&D 5e Homebrew - Sistema criado por TonhoDevi</p>
+            <div class="footer-links">
+                <a href="https://github.com/TonhoDevi/FichaProject" target="_blank">GitHub</a>
+                <a href="index.html">Início</a>
+                <a href="character-sheet.html">Ficha</a>
+                <a href="compendium-races.html">Raças</a>
             </div>
         </div>
-        <div class="tab-content" id="tab4">
-            <div class="sheet-container">
-                <!-- Imagem e Descrição -->
-                <div class="section">
-                    <div class="sheet-grid-details">
-                        <!-- Coluna Esquerda: Imagem -->
-                        <div>
-                            <div class="section-title">Imagem do Personagem</div>
-                            <div class="character-image-container">
-                                <div class="image-preview" id="imagePreview">
-                                    <img id="characterImage" src="" alt="Imagem do personagem" style="display: none;">
-                                    <div class="image-placeholder" id="imagePlaceholder">
-                                        <span class="placeholder-icon">🖼️</span>
-                                        <span class="placeholder-text">Clique para adicionar imagem</span>
-                                    </div>
-                                </div>
-                                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-                                <div class="image-controls">
-                                    <button class="btn btn-secondary" onclick="document.getElementById('imageUpload').click()">
-                                        📤 Escolher Imagem
-                                    </button>
-                                    <button class="btn btn-danger" onclick="removeCharacterImage()" id="removeImageBtn" style="display: none;">
-                                        🗑️ Remover
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Coluna Direita: Detalhes -->
-                        <div>
-                            <div class="section-title">Detalhes</div>
-                            <div class="combat-grid">
-                                <div class="input-group">
-                                    <label class="input-label">Idade</label>
-                                    <input type="text" id="idade" placeholder="25 anos, Adulto" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Altura</label>
-                                    <input type="text" id="altura" placeholder="185cm" oninput="autoSave()">
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Peso</label>
-                                    <input type="text" id="peso" placeholder="75kg" oninput="autoSave()">
-                                </div>
-                            </div>
-                            
-                            <div class="input-group">
-                                <label class="input-label">Características</label>
-                                <textarea id="caracteristicas" oninput="autoSave()" style="min-height: 100px;" placeholder="Calvo, nariz grande, olhos azuis..."></textarea>
-                            </div>
-                            
-                            <div class="combat-grid" style="grid-template-columns: 1fr 1fr;">
-                                <div class="input-group">
-                                    <label class="input-label">Personalidade</label>
-                                    <textarea id="personalidade" oninput="autoSave()" style="min-height: 80px;" placeholder="Traços de personalidade..."></textarea>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Ideais</label>
-                                    <textarea id="ideais" oninput="autoSave()" style="min-height: 80px;" placeholder="Ideais..."></textarea>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Vínculos</label>
-                                    <textarea id="vinculos" oninput="autoSave()" style="min-height: 80px;" placeholder="Vínculos..."></textarea>
-                                </div>
-                                <div class="input-group">
-                                    <label class="input-label">Defeitos</label>
-                                    <textarea id="defeitos" oninput="autoSave()" style="min-height: 80px;" placeholder="Defeitos..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Conhecidos -->
-                <div class="section">
-                    <div class="section-title">Conhecidos</div>
-                    <div class="individuals-list" id="individualsList"></div>
-                    <button class="btn btn-secondary" onclick="addIndividual()" style="width: 100%; margin-top: 10px;">+ Adicionar Conhecido</button>
-                </div>
-                
-                <!-- História -->
-                <div class="section">
-                    <div class="section-title">História</div>
-                    <textarea id="historia" oninput="autoSave()" style="min-height: 360px;" placeholder="História do personagem..."></textarea>
-                </div>
-                
-                <!-- Anotações -->
-                <div class="section">
-                    <div class="section-title">Anotações</div>
-                    <textarea id="anotacoes" oninput="autoSave()" style="min-height: 360px;" placeholder="Anotações"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Carregar -->
-    <div class="modal" id="loadModal">
-        <div class="modal-content">
-            <h2 class="modal-title">Carregar Personagem</h2>
-            <div id="characterList"></div>
-            <button class="btn btn-secondary" onclick="hideLoadModal()" style="width: 100%; margin-top: 15px;">Fechar</button>
-        </div>
-    </div>
+    </footer>
 
     <!-- JavaScript -->
-    <script src="js/spells.js"></script>
-    <script src="js/character.js"></script>
-    <script src="js/inventory.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/individuals.js"></script>
+    <script>
+        function toggleNavbar() {
+            const menu = document.querySelector('.navbar-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

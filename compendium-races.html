@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compêndio de Raças - D&D 5e Homebrew</title>
+    
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">
+                🎲 D&D 5e Homebrew
+            </a>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="character-sheet.html">Ficha de Personagem</a></li>
+                <li><a href="compendium-races.html" class="active">Compêndio de Raças</a></li>
+            </ul>
+            <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="compendio-header">
+        <div class="container">
+            <h1>Compêndio de Raças Homebrew</h1>
+            <p>Explore todas as raças customizadas disponíveis</p>
+        </div>
+    </section>
+
+    <!-- Filtros -->
+    <section class="filtros-section">
+        <div class="container">
+            <div class="filtros">
+                <input type="text" id="searchRace" placeholder="🔍 Buscar raça..." class="search-input">
+                <select id="filterSize" class="filter-select">
+                    <option value="">Todos os tamanhos</option>
+                    <option value="pequeno">Pequeno</option>
+                    <option value="medio">Médio</option>
+                    <option value="grande">Grande</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lista de Raças -->
+    <section class="racas-section">
+        <div class="container">
+            <div class="racas-grid" id="racasGrid">
+                <!-- As raças serão carregadas aqui via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Detalhes -->
+    <div class="modal" id="racaModal">
+        <div class="modal-content modal-large">
+            <button class="modal-close" onclick="closeRacaModal()">✕</button>
+            <div id="racaDetails"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 D&D 5e Homebrew - Sistema criado por TonhoDevi</p>
+            <div class="footer-links">
+                <a href="https://github.com/TonhoDevi/FichaProject" target="_blank">GitHub</a>
+                <a href="index.html">Início</a>
+                <a href="character-sheet.html">Ficha</a>
+                <a href="compendium-races.html">Raças</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleNavbar() {
+            const menu = document.querySelector('.navbar-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+    <script src="js/compendio.js"></script>
+</body>
+</html>

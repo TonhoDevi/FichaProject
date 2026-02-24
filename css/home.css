@@ -1,0 +1,475 @@
+/* ========================================
+   PÁGINA INICIAL
+======================================== */
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, var(--cor1), var(--cor5));
+    border-bottom: 3px solid var(--cor11);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px var(--sombra-preta);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.navbar-logo {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.8rem;
+    color: var(--cor3);
+    text-decoration: none;
+    text-shadow: 2px 2px 4px var(--sombra-preta);
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li a {
+    color: var(--cor8);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    padding: 8px 15px;
+    border-bottom: 2px solid transparent;
+}
+
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+    color: var(--cor3);
+    border-bottom-color: var(--cor3);
+}
+
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: 2px solid var(--cor3);
+    color: var(--cor3);
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background: 
+        linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(162, 114, 9, 0.5)),
+        url('../assets/textures/argyle.png');
+    background-size: cover, 200px;
+    background-position: center;
+    border-bottom: 4px solid var(--cor11);
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-title {
+    font-family: 'Pirata One', cursive;
+    font-size: 4.5rem;
+    color: var(--cor3);
+    margin-bottom: 20px;
+    text-shadow: 
+        3px 3px 6px var(--sombra-preta-forte),
+        0 0 30px var(--cor7);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: var(--cor8);
+    margin-bottom: 40px;
+    font-style: italic;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-large {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+}
+
+/* Features Section */
+.features {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--cor13));
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: var(--cor4);
+    text-align: center;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    padding: 30px;
+    border: 3px solid var(--cor11);
+    border-radius: 0;
+    text-align: center;
+    transition: all 0.3s ease;
+    clip-path: polygon(
+        15px 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%,
+        0 15px
+    );
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--sombra-crimson-forte);
+    border-color: var(--cor3);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: var(--cor3);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: var(--cor8);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.feature-link {
+    color: var(--cor3);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.feature-link:hover {
+    color: var(--cor2);
+    transform: translateX(5px);
+}
+
+/* About Section */
+.about {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, var(--cor5), var(--cor1));
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--cor8);
+    margin-bottom: 20px;
+}
+
+/* Footer */
+.footer {
+    background: var(--cor1);
+    border-top: 3px solid var(--cor11);
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer p {
+    color: var(--cor8);
+    margin-bottom: 15px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--cor3);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--cor2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: linear-gradient(135deg, var(--cor1), var(--cor5));
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+        transition: left 0.3s ease;
+        border-bottom: 3px solid var(--cor11);
+    }
+
+    .navbar-menu.active {
+        left: 0;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* ========================================
+   COMPÊNDIO DE RAÇAS
+======================================== */
+.compendio-header {
+    background: linear-gradient(135deg, var(--cor5), var(--cor1));
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--cor11);
+}
+
+.compendio-header h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: 3rem;
+    color: var(--cor3);
+    margin-bottom: 15px;
+}
+
+.compendio-header p {
+    color: var(--cor8);
+    font-size: 1.2rem;
+}
+
+.filtros-section {
+    padding: 30px 20px;
+    background: linear-gradient(135deg, var(--cor14));
+}
+
+.filtros {
+    display: flex;
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 20px;
+    border: 2px solid var(--cor11);
+    background: var(--cor15);
+    color: var(--cor8);
+    font-size: 1rem;
+}
+
+.filter-select {
+    padding: 12px 20px;
+    border: 2px solid var(--cor11);
+    background: var(--cor15);
+    color: var(--cor8);
+    font-size: 1rem;
+    min-width: 200px;
+}
+
+.racas-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--cor13));
+}
+
+.racas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.raca-card {
+    background: linear-gradient(135deg, var(--cor14), var(--cor15));
+    border: 3px solid var(--cor11);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(
+        15px 0,
+        100% 0,
+        100% calc(100% - 15px),
+        calc(100% - 15px) 100%,
+        0 100%,
+        0 15px
+    );
+}
+
+.raca-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px var(--sombra-crimson-forte);
+    border-color: var(--cor3);
+}
+
+.raca-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--cor11);
+}
+
+.raca-info {
+    padding: 20px;
+}
+
+.raca-info h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--cor3);
+    margin-bottom: 10px;
+}
+
+.raca-size,
+.raca-speed {
+    font-size: 0.9rem;
+    color: var(--cor10);
+    margin-bottom: 5px;
+}
+
+.raca-preview {
+    color: var(--cor8);
+    line-height: 1.6;
+    margin: 15px 0;
+}
+
+.btn-small {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.modal-large {
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--cor3);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1
+    
+}
+.modal-close:hover {
+    background: var(--cor6);
+    transform: rotate(90deg);
+}
+
+#racaDetails h2 {
+    font-family: 'Pirata One', cursive;
+    font-size: 2.5rem;
+    color: var(--cor3);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#racaDetails h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--cor3);
+    margin: 30px 0 15px;
+    border-bottom: 2px solid var(--cor11);
+    padding-bottom: 10px;
+}
+
+#racaDetails h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#racaDetails ul {
+    list-style: none;
+    padding: 0;
+}
+
+#racaDetails ul li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid var(--cor2);
+    color: var(--cor8);
+}
+
+#racaDetails p {
+    color: var(--cor8);
+    line-height: 1.8;
+}
+}
