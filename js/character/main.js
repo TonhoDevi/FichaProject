@@ -232,6 +232,92 @@ function showSaveIndicator() {
 }
 
 // ========================================
+// EXPORT E IMPORT EM JSON
+// ========================================
+function exportCharacterJSON() {
+    const char = getCurrentCharacter();
+    if (!char.nomePersonagem) {
+        alert('Por favor, insira um nome para o personagem antes de exportar.');
+        return;
+    }
+    
+    // Inclui explicitamente todas as informações críticas
+    const exportData = {
+        ...char,
+        skillProficiencies: skillProficiencies,  // Perícias e proficiências
+        abilities: abilities,  // Habilidades customizadas
+        inventoryItems: inventoryItems,  // Inventário
+        magicItems: magicItems,  // Itens mágicos
+        attacks: attacks,  // Ataques
+        spells: spells,  // Magias
+        individualsUnit: individualsUnit,  // Conhecidos
+        characterImage: characterImageData  // Imagem
+    };
+    
+    const jsonString = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${char.nomePersonagem}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    alert(`Personagem "${char.nomePersonagem}" exportado com sucesso!\n\nDados salvos:\n✓ Perícias e Proficiências\n✓ Habilidades\n✓ Inventário\n✓ Itens Mágicos\n✓ Ataques\n✓ Magias`);
+}
+
+function importCharacterJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            const char = JSON.parse(e.target.result);
+            
+            // Restaura todos os dados do JSON
+            skillProficiencies = char.skillProficiencies || {};
+            abilities = char.abilities || [];
+            inventoryItems = char.inventoryItems || [];
+            magicItems = char.magicItems || [];
+            attacks = char.attacks || [];
+            spells = char.spells || {
+                truques: [], nivel1: [], nivel2: [], nivel3: [], nivel4: [],
+                nivel5: [], nivel6: [], nivel7: [], nivel8: [], nivel9: []
+            };
+            individualsUnit = char.individualsUnit || [];
+            characterImageData = char.characterImage || null;
+            
+            // Carrega os dados do formulário
+            loadCharacterData(char);
+            
+            // Salva no localStorage também
+            const characters = JSON.parse(localStorage.getItem('dnd_characters') || '[]');
+            const existingIndex = characters.findIndex(c => c.nomePersonagem === char.nomePersonagem);
+            
+            if (existingIndex >= 0) {
+                characters[existingIndex] = char;
+            } else {
+                characters.push(char);
+            }
+            
+            localStorage.setItem('dnd_characters', JSON.stringify(characters));
+            alert(`Personagem "${char.nomePersonagem}" importado com sucesso!\n\n✓ Perícias restauradas\n✓ Habilidades restauradas\n✓ Inventário restaurado\n✓ Todos os dados restaurados`);
+            
+        } catch (error) {
+            alert('Erro ao importar arquivo JSON. Verifique se o arquivo está correto.');
+            console.error(error);
+        }
+    };
+    reader.readAsText(file);
+    
+    // Limpar o input
+    event.target.value = '';
+}
+
+// ========================================
 // MODAL DE CARREGAMENTO
 // ========================================
 function showLoadModal() {
