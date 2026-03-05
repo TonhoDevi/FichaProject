@@ -1,35 +1,78 @@
 /* ========================================
-   ATRIBUTOS
+   6-character.css
+   Ficha de Personagem — Cosmos Sombrio
+   
+   ÍNDICE:
+   01. Informações gerais (info-grid)
+   02. Atributos (stat-box)
+   03. Perícias (skill-item)
+   04. Combate — Widgets SVG
+   05. Deslocamento
+   06. Ataques
+   07. Habilidades
+   08. Moedas / Inventário
+   09. Itens Mágicos
+   10. Sistema de Magias
+   11. Imagem do personagem
+   12. Indivíduos / Conhecidos
+   13. Utilitários de display
 ======================================== */
+
+/* ════════════════════════════════════════════════════════════
+   01. INFORMAÇÕES GERAIS
+════════════════════════════════════════════════════════════ */
+.character-info-grid,
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   02. ATRIBUTOS
+════════════════════════════════════════════════════════════ */
 .character-stats-grid,
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    gap: 14px;
 }
+
 .character-attribute-box,
 .stat-box {
     text-align: center;
-    padding: 15px;
-    background: linear-gradient(135deg, var(--cor16));
-    border: 3px solid var(--cor2);
-    border-radius: 0px;
+    padding: 14px 10px;
+    background: linear-gradient(160deg, #0c1040, #080b24);
+    border: 2px solid rgba(144, 128, 200, 0.45);
+    border-radius: 2px;
     position: relative;
     clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
     transition: all 0.3s ease;
+    box-shadow:
+        0 0 18px rgba(80, 60, 180, 0.14),
+        inset 0 0 16px rgba(60, 40, 140, 0.08);
+}
+
+.character-attribute-box:hover,
+.stat-box:hover {
+    border-color: rgba(200, 188, 232, 0.70);
+    box-shadow:
+        0 0 25px rgba(100, 80, 200, 0.30),
+        inset 0 0 20px rgba(80, 60, 160, 0.12);
+    transform: translateY(-1px);
 }
 
 .character-attribute-box.proficient,
 .stat-box.proficient {
-    background: linear-gradient(135deg, var(--cor24));
-    border: 3px solid var(--cor25);
+    background: linear-gradient(160deg, #1a0d42, #0e0828);
+    border: 2px solid rgba(180, 144, 240, 0.70);
+    box-shadow:
+        0 0 20px rgba(140, 100, 240, 0.30),
+        inset 0 0 18px rgba(100, 60, 200, 0.15);
 }
 
-.character-attribute-box.proficient::before,
-.stat-box.proficient::before {
-    background: var(--cor25);
-}
-
+/* Check de proficiência */
 .character-proficiency-check,
 .stat-prof-check {
     appearance: none;
@@ -39,16 +82,16 @@
     width: 40px;
     height: 25px;
     cursor: pointer;
-    background: var(--cor21);
-    border: 2px solid var(--cor2);
+    background: rgba(14, 18, 55, 0.9);
+    border: 2px solid rgba(144, 128, 200, 0.50);
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     transition: all 0.3s ease;
 }
 
 .character-proficiency-check:checked,
 .stat-prof-check:checked {
-    background: var(--cor2);
-    border-color: var(--cor2);
+    background: rgba(100, 80, 200, 0.55);
+    border-color: rgba(200, 188, 232, 0.80);
     transform: rotate(180deg);
 }
 
@@ -60,31 +103,35 @@
     left: 50%;
     transform: translate(-50%, -45%);
     font-size: 28px;
-    color: var(--cor21);
+    color: var(--cosmos-silver-bright);
 }
 
+/* Labels e valores dos atributos */
 .character-attribute-label,
 .stat-label {
-    font-size: 1.0rem;
+    font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    color: var(--cor18);
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    color: var(--cosmos-text-dim);
+    font-family: 'Cinzel', serif;
 }
 
 .character-attribute-input,
 .stat-input {
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-size: 2.0rem;
     font-weight: 700;
     -webkit-appearance: none;
     -moz-appearance: textfield;
     min-height: 40px;
-    background: var(--cor12);
-    color: var(--cor19);
-    border: 2px solid var(--cor2);
+    background: rgba(8, 11, 30, 0.70);
+    color: var(--cosmos-silver-bright);
+    border: 1px solid rgba(100, 80, 200, 0.30);
+    font-family: 'Cinzel', serif;
+    text-shadow: 0 0 10px rgba(140, 110, 240, 0.40);
 }
 
 .character-attribute-modifier,
@@ -92,770 +139,88 @@
     font-size: 1.8rem;
     font-weight: 700;
     font-family: 'Cinzel', serif;
-    color: var(--cor3);
+    color: var(--cosmos-silver);
+    text-shadow: 0 0 12px rgba(140, 110, 240, 0.50);
 }
 
 .character-saving-throw,
 .stat-save {
-    font-size: 1.0rem;
-    color: var(--cor8);
+    font-size: 0.95rem;
+    color: var(--cosmos-text-dim);
     margin-top: 4px;
     font-weight: 600;
-    padding: 4px 38px;
-    border: 2px solid var(--cor2);
+    padding: 3px 28px;
+    border: 1px solid rgba(100, 80, 200, 0.30);
     border-radius: 0;
-    background: var(--cor21);
+    background: rgba(8, 11, 30, 0.60);
     display: inline-block;
     transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
-/* ========================================
-   PERÍCIAS
-======================================== */
+/* ════════════════════════════════════════════════════════════
+   03. PERÍCIAS
+════════════════════════════════════════════════════════════ */
 .character-skills-grid,
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 6px;
 }
 
 .character-skill-item,
 .skill-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px;
-    background: var(--transp-escuro-leve);
-    border-radius: 0;
-    border: 1px solid var(--cor11);
-    border-left: 3px solid var(--cor3);
+    gap: 7px;
+    padding: 5px 7px;
+    background: rgba(10, 13, 36, 0.75);
+    border: 1px solid rgba(80, 65, 160, 0.22);
+    border-left: 3px solid rgba(144, 128, 200, 0.50);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.character-skill-item:hover,
+.skill-item:hover {
+    background: rgba(15, 19, 50, 0.85);
+    border-left-color: rgba(200, 188, 232, 0.75);
 }
 
 .character-skill-prof-select,
 .skill-prof-select {
     width: auto;
-    min-width: 100px;
+    min-width: 90px;
     padding: 4px 8px;
-    font-size: 0.8rem;
-    border: 2px solid var(--cor11);
-    min-height: 36px;
-    background: var(--transp-preto-total);
-    color: var(--cor2);
+    font-size: 0.78rem;
+    border: 1px solid rgba(100, 80, 200, 0.35);
+    min-height: 34px;
+    background: rgba(8, 11, 30, 0.85);
+    color: var(--cosmos-text-dim);
 }
 
 .character-skill-name,
 .skill-name {
     flex: 1;
-    font-size: 1.2rem;
-    color: var(--cor8);
+    font-size: 1.05rem;
+    color: var(--cosmos-text);
 }
 
 .character-skill-value,
 .skill-value {
     font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--cor19);
+    font-size: 1.05rem;
+    color: var(--cosmos-silver);
     min-width: 5px;
     text-align: center;
+    text-shadow: 0 0 8px rgba(140, 110, 240, 0.35);
 }
 
-/* ========================================
-   ATAQUES
-======================================== */
-.character-attack-list,
-.attack-list {
-    margin-top: 10px;
-}
-
-.attack-item {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 8px;
-    margin-bottom: 8px;
-    align-items: center;
-}
-
-/* ========================================
-   MOEDAS
-======================================== */
-.character-currency-grid,
-.moedas-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.character-currency-item,
-.moeda-item {
-    position: relative;
-}
-
-.moeda-item .input-label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.character-currency-icon,
-.moeda-icon {
-    width: 20px;
-    height: 20px;
-    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-    display: inline-block;
-}
-
-.moeda-icon.cobre {
-    background: linear-gradient(135deg, #b87333, #8b4513);
-}
-
-.moeda-icon.prata {
-    background: linear-gradient(135deg, #c0c0c0, #808080);
-}
-
-.moeda-icon.electrum {
-    background: linear-gradient(135deg, #4ff974, #376f24);
-}
-
-.moeda-icon.ouro {
-    background: linear-gradient(135deg, #ffd700, #daa520);
-}
-
-.moeda-icon.platina {
-    background: linear-gradient(135deg, #1cfcfc, #a8a8a8);
-}
-
-/* ========================================
-   INVENTÁRIO
-======================================== */
-.character-inventory-list,
-.inventory-list {
-    margin-top: 10px;
-}
-
-.inventory-item {
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
-    gap: 10px;
-    margin-bottom: 10px;
-    align-items: center;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--cor11);
-    border-radius: 0;
-}
-
-.inventory-item input[type="number"] {
-    text-align: center;
-    font-weight: 700;
-}
-
-.inventory-item input[type="text"] {
-    flex: 1;
-}
-
-.inventory-item .delete-btn {
-    padding: 8px 15px;
-}
-
-/* ========================================
-   ITENS MÁGICOS
-======================================== */
-.character-magic-items-list,
-.magic-items-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.magic-item {
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--cor11);
-    border-radius: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.magic-item-header {
-    display: grid;
-    grid-template-columns: 2fr auto 50px;
-    gap: 10px;
-    padding: 12px;
-    align-items: center;
-    cursor: pointer;
-    background: linear-gradient(135deg, var(--cor14), var(--cor15));
-    transition: all 0.3s ease;
-}
-
-.magic-item-header:hover {
-    background: linear-gradient(135deg, var(--cor15), var(--cor16));
-}
-
-.magic-item-header input[type="text"] {
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    color: var(--cor19);
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 8px 12px;
-}
-
-.magic-item-sync {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.magic-item-sync input[type="checkbox"] {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-}
-
-.magic-item-sync input[type="checkbox"]:checked::after {
-    content: "🔷";
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    animation: syncEnter 0.4s ease forwards;
-}
-
-.magic-item-sync input[type="checkbox"]:checked {
-    animation: syncGlow 2s ease-in-out infinite;
-    background: radial-gradient(circle at center, var(--cor2) 20%, var(--cor12) 70%);
-}
-
-.magic-item-expand {
-    background: transparent;
-    border: none;
-    color: var(--cor3);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.magic-item-expand.active {
-    transform: rotate(180deg);
-}
-
-.magic-item-description {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.magic-item-description.active {
-    max-height: 500px;
-}
-
-.magic-item-description-content {
-    padding: 15px;
-}
-
-.magic-item-description textarea {
-    width: 100%;
-    min-height: 120px;
-    background: var(--cor15);
-    border: 2px solid var(--cor11);
-    color: var(--cor8);
-    font-size: 0.95rem;
-    padding: 10px;
-    resize: vertical;
-}
-
-.magic-item-actions {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.magic-item-actions .delete-btn {
-    padding: 8px 20px;
-    font-size: 0.9rem;
-}
-
-.sync-label {
-    font-size: 0.7rem;
-    color: var(--cor10);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* ========================================
-   SISTEMA DE MAGIAS
-======================================== */
-.character-spell-slots-grid,
-.spell-slots-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.character-spell-level-section,
-.spell-level-section {
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--cor11);
-    border-radius: 0;
-    overflow: hidden;
-}
-
-.character-spell-level-header,
-.spell-level-header {
-    padding: 12px 15px;
-    background: linear-gradient(135deg, var(--brilho-laranja), var(--cor15));
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.spell-level-header:hover {
-    background: linear-gradient(135deg, var(--cor15), var(--cor16));
-}
-
-.character-spell-level-info,
-.spell-level-info {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-}
-
-.character-spell-level-title,
-.spell-level-title {
-    font-family: 'Cinzel', serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--cor3);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.character-spell-slots,
-.spell-slots {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.character-slot-current,
-.character-slot-max,
-.slot-current,
-.slot-max {
-    width: 50px;
-    text-align: center;
-    padding: 5px;
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    color: var(--cor19);
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-radius: 0;
-}
-
-.character-slot-separator,
-.slot-separator {
-    color: var(--cor8);
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-.character-spell-expand-btn,
-.spell-expand-btn {
-    background: transparent;
-    border: none;
-    color: var(--cor3);
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 5px 10px;
-    transition: transform 0.3s ease;
-}
-
-.spell-expand-btn.active {
-    transform: rotate(180deg);
-}
-
-.character-spell-level-content,
-.spell-level-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-}
-
-.spell-level-content.active {
-    max-height: 2000px;
-}
-
-.character-spell-list,
-.spell-list {
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.spell-card {
-    background: rgba(0, 0, 0, 0.4);
-    border: 2px solid var(--cor11);
-    border-radius: 0;
-    overflow: hidden;
-}
-
-.spell-card-header {
-    padding: 10px 12px;
-    background: linear-gradient(135deg, var(--cor16), var(--cor15));
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.spell-card-header:hover {
-    background: linear-gradient(135deg, var(--cor15), var(--cor14));
-}
-
-.spell-card-header input[type="text"] {
-    flex: 1;
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    color: var(--cor8);
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 6px 10px;
-}
-
-.spell-card-expand {
-    background: transparent;
-    border: none;
-    color: var(--cor3);
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.spell-card-expand.active {
-    transform: rotate(180deg);
-}
-
-.spell-card-details {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.spell-card-details.active {
-    max-height: 800px;
-}
-
-.spell-details-content {
-    padding: 15px;
-    display: grid;
-    gap: 12px;
-}
-
-.spell-details-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.spell-components {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.component-check {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.component-check input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: var(--cor2);
-}
-
-.component-check label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--cor8);
-    cursor: pointer;
-}
-
-.concentration-check {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.concentration-check input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    accent-color: var(--cor3);
-}
-
-.concentration-check label {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--cor3);
-    cursor: pointer;
-}
-
-.spell-description {
-    width: 100%;
-    min-height: 100px;
-    background: var(--cor15);
-    border: 2px solid var(--cor11);
-    color: var(--cor8);
-    font-size: 0.9rem;
-    padding: 10px;
-    resize: vertical;
-}
-
-.spell-card-actions {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: flex-end;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.spell-card-actions .delete-btn {
-    padding: 6px 15px;
-    font-size: 0.85rem;
-}
-
-/* ========================================
-   IMAGEM DO PERSONAGEM
-======================================== */
-.character-image-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-}
-
-.image-preview {
-    width: 300px;
-    height: 400px;
-    border: 4px solid var(--cor11);
-    background: linear-gradient(135deg, var(--cor16), var(--cor15));
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    clip-path: polygon(
-        20px 0,
-        100% 0,
-        100% calc(100% - 20px),
-        calc(100% - 20px) 100%,
-        0 100%,
-        0 20px
-    );
-}
-
-.image-preview:hover {
-    border-color: var(--cor3);
-    box-shadow: 0 0 20px var(--sombra-crimson);
-}
-
-.image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.image-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: 
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(0, 0, 0, 0.1) 10px,
-            rgba(0, 0, 0, 0.1) 20px
-        );
-}
-
-.placeholder-icon {
-    font-size: 4rem;
-    opacity: 0.5;
-}
-
-.placeholder-text {
-    font-family: 'Cinzel', serif;
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--cor10);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.image-controls {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-/* ========================================
-   INDIVIDUOS E DESCRIÇÕES
-======================================== */
-.character-individuals-list,
-.individuals-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.individuals-unit {
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid var(--cor11);
-    border-radius: 0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.individuals-unit-header {
-    display: grid;
-    grid-template-columns: 2fr auto 50px;
-    gap: 10px;
-    padding: 12px;
-    align-items: center;
-    cursor: pointer;
-    background: linear-gradient(135deg, var(--cor14), var(--cor15));
-    transition: all 0.3s ease;
-}
-
-.individuals-unit-header:hover {
-    background: linear-gradient(135deg, var(--cor15), var(--cor16));
-}
-
-.individuals-unit-header input[type="text"] {
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    color: var(--cor19);
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 8px 12px;
-}
-
-/* styling para o campo de usos nas habilidades */
-.ability-uses {
-    background: var(--cor12);
-    border: 2px solid var(--cor2);
-    color: var(--cor19);
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 8px 12px;
-    width: 60px;
-    margin-left: 10px;
-}
-
-
-.individuals-unit-expand {
-    background: transparent;
-    border: none;
-    color: var(--cor3);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.individuals-unit-expand.active {
-    transform: rotate(180deg);
-}
-
-.individuals-unit-description {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.individuals-unit-description.active {
-    max-height: 500px;
-}
-
-.individuals-unit-description-content {
-    padding: 15px;
-}
-
-.individuals-unit-description textarea {
-    width: 100%;
-    min-height: 120px;
-    background: var(--cor15);
-    border: 2px solid var(--cor11);
-    color: var(--cor8);
-    font-size: 0.95rem;
-    padding: 10px;
-    resize: vertical;
-}
-
-.individuals-unit-actions {
-    padding: 10px 15px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.individuals-unit-actions .delete-btn {
-    padding: 8px 20px;
-    font-size: 0.9rem;
-}
-
+/* ════════════════════════════════════════════════════════════
+   04. COMBATE — WIDGETS SVG
+   Mantém toda a estrutura original; atualiza cores/sombras
+════════════════════════════════════════════════════════════ */
 
-/* ── Container dos três heróis ── */
+/* ── Container das linhas de widgets ── */
 .character-combat-row,
 .combat-hero-row {
     display: flex;
@@ -884,20 +249,24 @@
     cursor: text;
 }
 
+/* ── SVG shape-bg ── */
+.character-combat-shape svg.shape-bg,
 .combat-hero-shape svg.shape-bg {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    filter: drop-shadow(0 5px 12px rgba(0,0,0,0.55));
+    filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.65));
     transition: filter 0.25s ease, transform 0.2s ease;
 }
 
+.character-combat-shape:hover svg.shape-bg,
 .combat-hero-shape:hover svg.shape-bg {
-    filter: drop-shadow(0 8px 18px rgba(0,0,0,0.75));
+    filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.80));
     transform: translateY(-2px);
 }
 
-/* ── Inputs dentro das formas ── */
+/* ── Shape inner (conteúdo) ── */
+.character-combat-shape .shape-inner,
 .combat-hero-shape .shape-inner {
     position: relative;
     z-index: 2;
@@ -908,6 +277,7 @@
     text-align: center;
 }
 
+/* ── Inputs dentro dos widgets ── */
 .character-combat-value,
 .hero-main-val {
     background: transparent !important;
@@ -917,12 +287,14 @@
     font-family: 'Cinzel', serif !important;
     font-weight: 700 !important;
     color: #fff !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.8) !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85) !important;
     padding: 0 !important;
     line-height: 1 !important;
     -moz-appearance: textfield !important;
 }
 
+.character-combat-value::-webkit-outer-spin-button,
+.character-combat-value::-webkit-inner-spin-button,
 .hero-main-val::-webkit-outer-spin-button,
 .hero-main-val::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -931,13 +303,13 @@
 .hero-sub-val {
     background: transparent !important;
     border: none !important;
-    border-top: 1px solid rgba(255,255,255,0.3) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
     outline: none !important;
     text-align: center !important;
     font-family: 'Crimson Text', serif !important;
     font-weight: 600 !important;
-    color: rgba(255,255,255,0.75) !important;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.7) !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.70) !important;
     padding: 2px 0 0 0 !important;
     margin-top: 2px !important;
     line-height: 1 !important;
@@ -949,44 +321,57 @@
     -webkit-appearance: none;
 }
 
-/* ── Label abaixo das formas ── */
+/* ── Labels abaixo dos widgets ── */
 .character-combat-label,
 .combat-hero-label {
     font-family: 'Cinzel', serif;
-    font-size: 0.68em;
+    font-size: 0.65em;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--cor4, #8b6914);
+    color: var(--cosmos-text-dim);
     text-align: center;
 }
 
-/* ── Tamanhos específicos ── */
-.character-heart-main,
-.shape-vida { width: 138px; height: 130px; }
-.character-shield-shape,
-.shape-ca   { width: 108px; height: 122px; }
-.character-lightning-shape,
-.shape-init { width: 86px;  height: 122px; }
-.character-heart-max,
-.shape-vida-max  { width: 80px; height: 79px; }
-.character-heart-temp,
-.shape-vida-temp { width: 80px; height: 79px; }
+.small-label {
+    font-size: 0.58em !important;
+    letter-spacing: 0.05em !important;
+}
 
-/* ── Estilos para corações pequenos ── */
+/* ── Tamanhos das formas ── */
+.character-heart-main,
+.shape-vida       { width: 138px; height: 130px; }
+
+.character-heart-max,
+.shape-vida-max   { width: 80px;  height: 79px;  }
+
+.character-heart-temp,
+.shape-vida-temp  { width: 80px;  height: 79px;  }
+
+.character-shield-shape,
+.shape-ca         { width: 108px; height: 122px; }
+
+.character-lightning-shape,
+.shape-init       { width: 86px;  height: 122px; }
+
+/* ── Ordenação dos corações ── */
+.character-combat-stat.small-heart,
 .combat-hero-stat.small-heart {
     align-self: center;
 }
 
+.character-combat-stat.main-heart,
 .combat-hero-stat.main-heart {
     align-self: flex-end;
     order: 1;
 }
 
+.character-combat-row .small-heart:first-child,
 .combat-hero-row .small-heart:first-child {
     order: 0;
 }
 
+.character-combat-row .small-heart:last-child,
 .combat-hero-row .small-heart:last-child {
     order: 2;
 }
@@ -995,67 +380,787 @@
     font-size: 1.2em !important;
 }
 
-.small-label {
-    font-size: 0.6em !important;
-    letter-spacing: 0.05em !important;
+/* ── Glow on focus ── */
+.shape-ca .hero-main-val:focus,
+.shape-ca .character-combat-value:focus {
+    text-shadow: 0 0 14px #90c8ff, 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+.shape-vida .hero-main-val:focus,
+.shape-vida .character-combat-value:focus {
+    text-shadow: 0 0 14px #ff9090, 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+.shape-vida-max .hero-main-val:focus,
+.shape-vida-max .character-combat-value:focus {
+    text-shadow: 0 0 12px #70b0f0, 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+.shape-vida-temp .hero-main-val:focus,
+.shape-vida-temp .character-combat-value:focus {
+    text-shadow: 0 0 12px #f5d070, 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+.shape-init .hero-main-val:focus,
+.shape-init .character-combat-value:focus {
+    text-shadow: 0 0 14px #ffe080, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
 
-/* ── PV Temp embaixo do coração ── */
-.pv-temp-badge {
+/* ── Responsivo widgets ── */
+@media (max-width: 540px) {
+    .shape-ca        { width: 88px;  height: 100px; }
+    .shape-vida      { width: 112px; height: 106px; }
+    .shape-init      { width: 70px;  height: 100px; }
+    .shape-vida-max  { width: 64px;  height: 63px;  }
+    .shape-vida-temp { width: 64px;  height: 63px;  }
+}
+
+/* ════════════════════════════════════════════════════════════
+   05. DESLOCAMENTO
+════════════════════════════════════════════════════════════ */
+.character-displacement-grid,
+.displacement-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+@media (max-width: 768px) {
+    .character-displacement-grid,
+    .displacement-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   06. ATAQUES
+════════════════════════════════════════════════════════════ */
+.character-attack-list,
+.attack-list {
+    margin-top: 10px;
+}
+
+.attack-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+/* ════════════════════════════════════════════════════════════
+   07. HABILIDADES
+════════════════════════════════════════════════════════════ */
+.character-abilities-list,
+.abilities-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ability-uses {
+    background: rgba(8, 11, 30, 0.85);
+    border: 1px solid rgba(100, 80, 200, 0.40);
+    color: var(--cosmos-silver);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 12px;
+    width: 60px;
+    margin-left: 10px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   08. MOEDAS / INVENTÁRIO
+════════════════════════════════════════════════════════════ */
+.character-currency-grid,
+.moedas-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.character-currency-item,
+.moeda-item {
+    position: relative;
+}
+
+.moeda-item .input-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.character-currency-icon,
+.moeda-icon {
+    width: 18px;
+    height: 18px;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: inline-block;
+}
+
+.moeda-icon.cobre    { background: linear-gradient(135deg, #b87333, #8b4513); }
+.moeda-icon.prata    { background: linear-gradient(135deg, #c0c0c0, #808080); }
+.moeda-icon.electrum { background: linear-gradient(135deg, #4ff974, #376f24); }
+.moeda-icon.ouro     { background: linear-gradient(135deg, #ffd700, #daa520); }
+.moeda-icon.platina  { background: linear-gradient(135deg, #1cfcfc, #a8a8a8); }
+
+.character-inventory-list,
+.inventory-list {
+    margin-top: 10px;
+}
+
+.inventory-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px;
+    background: rgba(8, 11, 30, 0.50);
+    border: 1px solid rgba(80, 65, 160, 0.25);
+    border-radius: 0;
+}
+
+.inventory-item input[type="number"] {
+    text-align: center;
+    font-weight: 700;
+}
+
+.inventory-item .delete-btn {
+    padding: 8px 15px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   09. ITENS MÁGICOS
+════════════════════════════════════════════════════════════ */
+.character-magic-items-list,
+.magic-items-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.magic-item {
+    background: rgba(8, 11, 30, 0.55);
+    border: 1px solid rgba(80, 65, 160, 0.30);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.magic-item-header {
+    display: grid;
+    grid-template-columns: 2fr auto 50px;
+    gap: 10px;
+    padding: 12px;
+    align-items: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(14,18,55,0.90), rgba(9,13,36,0.95));
+    transition: all 0.3s ease;
+}
+
+.magic-item-header:hover {
+    background: linear-gradient(135deg, rgba(20,24,65,0.95), rgba(14,18,50,0.98));
+}
+
+.magic-item-header input[type="text"] {
+    background: rgba(8, 11, 30, 0.80);
+    border: 1px solid rgba(100, 80, 200, 0.40);
+    color: var(--cosmos-silver);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+.magic-item-sync {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
 }
 
-.pv-temp-badge label.input-label {
-    font-size: 0.68em;
-    opacity: 0.7;
-    margin: 0;
-    white-space: nowrap;
+.magic-item-sync input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(8, 11, 30, 0.80);
+    border: 2px solid rgba(100, 80, 200, 0.50);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.magic-item-sync input[type="checkbox"]:checked::after {
+    content: "🔷";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    animation: syncEnter 0.4s ease forwards;
+}
+
+.magic-item-sync input[type="checkbox"]:checked {
+    animation: syncGlow 2s ease-in-out infinite;
+    background: radial-gradient(circle at center, rgba(100,80,200,0.6) 20%, rgba(8,11,30,0.9) 70%);
+}
+
+.magic-item-expand {
+    background: transparent;
+    border: none;
+    color: var(--cosmos-silver);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.magic-item-expand.active { transform: rotate(180deg); }
+
+.magic-item-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(5, 8, 22, 0.50);
+}
+
+.magic-item-description.active { max-height: 500px; }
+
+.magic-item-description-content { padding: 15px; }
+
+.magic-item-description textarea {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(8, 11, 30, 0.75);
+    border: 1px solid rgba(80, 65, 160, 0.35);
+    color: var(--cosmos-text);
+    font-size: 0.95rem;
+    padding: 10px;
+    resize: vertical;
+}
+
+.magic-item-actions {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background: rgba(5, 8, 22, 0.30);
+}
+
+.magic-item-actions .delete-btn { padding: 8px 20px; font-size: 0.9rem; }
+
+.sync-label {
+    font-size: 0.7rem;
+    color: var(--cosmos-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   10. SISTEMA DE MAGIAS
+════════════════════════════════════════════════════════════ */
+
+/* ── Seção de Truques (com duplo prefixo "character-character-") ── */
+.character-character-spell-level-section {
+    background: rgba(8, 11, 30, 0.55);
+    border: 1px solid rgba(80, 65, 160, 0.30);
+    border-radius: 0;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.character-character-spell-level-header {
+    padding: 12px 15px;
+    background: linear-gradient(135deg, rgba(20,24,60,0.90), rgba(9,13,36,0.95));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.character-character-spell-level-header:hover {
+    background: linear-gradient(135deg, rgba(25,30,70,0.95), rgba(14,18,50,0.98));
+}
+
+.character-character-spell-level-title {
     font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cosmos-silver);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
 }
 
-.pv-temp-badge input {
-    width: 54px !important;
-    font-size: 0.85em !important;
-    padding: 3px 5px !important;
-    text-align: center !important;
-    border-radius: 5px !important;
+.character-character-spell-level-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
 }
 
-/* ── Glow on focus ── */
-/* CA → azul */
-.shape-ca .hero-main-val:focus,
-.character-shield-shape .character-combat-value:focus { box-shadow: none; text-shadow: 0 0 12px #90c8ff, 0 2px 4px rgba(0,0,0,0.8) !important; }
-/* Vida → vermelho */
-.shape-vida .hero-main-val:focus,
-.character-heart-main .character-combat-value:focus  { box-shadow: none; text-shadow: 0 0 12px #ff9090, 0 2px 4px rgba(0,0,0,0.8) !important; }
-.shape-vida .hero-sub-val:focus,
-.character-heart-main .hero-sub-val:focus   { box-shadow: none; text-shadow: 0 0 8px  #ff9090, 0 1px 3px rgba(0,0,0,0.7) !important; }
-/* Vida Máxima → azul */
-.shape-vida-max .hero-main-val:focus,
-.character-heart-max .character-combat-value:focus { box-shadow: none; text-shadow: 0 0 10px #70b0f0, 0 2px 4px rgba(0,0,0,0.8) !important; }
-/* Vida Temporária → dourado */
-.shape-vida-temp .hero-main-val:focus,
-.character-heart-temp .character-combat-value:focus { box-shadow: none; text-shadow: 0 0 10px #f5d070, 0 2px 4px rgba(0,0,0,0.8) !important; }
-/* Init → amarelo */
-.shape-init .hero-main-val:focus,
-.character-lightning-shape .character-combat-value:focus  { box-shadow: none; text-shadow: 0 0 12px #ffe080, 0 2px 4px rgba(0,0,0,0.8) !important; }
+.character-character-spell-level-content.active { max-height: 2000px; }
 
-/* ── Responsivo ── */
-@media (max-width: 540px) {
-    .shape-ca   { width: 88px;  height: 100px; }
-    .shape-vida { width: 112px; height: 106px; }
-    .shape-init { width: 70px;  height: 100px; }
-    .shape-vida-max  { width: 65px; height: 65px; }
-    .shape-vida-temp { width: 65px; height: 65px; }
-    .hero-main-val { font-size: 1.5em !important; }
+.character-character-spell-list {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* ========================================
-   ELEMENTOS DE DISPLAY (Visualização)
-======================================== */
+.character-character-spell-expand-btn {
+    background: transparent;
+    border: none;
+    color: var(--cosmos-silver);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.3s ease;
+}
+
+.character-character-spell-expand-btn.active { transform: rotate(180deg); }
+
+/* ── Grid de slots de magia ── */
+.character-spell-slots-grid,
+.spell-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.character-spell-level-section,
+.spell-level-section {
+    background: rgba(8, 11, 30, 0.55);
+    border: 1px solid rgba(80, 65, 160, 0.28);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.character-spell-level-header,
+.spell-level-header {
+    padding: 11px 14px;
+    background: linear-gradient(135deg, rgba(18,22,56,0.90), rgba(9,13,36,0.95));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.character-spell-level-header:hover,
+.spell-level-header:hover {
+    background: linear-gradient(135deg, rgba(24,28,66,0.95), rgba(14,18,50,0.98));
+}
+
+.character-spell-level-info,
+.spell-level-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    flex: 1;
+}
+
+.character-spell-level-title,
+.spell-level-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.90rem;
+    font-weight: 700;
+    color: var(--cosmos-silver);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.character-spell-slots,
+.spell-slots {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.character-slot-current,
+.character-slot-max,
+.slot-current,
+.slot-max {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    background: rgba(8, 11, 30, 0.85);
+    border: 1px solid rgba(100, 80, 200, 0.45);
+    color: var(--cosmos-silver);
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 0;
+}
+
+.character-slot-separator,
+.slot-separator {
+    color: var(--cosmos-text-dim);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.character-spell-expand-btn,
+.spell-expand-btn {
+    background: transparent;
+    border: none;
+    color: var(--cosmos-silver);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: transform 0.3s ease;
+}
+
+.character-spell-expand-btn.active,
+.spell-expand-btn.active {
+    transform: rotate(180deg);
+}
+
+.character-spell-level-content,
+.spell-level-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.character-spell-level-content.active,
+.spell-level-content.active {
+    max-height: 2000px;
+}
+
+.character-spell-list,
+.spell-list {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ── Spell cards ── */
+.spell-card {
+    background: rgba(5, 8, 22, 0.55);
+    border: 1px solid rgba(80, 65, 160, 0.28);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.spell-card-header {
+    padding: 9px 11px;
+    background: linear-gradient(135deg, rgba(14,18,50,0.90), rgba(9,13,36,0.95));
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.spell-card-header:hover {
+    background: linear-gradient(135deg, rgba(20,24,60,0.95), rgba(14,18,50,0.98));
+}
+
+.spell-card-header input[type="text"] {
+    flex: 1;
+    background: rgba(8, 11, 30, 0.80);
+    border: 1px solid rgba(100, 80, 200, 0.38);
+    color: var(--cosmos-text);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+}
+
+.spell-card-expand {
+    background: transparent;
+    border: none;
+    color: var(--cosmos-silver);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.spell-card-expand.active { transform: rotate(180deg); }
+
+.spell-card-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(5, 8, 22, 0.35);
+}
+
+.spell-card-details.active { max-height: 800px; }
+
+.spell-details-content {
+    padding: 14px;
+    display: grid;
+    gap: 12px;
+}
+
+.spell-details-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.spell-components {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.component-check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.component-check input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--cosmos-ornament);
+}
+
+.component-check label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cosmos-text);
+    cursor: pointer;
+}
+
+.concentration-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.concentration-check input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: var(--cosmos-silver);
+}
+
+.concentration-check label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--cosmos-silver);
+    cursor: pointer;
+}
+
+.spell-description {
+    width: 100%;
+    min-height: 100px;
+    background: rgba(8, 11, 30, 0.75);
+    border: 1px solid rgba(80, 65, 160, 0.30);
+    color: var(--cosmos-text);
+    font-size: 0.9rem;
+    padding: 10px;
+    resize: vertical;
+}
+
+.spell-card-actions {
+    padding: 9px 14px;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(5, 8, 22, 0.25);
+}
+
+.spell-card-actions .delete-btn {
+    padding: 6px 15px;
+    font-size: 0.85rem;
+}
+
+/* ════════════════════════════════════════════════════════════
+   11. IMAGEM DO PERSONAGEM
+════════════════════════════════════════════════════════════ */
+.character-image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.image-preview {
+    width: 300px;
+    height: 400px;
+    border: 2px solid rgba(144, 128, 200, 0.45);
+    background: linear-gradient(160deg, #0c1040, #080b24);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(
+        20px 0,
+        100% 0,
+        100% calc(100% - 20px),
+        calc(100% - 20px) 100%,
+        0 100%,
+        0 20px
+    );
+    box-shadow:
+        0 0 20px rgba(80, 60, 180, 0.18),
+        inset 0 0 30px rgba(60, 40, 140, 0.10);
+}
+
+.image-preview:hover {
+    border-color: rgba(200, 188, 232, 0.65);
+    box-shadow: 0 0 30px rgba(100, 80, 200, 0.30);
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 12px,
+            rgba(100, 80, 200, 0.04) 12px,
+            rgba(100, 80, 200, 0.04) 24px
+        );
+}
+
+.placeholder-icon  { font-size: 4rem; opacity: 0.40; }
+
+.placeholder-text {
+    font-family: 'Cinzel', serif;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--cosmos-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.image-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* ════════════════════════════════════════════════════════════
+   12. INDIVÍDUOS / CONHECIDOS
+════════════════════════════════════════════════════════════ */
+.character-individuals-list,
+.individuals-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.individuals-unit {
+    background: rgba(8, 11, 30, 0.55);
+    border: 1px solid rgba(80, 65, 160, 0.28);
+    border-radius: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.individuals-unit-header {
+    display: grid;
+    grid-template-columns: 2fr auto 50px;
+    gap: 10px;
+    padding: 12px;
+    align-items: center;
+    cursor: pointer;
+    background: linear-gradient(135deg, rgba(14,18,55,0.90), rgba(9,13,36,0.95));
+    transition: all 0.3s ease;
+}
+
+.individuals-unit-header:hover {
+    background: linear-gradient(135deg, rgba(20,24,65,0.95), rgba(14,18,50,0.98));
+}
+
+.individuals-unit-header input[type="text"] {
+    background: rgba(8, 11, 30, 0.80);
+    border: 1px solid rgba(100, 80, 200, 0.40);
+    color: var(--cosmos-silver);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 12px;
+}
+
+.individuals-unit-expand {
+    background: transparent;
+    border: none;
+    color: var(--cosmos-silver);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.individuals-unit-expand.active { transform: rotate(180deg); }
+
+.individuals-unit-description {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(5, 8, 22, 0.40);
+}
+
+.individuals-unit-description.active { max-height: 500px; }
+
+.individuals-unit-description-content { padding: 15px; }
+
+.individuals-unit-description textarea {
+    width: 100%;
+    min-height: 120px;
+    background: rgba(8, 11, 30, 0.75);
+    border: 1px solid rgba(80, 65, 160, 0.30);
+    color: var(--cosmos-text);
+    font-size: 0.95rem;
+    padding: 10px;
+    resize: vertical;
+}
+
+.individuals-unit-actions {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    background: rgba(5, 8, 22, 0.25);
+}
+
+.individuals-unit-actions .delete-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+/* ════════════════════════════════════════════════════════════
+   13. UTILITÁRIOS DE DISPLAY
+════════════════════════════════════════════════════════════ */
 .info-display {
     display: flex;
     flex-direction: column;
@@ -1063,11 +1168,11 @@
 
 .display-value {
     padding: 10px;
-    background: var(--cor12);
-    color: var(--cor19);
+    background: rgba(8, 11, 30, 0.80);
+    color: var(--cosmos-silver);
     font-weight: 700;
-    border: 1px solid var(--cor11);
-    border-radius: 4px;
+    border: 1px solid rgba(80, 65, 160, 0.30);
+    border-radius: 0;
     min-height: 40px;
     display: flex;
     align-items: center;
@@ -1078,7 +1183,7 @@
     font-size: 2.0rem;
     font-weight: 700;
     text-align: center;
-    color: var(--cor3);
+    color: var(--cosmos-silver);
     margin-bottom: 8px;
+    text-shadow: 0 0 12px rgba(140, 110, 240, 0.40);
 }
-

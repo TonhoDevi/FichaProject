@@ -1,100 +1,100 @@
 /* ========================================
    SISTEMA DE CORES E VARIÁVEIS GLOBAIS
-   Paleta: Grimório Sombrio (Dourado/Âmbar)
+   Paleta: Cosmos Sombrio (Roxo / Azul Estelar)
    
    ORGANIZAÇÃO:
    - Blocos numerados por função
    - Nomes descritivos e claros
-   - Aliases retrocompatíveis
+   - Aliases retrocompatíveis (BLOCO 99)
 ======================================== */
 :root {
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 01: FUNDAÇÃO — Cores Base de Fundo (Tons Escuros)
     ═══════════════════════════════════════════════════════════════ */
-    --color-foundation-darkest:     #0a0805;  /* Tinta profunda   — Gradientes externos  */
-    --color-foundation-dark:        #2a2318;  /* Pedra escura     — Fundo geral         */
-    --color-foundation-medium:      #3d3222;  /* Pedra média      — Inputs, cards       */
-    --color-foundation-light:       #574832;  /* Pedra clara      — Bonus-box, destaques*/
-    --color-foundation-deep:        #1e1a10;  /* Pedra profunda   — Stat-boxes          */
+    --color-foundation-darkest:     #050814;  /* Vazio estelar    — Gradientes externos  */
+    --color-foundation-dark:        #090d24;  /* Espaço profundo  — Fundo geral         */
+    --color-foundation-medium:      rgba(10, 14, 40, 0.95); /* Nebulosa — Inputs, cards */
+    --color-foundation-light:       #141848;  /* Nebulosa clara   — Bonus-box, destaques*/
+    --color-foundation-deep:        #080b22;  /* Abismo           — Stat-boxes          */
 
     /* ═══════════════════════════════════════════════════════════════
-       BLOCO 02: PRIMÁRIA — Fundo Principal Claro
+       BLOCO 02: PRIMÁRIA — Fundo de Cards e Seções
     ═══════════════════════════════════════════════════════════════ */
-    --color-primary-light:          #e8d9b5;  /* Pergaminho claro — Fundo principal     */
+    --color-primary-light:          #0e1235;  /* Nebulosa card    — Fundo seções/cards  */
 
     /* ═══════════════════════════════════════════════════════════════
-       BLOCO 03: ACENTOS — Ouro (Bordas, Destaques, Seções)
+       BLOCO 03: ACENTOS — Ametista (Bordas, Destaques)
     ═══════════════════════════════════════════════════════════════ */
-    --color-accent-gold-bright:     #f0c96a;  /* Ouro brilhante   — Destaques principais */
-    --color-accent-gold-medium:     #c9a84c;  /* Ouro médio       — Bordas externas    */
-    --color-accent-gold-dark:       #8b6914;  /* Ouro escuro      — Fundo seções       */
-    --color-accent-amber:           #b87d2e;  /* Âmbar            — Bordas internas    */
-    --color-accent-amber-translucid:#b87d2ebb;/* Âmbar translúcido— Placas/overlay     */
+    --color-accent-gold-bright:     #c8bce8;  /* Prata estelar    — Destaques principais */
+    --color-accent-gold-medium:     #9080c8;  /* Ametista         — Bordas externas    */
+    --color-accent-gold-dark:       #0a0d28;  /* Cosmos escuro    — Fundo seções       */
+    --color-accent-amber:           #6055a0;  /* Violeta sombrio  — Bordas internas    */
+    --color-accent-amber-translucid:rgba(60, 50, 120, 0.73); /* Roxo translúcido      */
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 04: TEXTOS — Cores de Tipografia
     ═══════════════════════════════════════════════════════════════ */
-    --color-text-primary:           #f5edd6;  /* Pergaminho       — Texto geral         */
-    --color-text-secondary:         #9c8055;  /* Dourado muted    — Textos secundários  */
-    --color-text-label:             #c9a84c;  /* Ouro médio       — Labels de atributos*/
-    --color-text-highlight:         #f5de6a;  /* Ouro brilhante+  — Bônus/números      */
-    --color-text-dark:              #2c1f0e;  /* Marrom escuro    — Sobre fundo claro  */
-    --color-text-on-light:          #1a1008;  /* Sombra           — Títulos em claros  */
+    --color-text-primary:           #ddd5f8;  /* Névoa clara      — Texto geral         */
+    --color-text-secondary:         #7870a0;  /* Névoa escura     — Textos secundários  */
+    --color-text-label:             #a090d0;  /* Ametista média   — Labels de atributos*/
+    --color-text-highlight:         #ede8ff;  /* Branco estrelado — Bônus/números      */
+    --color-text-dark:              #c8bce8;  /* Prata (no dark bg, usar claro)        */
+    --color-text-on-light:          #c8bce8;  /* Prata estelar    — Títulos            */
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 05: ESTADOS — Proficiência e UI Interativa
     ═══════════════════════════════════════════════════════════════ */
-    --color-state-proficient-bg:    #500f07;  /* Atributo proficiente (fundo)          */
-    --color-state-proficient-border:#fcd330;  /* Atributo proficiente (borda)          */
-    --color-state-proficient-accent:#8b6914;  /* Proficiência (efeito)                 */
+    --color-state-proficient-bg:    #1a0d40;  /* Roxo profundo    — Proficiente (fundo)*/
+    --color-state-proficient-border:#b090f0;  /* Lilás brilhante  — Proficiente (borda)*/
+    --color-state-proficient-accent:#6040b0;  /* Roxo médio       — Proficiência efeito*/
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 06: EFEITOS — Brilhos e Glows
     ═══════════════════════════════════════════════════════════════ */
-    --color-effect-ember:           #6b3a10;  /* Brasa            — Efeito glow        */
+    --color-effect-ember:           rgba(80, 60, 160, 0.7); /* Brilho roxo — Glow    */
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 07: CATEGORIAS — Cores de Sistema de Magia/Classe
     ═══════════════════════════════════════════════════════════════ */
-    --color-category-global:        #2e6b4e;  /* Verde floresta   — Globais            */
-    --color-category-tribal:        #7a3a14;  /* Siena queimado   — Tribais            */
-    --color-category-mystical:      #4a2878;  /* Violeta profundo — Místicas           */
-    --color-category-supernatural:  #8b3048;  /* Carmesim rosado  — Sobrenaturais      */
+    --color-category-global:        #1e5e42;
+    --color-category-tribal:        #6a3010;
+    --color-category-mystical:      #4a2878;
+    --color-category-supernatural:  #7a2848;
 
     --color-category-global-text:        #5fbd8e;
     --color-category-tribal-text:        #d48040;
-    --color-category-mystical-text:      #a070e8;
+    --color-category-mystical-text:      #c090ff;
     --color-category-supernatural-text:  #e07090;
 
-    --color-category-global-bg:         rgba( 46,107, 78, .15);
-    --color-category-tribal-bg:         rgba(122, 58, 20, .15);
-    --color-category-mystical-bg:       rgba( 74, 40,120, .15);
-    --color-category-supernatural-bg:   rgba(139, 48, 72, .15);
+    --color-category-global-bg:         rgba( 30, 94, 66, .15);
+    --color-category-tribal-bg:         rgba(106, 48, 16, .15);
+    --color-category-mystical-bg:       rgba( 74, 40,120, .20);
+    --color-category-supernatural-bg:   rgba(122, 40, 72, .15);
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 08: TRANSPARÊNCIAS — Sobreposições e Overlays
     ═══════════════════════════════════════════════════════════════ */
-    --transparency-dark:          rgba(10,  8,  5, .95);
-    --transparency-dark-medium:   rgba(10,  8,  5, .80);
-    --transparency-dark-light:    rgba(10,  8,  5, .60);
-    --transparency-stone:         rgba(42, 35, 24, .60);
-    --transparency-stone-dark:    rgba(42, 35, 24, .90);
-    --transparency-gold:          rgba(139,107, 20, .50);
-    --transparency-gold-soft:     rgba(184,125, 46, .30);
+    --transparency-dark:          rgba(5,   8, 20, .95);
+    --transparency-dark-medium:   rgba(5,   8, 20, .80);
+    --transparency-dark-light:    rgba(5,   8, 20, .60);
+    --transparency-stone:         rgba(9,  13, 36, .70);
+    --transparency-stone-dark:    rgba(9,  13, 36, .92);
+    --transparency-gold:          rgba(80, 60,160, .45);
+    --transparency-gold-soft:     rgba(60, 50,140, .30);
     --transparency-black:         rgba(0,   0,  0, .60);
     --transparency-black-strong:  rgba(0,   0,  0, .80);
     --transparency-black-intense: rgba(0,   0,  0, .90);
-    --transparency-black-complete:rgba(0,   0,  0, .95);
+    --transparency-black-complete:rgba(0,   0,  0, .96);
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 09: BRILHOS — Highlight Effects
     ═══════════════════════════════════════════════════════════════ */
-    --shine-gold-subtle:          rgba(201,168, 76, .03);
-    --shine-gold-light:           rgba(201,168, 76, .05);
-    --shine-amber-subtle:         rgba(184,125, 46, .02);
-    --shine-amber-light:          rgba(184,125, 46, .10);
-    --shine-amber-medium:         rgba(184,125, 46, .20);
-    --shine-orange:               rgba(201,168, 76, .50);
+    --shine-gold-subtle:          rgba(144,128,200, .03);
+    --shine-gold-light:           rgba(144,128,200, .06);
+    --shine-amber-subtle:         rgba(100, 80,180, .02);
+    --shine-amber-light:          rgba(100, 80,180, .10);
+    --shine-amber-medium:         rgba(100, 80,180, .18);
+    --shine-orange:               rgba(144,128,200, .40);
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 10: SOMBRAS — Shadow Effects
@@ -102,12 +102,12 @@
     --shadow-black:               rgba(  0,  0,  0, .80);
     --shadow-black-intense:       rgba(  0,  0,  0, .90);
     --shadow-black-light:         rgba(  0,  0,  0, .50);
-    --shadow-gold-dark:           rgba(139,107, 20, .30);
-    --shadow-gold-medium:         rgba(184,125, 46, .40);
-    --shadow-gold-bright:         rgba(201,168, 76, .60);
-    --shadow-gold-deep:           rgba( 80, 60, 20, .80);
-    --shadow-gold-dark-total:     rgba(139,105,  6, .90);
-    --shadow-amber:               rgba(184,125, 46, .50);
+    --shadow-gold-dark:           rgba( 60, 50,130, .25);
+    --shadow-gold-medium:         rgba( 80, 60,160, .35);
+    --shadow-gold-bright:         rgba(100, 80,200, .55);
+    --shadow-gold-deep:           rgba( 30, 20, 80, .80);
+    --shadow-gold-dark-total:     rgba( 50, 40,110, .90);
+    --shadow-amber:               rgba( 80, 60,160, .45);
 
     /* ═══════════════════════════════════════════════════════════════
        BLOCO 11: IMPRESSÃO — Print Styles
@@ -117,45 +117,67 @@
     --print-border: #000000;
 
     /* ═══════════════════════════════════════════════════════════════
-       BLOCO 99: ALIASES DE RETROCOMPATIBILIDADE
-       (Mapeamento antigo → novo sistema)
-       Permitem que o código existente continue funcionando sem mudanças
+       BLOCO 12: COSMOS — Dark Fantasy Exclusivos
     ═══════════════════════════════════════════════════════════════ */
-    
+    --cosmos-void:          #050814;
+    --cosmos-deep:          #090d24;
+    --cosmos-card:          #0e1235;
+    --cosmos-section:       #0a0d28;
+    --cosmos-input:         rgba(10, 14, 40, 0.95);
+    --cosmos-statbox:       #080b22;
+    --cosmos-bonusbox:      #141848;
+    --cosmos-border-dim:    rgba(96,  85, 160, 0.35);
+    --cosmos-border:        rgba(144,128, 200, 0.55);
+    --cosmos-ornament:      #9080c8;
+    --cosmos-silver:        #c8bce8;
+    --cosmos-silver-bright: #ede8ff;
+    --cosmos-text:          #ddd5f8;
+    --cosmos-text-dim:      #7870a0;
+    --cosmos-glow-soft:     rgba(100, 80, 200, 0.12);
+    --cosmos-glow-med:      rgba(100, 80, 200, 0.30);
+    --cosmos-glow-bright:   rgba(140,110, 240, 0.55);
+    --cosmos-nebula-left:   rgba( 80, 40, 160, 0.20);
+    --cosmos-nebula-right:  rgba( 20, 50, 180, 0.18);
+
+    /* ═══════════════════════════════════════════════════════════════
+       BLOCO 99: ALIASES DE RETROCOMPATIBILIDADE
+       (Mapeamento antigo → novo sistema cosmos)
+    ═══════════════════════════════════════════════════════════════ */
+
     /* FUNDOS */
-    --cor1:  var(--color-foundation-darkest);
-    --cor5:  var(--color-foundation-dark);
+    --cor1:  var(--cosmos-void);
+    --cor5:  var(--cosmos-deep);
     --cor6:  var(--color-accent-amber-translucid);
-    --cor13: var(--color-primary-light);
-    --cor14: var(--color-accent-gold-dark);
-    --cor15: var(--color-foundation-medium);
-    --cor16: var(--color-foundation-deep);
-    --cor17: var(--color-foundation-light);
+    --cor13: var(--cosmos-card);
+    --cor14: var(--cosmos-section);
+    --cor15: var(--cosmos-input);
+    --cor16: var(--cosmos-statbox);
+    --cor17: var(--cosmos-bonusbox);
 
     /* BORDAS */
-    --cor2:  var(--color-accent-gold-medium);
+    --cor2:  var(--cosmos-ornament);
     --cor11: var(--color-accent-amber);
-    --cor23: var(--color-accent-gold-medium);
+    --cor23: var(--cosmos-ornament);
 
     /* TEXTOS */
-    --cor3:  var(--color-accent-gold-bright);
-    --cor4:  var(--color-text-on-light);
-    --cor8:  var(--color-text-primary);
-    --cor10: var(--color-text-secondary);
-    --cor18: var(--color-accent-gold-medium);
-    --cor19: var(--color-accent-gold-bright);
-    --cor20: var(--color-text-dark);
+    --cor3:  var(--cosmos-silver);
+    --cor4:  var(--cosmos-silver);
+    --cor8:  var(--cosmos-text);
+    --cor10: var(--cosmos-text-dim);
+    --cor18: var(--color-text-label);
+    --cor19: var(--cosmos-silver-bright);
+    --cor20: var(--cosmos-silver);   /* labels — fundo escuro, usar claro */
 
     /* INPUTS E BOXES */
-    --cor12: var(--color-foundation-medium);
-    --cor21: var(--color-text-on-light);
-    --cor22: var(--color-accent-gold-dark);
+    --cor12: var(--cosmos-input);
+    --cor21: var(--cosmos-section);  /* era texto escuro, agora fundo escuro */
+    --cor22: var(--cosmos-bonusbox);
     --cor24: var(--color-state-proficient-bg);
     --cor25: var(--color-state-proficient-border);
 
     /* EFEITOS */
     --cor7:  var(--color-effect-ember);
-    --cor9:  #070503;
+    --cor9:  #030509;
 
     /* CATEGORIAS */
     --cor-cat-global:       var(--color-category-global);

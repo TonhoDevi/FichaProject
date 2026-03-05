@@ -13,16 +13,16 @@ html {
     -webkit-text-size-adjust: 100%;
 }
 
+/* ── Fundo: Cosmos / Nebulosa Sombria ── */
 body {
-        /* linear-gradient(135deg, var(--cor1) 0%, var(--cor5) 50%, var(--cor1) 100%),*/
-    background-image: url('../assets/textures/arches.png');
-    background-color: var(--cor5);
-    background-size: 150px;  /* ← Tamanho da textura (ajuste esse valor!) */
-    background-position: center;
-    background-repeat: repeat;  /* ← Repete o padrão */
-    background-attachment: fixed;  /* ← Opcional: textura fixa ao scroll */
+    background-color: var(--cosmos-void);
+    background-image:
+        radial-gradient(ellipse 80% 55% at 18% 28%, rgba(80, 40, 180, 0.20) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 45% at 82% 72%, rgba(20, 55, 200, 0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 55% 10%,  rgba(60, 20, 140, 0.12) 0%, transparent 55%);
+    background-attachment: fixed;
     font-family: 'Crimson Text', serif;
-    color: var(--cor8);
+    color: var(--cosmos-text);
     min-height: 100vh;
     padding: 20px;
     -webkit-font-smoothing: antialiased;
@@ -31,43 +31,96 @@ body {
     position: relative;
 }
 
+/* ── Estrelas: camada fixa de pontos brancos ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(1.2px 1.2px at  4%  7%, rgba(255,255,255,0.85), transparent),
+        radial-gradient(1px   1px   at 12% 19%, rgba(255,255,255,0.60), transparent),
+        radial-gradient(1.5px 1.5px at 22%  3%, rgba(255,255,255,0.70), transparent),
+        radial-gradient(1px   1px   at 31% 42%, rgba(255,255,255,0.50), transparent),
+        radial-gradient(1.2px 1.2px at 38% 14%, rgba(255,255,255,0.65), transparent),
+        radial-gradient(1px   1px   at 47% 58%, rgba(255,255,255,0.55), transparent),
+        radial-gradient(1.5px 1.5px at 53%  9%, rgba(255,255,255,0.75), transparent),
+        radial-gradient(1px   1px   at 61% 34%, rgba(255,255,255,0.50), transparent),
+        radial-gradient(1.2px 1.2px at 68% 72%, rgba(255,255,255,0.65), transparent),
+        radial-gradient(1px   1px   at 74% 22%, rgba(255,255,255,0.55), transparent),
+        radial-gradient(1.5px 1.5px at 82%  5%, rgba(255,255,255,0.70), transparent),
+        radial-gradient(1px   1px   at 89% 47%, rgba(255,255,255,0.50), transparent),
+        radial-gradient(1.2px 1.2px at 95% 88%, rgba(255,255,255,0.60), transparent),
+        radial-gradient(1px   1px   at  8% 63%, rgba(255,255,255,0.45), transparent),
+        radial-gradient(1.5px 1.5px at 16% 81%, rgba(255,255,255,0.70), transparent),
+        radial-gradient(1px   1px   at 27% 95%, rgba(255,255,255,0.50), transparent),
+        radial-gradient(1.2px 1.2px at 42% 77%, rgba(255,255,255,0.60), transparent),
+        radial-gradient(1px   1px   at 56% 90%, rgba(255,255,255,0.45), transparent),
+        radial-gradient(1.5px 1.5px at 63% 55%, rgba(255,255,255,0.65), transparent),
+        radial-gradient(1px   1px   at 77% 38%, rgba(255,255,255,0.50), transparent),
+        radial-gradient(1.2px 1.2px at 91% 17%, rgba(255,255,255,0.60), transparent),
+        radial-gradient(1px   1px   at  3% 32%, rgba(255,255,255,0.40), transparent),
+        radial-gradient(1.5px 1.5px at 19% 52%, rgba(200,190,240,0.65), transparent),
+        radial-gradient(1px   1px   at 34% 66%, rgba(200,190,240,0.45), transparent),
+        radial-gradient(1.2px 1.2px at 48% 25%, rgba(200,190,240,0.55), transparent),
+        radial-gradient(1px   1px   at 59% 83%, rgba(200,190,240,0.40), transparent),
+        radial-gradient(1.5px 1.5px at 71%  1%, rgba(200,190,240,0.60), transparent),
+        radial-gradient(1px   1px   at 85% 61%, rgba(200,190,240,0.45), transparent),
+        radial-gradient(1.2px 1.2px at 96% 39%, rgba(200,190,240,0.55), transparent),
+        radial-gradient(1px   1px   at 29% 11%, rgba(170,160,220,0.50), transparent);
+    background-size: 100% 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.75;
+}
+
+/* ── Nebulosa animada (camada sutil) ── */
+body::after {
+    content: '';
+    position: fixed;
+    inset: -10%;
+    width: 120%;
+    height: 120%;
+    background:
+        radial-gradient(ellipse 45% 35% at 30% 40%, rgba(100, 60, 200, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(30,  70, 220, 0.07) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    animation: nebulaPulse 18s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaPulse {
+    0%   { opacity: 0.6; transform: scale(1.00) rotate(0deg); }
+    50%  { opacity: 1.0; transform: scale(1.04) rotate(1deg); }
+    100% { opacity: 0.7; transform: scale(1.01) rotate(-1deg); }
+}
 
 /* ========================================
    ANIMAÇÕES GLOBAIS
 ======================================== */
 @keyframes shimmer {
-    0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+    0%   { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
     100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes syncEnter {
-    0% {
-        transform: scale(0.2) rotate(-180deg);
-        opacity: 0;
-    }
-    60% {
-        transform: scale(1.2) rotate(20deg);
-    }
-    100% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
+    0%   { transform: scale(0.2) rotate(-180deg); opacity: 0; }
+    60%  { transform: scale(1.2) rotate(20deg); }
+    100% { transform: scale(1)   rotate(0deg);   opacity: 1; }
 }
 
 @keyframes syncGlow {
-    0%, 100% {
-        box-shadow: 0 0 4px var(--cor2);
-    }
-    50% {
-        box-shadow:
-            0 0 10px var(--cor2),
-            0 0 18px var(--cor2);
-    }
+    0%, 100% { box-shadow: 0 0 4px var(--cosmos-ornament); }
+    50%       { box-shadow: 0 0 12px var(--cosmos-ornament), 0 0 22px var(--cosmos-ornament); }
+}
+
+@keyframes ornamentsGlow {
+    0%, 100% { opacity: 0.45; }
+    50%       { opacity: 0.80; }
 }
 
 /* ========================================
@@ -80,100 +133,119 @@ body {
     z-index: 1;
 }
 
+/* ── Header / Banner da ficha ── */
 .header {
     text-align: center;
     margin-bottom: 30px;
-    padding: 30px;
-    background: linear-gradient(135deg, var(--cor1) 0%, var(--cor6) 50%, var(--cor1) 100%);
-    border-radius: 0;
-    border: 3px solid var(--cor3);
-    border-top: 8px solid var(--cor3);
-    border-bottom: 8px solid var(--cor3);
-    box-shadow: 
-        0 10px 40px var(--sombra-preta),
-        inset 0 0 50px var(--brilho-crimson-forte);
+    padding: 32px 40px;
+    background:
+        linear-gradient(180deg,
+            rgba(30, 20, 70, 0.85) 0%,
+            rgba(10, 13, 40, 0.95) 60%,
+            rgba(5,   8, 22, 0.98) 100%);
+    border: 1px solid rgba(144, 128, 200, 0.40);
+    border-top: 3px solid rgba(200, 188, 232, 0.70);
+    border-bottom: 3px solid rgba(200, 188, 232, 0.70);
+    box-shadow:
+        0 0 40px rgba(80, 60, 180, 0.25),
+        inset 0 0 60px rgba(80, 60, 160, 0.08),
+        0 8px 30px rgba(0, 0, 0, 0.70);
     position: relative;
     overflow: hidden;
     clip-path: polygon(
         0 0,
         100% 0,
-        100% calc(100% - 15px),
-        calc(100% - 15px) 100%,
+        100% calc(100% - 14px),
+        calc(100% - 14px) 100%,
         0 100%
     );
 }
 
+/* Brilho de bordas ornamentais no header */
 .header::before {
-    content: '';
+    content: '✦';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 20px,
-        var(--brilho-crimson-medio) 20px,
-        var(--brilho-crimson-medio) 40px
-    );
-    animation: shimmer 30s linear infinite;
+    top: 8px;
+    left: 18px;
+    font-size: 14px;
+    color: rgba(200, 188, 232, 0.55);
+    pointer-events: none;
+    animation: ornamentsGlow 4s ease-in-out infinite;
+}
+
+.header::after {
+    content: '✦';
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    font-size: 14px;
+    color: rgba(200, 188, 232, 0.55);
+    pointer-events: none;
+    animation: ornamentsGlow 4s ease-in-out infinite 2s;
 }
 
 .header h1 {
     font-family: 'Pirata One', cursive;
     font-size: 3.5rem;
-    color: var(--cor3);
-    text-shadow: 
-        3px 3px 6px var(--sombra-preta-forte),
-        0 0 30px var(--cor7),
-        0 0 50px var(--cor4);
-    margin-bottom: 10px;
+    color: var(--cosmos-silver-bright);
+    text-shadow:
+        2px 2px 8px rgba(0, 0, 0, 0.90),
+        0 0 30px rgba(100, 80, 200, 0.60),
+        0 0 60px rgba(80, 60, 180, 0.30);
+    margin-bottom: 8px;
     position: relative;
     z-index: 1;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
 }
 
 .header p {
-    color: var(--cor8);
-    font-size: 1.2rem;
+    color: var(--cosmos-text-dim);
+    font-size: 1.1rem;
     font-style: italic;
     position: relative;
     z-index: 1;
-    text-shadow: 2px 2px 4px var(--sombra-preta);
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
 }
 
 /* ========================================
    CONTAINER DA FICHA
 ======================================== */
 .sheet-container {
-    background: linear-gradient(135deg, var(--cor13));
-    padding: 40px;
-    border-radius: 0;
-    border: 4px solid var(--cor11);
+    background: linear-gradient(160deg,
+        rgba(14, 18, 55, 0.96) 0%,
+        rgba(9, 13, 36, 0.98)  100%);
+    padding: 36px;
+    border: 1px solid rgba(100, 80, 200, 0.28);
+    border-top: 2px solid rgba(144, 128, 200, 0.45);
     position: relative;
+    box-shadow:
+        0 0 30px rgba(60, 40, 160, 0.15),
+        inset 0 0 50px rgba(80, 60, 160, 0.04);
 }
 
+/* Linha de grade sutil */
 .sheet-container::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: 
+    background:
         repeating-linear-gradient(
             90deg,
             transparent,
-            transparent 50px,
-            var(--brilho-vermelho-leve) 50px,
-            var(--brilho-vermelho-leve) 51px
+            transparent 60px,
+            rgba(100, 80, 200, 0.02) 60px,
+            rgba(100, 80, 200, 0.02) 61px
         ),
         repeating-linear-gradient(
             0deg,
             transparent,
-            transparent 50px,
-            var(--brilho-vermelho-leve) 50px,
-            var(--brilho-vermelho-leve) 51px
+            transparent 60px,
+            rgba(100, 80, 200, 0.02) 60px,
+            rgba(100, 80, 200, 0.02) 61px
         );
     pointer-events: none;
+    border-radius: inherit;
 }
 
 .sheet-grid {
@@ -189,19 +261,16 @@ body {
     gap: 20px;
 }
 
+/* ========================================
+   INDICADOR DE SALVAMENTO
+======================================== */
 .save-indicator {
     animation: slideInUp 0.3s ease-out;
 }
 
 @keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .save-indicator.show {
