@@ -16,10 +16,6 @@ html {
 /* ── Fundo: Cosmos / Nebulosa Sombria ── */
 body {
     background-color: var(--cosmos-void);
-    background-image:
-        radial-gradient(ellipse 80% 55% at 18% 28%, rgba(80, 40, 180, 0.20) 0%, transparent 60%),
-        radial-gradient(ellipse 65% 45% at 82% 72%, rgba(20, 55, 200, 0.16) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 55% 10%,  rgba(60, 20, 140, 0.12) 0%, transparent 55%);
     background-attachment: fixed;
     font-family: 'Crimson Text', serif;
     color: var(--cosmos-text);
@@ -30,70 +26,6 @@ body {
     touch-action: pan-y;
     position: relative;
 }
-
-/* ── Estrelas: camada fixa de pontos brancos ── */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-        radial-gradient(1.2px 1.2px at  4%  7%, rgba(255,255,255,0.85), transparent),
-        radial-gradient(1px   1px   at 12% 19%, rgba(255,255,255,0.60), transparent),
-        radial-gradient(1.5px 1.5px at 22%  3%, rgba(255,255,255,0.70), transparent),
-        radial-gradient(1px   1px   at 31% 42%, rgba(255,255,255,0.50), transparent),
-        radial-gradient(1.2px 1.2px at 38% 14%, rgba(255,255,255,0.65), transparent),
-        radial-gradient(1px   1px   at 47% 58%, rgba(255,255,255,0.55), transparent),
-        radial-gradient(1.5px 1.5px at 53%  9%, rgba(255,255,255,0.75), transparent),
-        radial-gradient(1px   1px   at 61% 34%, rgba(255,255,255,0.50), transparent),
-        radial-gradient(1.2px 1.2px at 68% 72%, rgba(255,255,255,0.65), transparent),
-        radial-gradient(1px   1px   at 74% 22%, rgba(255,255,255,0.55), transparent),
-        radial-gradient(1.5px 1.5px at 82%  5%, rgba(255,255,255,0.70), transparent),
-        radial-gradient(1px   1px   at 89% 47%, rgba(255,255,255,0.50), transparent),
-        radial-gradient(1.2px 1.2px at 95% 88%, rgba(255,255,255,0.60), transparent),
-        radial-gradient(1px   1px   at  8% 63%, rgba(255,255,255,0.45), transparent),
-        radial-gradient(1.5px 1.5px at 16% 81%, rgba(255,255,255,0.70), transparent),
-        radial-gradient(1px   1px   at 27% 95%, rgba(255,255,255,0.50), transparent),
-        radial-gradient(1.2px 1.2px at 42% 77%, rgba(255,255,255,0.60), transparent),
-        radial-gradient(1px   1px   at 56% 90%, rgba(255,255,255,0.45), transparent),
-        radial-gradient(1.5px 1.5px at 63% 55%, rgba(255,255,255,0.65), transparent),
-        radial-gradient(1px   1px   at 77% 38%, rgba(255,255,255,0.50), transparent),
-        radial-gradient(1.2px 1.2px at 91% 17%, rgba(255,255,255,0.60), transparent),
-        radial-gradient(1px   1px   at  3% 32%, rgba(255,255,255,0.40), transparent),
-        radial-gradient(1.5px 1.5px at 19% 52%, rgba(200,190,240,0.65), transparent),
-        radial-gradient(1px   1px   at 34% 66%, rgba(200,190,240,0.45), transparent),
-        radial-gradient(1.2px 1.2px at 48% 25%, rgba(200,190,240,0.55), transparent),
-        radial-gradient(1px   1px   at 59% 83%, rgba(200,190,240,0.40), transparent),
-        radial-gradient(1.5px 1.5px at 71%  1%, rgba(200,190,240,0.60), transparent),
-        radial-gradient(1px   1px   at 85% 61%, rgba(200,190,240,0.45), transparent),
-        radial-gradient(1.2px 1.2px at 96% 39%, rgba(200,190,240,0.55), transparent),
-        radial-gradient(1px   1px   at 29% 11%, rgba(170,160,220,0.50), transparent);
-    background-size: 100% 100%;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.75;
-}
-
-/* ── Nebulosa animada (camada sutil) ── */
-body::after {
-    content: '';
-    position: fixed;
-    inset: -10%;
-    width: 120%;
-    height: 120%;
-    background:
-        radial-gradient(ellipse 45% 35% at 30% 40%, rgba(100, 60, 200, 0.08) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 30% at 70% 60%, rgba(30,  70, 220, 0.07) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 0;
-    animation: nebulaPulse 18s ease-in-out infinite alternate;
-}
-
-@keyframes nebulaPulse {
-    0%   { opacity: 0.6; transform: scale(1.00) rotate(0deg); }
-    50%  { opacity: 1.0; transform: scale(1.04) rotate(1deg); }
-    100% { opacity: 0.7; transform: scale(1.01) rotate(-1deg); }
-}
-
 /* ========================================
    ANIMAÇÕES GLOBAIS
 ======================================== */
