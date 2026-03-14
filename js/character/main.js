@@ -447,50 +447,6 @@ function validateCharacterData(data) {
     return true;
 }
 
-
-function importCharacterJSON(event) {
-    const file = event.target.files[0];
-    
-    if (!file) return;
-    
-    if (!file.name.endsWith('.json')) {
-        alert('Por favor, selecione um arquivo .json válido.');
-        event.target.value = '';
-        return;
-    }
-    
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-        try {
-            const characterData = JSON.parse(e.target.result);
-            
-            // VALIDAÇÃO
-            if (!validateCharacterData(characterData)) {
-                throw new Error('Estrutura do arquivo inválida');
-            }
-            
-            if (confirm(`Deseja carregar o personagem "${characterData.nomePersonagem}"?\n\nIsso substituirá os dados atuais não salvos.`)) {
-                loadCharacterData(characterData);
-                showImportSuccess(characterData.nomePersonagem);
-            }
-            
-        } catch (error) {
-            console.error('Erro ao importar:', error);
-            alert('Erro ao ler o arquivo.\nCertifique-se de que é um arquivo .json válido exportado desta aplicação.');
-        }
-        
-        event.target.value = '';
-    };
-    
-    reader.onerror = function() {
-        alert('Erro ao ler o arquivo.');
-        event.target.value = '';
-    };
-    
-    reader.readAsText(file);
-}
-
 function sanitizeFileName(name) {
     return name
         .replace(/[^a-z0-9áàâãéèêíïóôõöúçñ\s-]/gi, '') 
