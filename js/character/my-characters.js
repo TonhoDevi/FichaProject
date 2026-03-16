@@ -8,7 +8,7 @@
 
 const TIPO_LABEL = { dnd: 'D&D 5e', mem: 'M&M 3e' };
 const TIPO_HREF  = {
-    dnd: '/html/sheet/character-sheet.html',
+    dnd: '/html/sheet/ddt-character-sheet.html',
     mem: '/html/sheet/mem-character-sheet.html'
 };
 
