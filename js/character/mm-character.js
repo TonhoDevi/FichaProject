@@ -9,33 +9,44 @@
 //  CONSTANTES — Perícias base do sistema
 // ─────────────────────────────────────────────
 const MM_SKILLS = [
-    { id: 'acrobacia',       label: 'Acrobacia',          attr: 'atAgilidade' },
-    { id: 'atletismo',       label: 'Atletismo',           attr: 'atForca'     },
-    { id: 'combateCC',       label: 'Combate Corp. a Corp.',attr: 'atLuta'     },
-    { id: 'combateDist',     label: 'Combate à Distância', attr: 'atDestreza' },
-    { id: 'conducao',        label: 'Condução',            attr: 'atDestreza' },
-    { id: 'enganacao',       label: 'Enganação',           attr: 'atPresenca' },
-    { id: 'especialidade',   label: 'Especialidade',       attr: 'atIntelecto'},
-    { id: 'escavacao',       label: 'Escavação',           attr: 'atForca'    },
-    { id: 'furtividade',     label: 'Furtividade',         attr: 'atAgilidade'},
-    { id: 'intuicao',        label: 'Intuição',            attr: 'atPercepao' },
-    { id: 'intimidacao',     label: 'Intimidação',         attr: 'atPresenca' },
-    { id: 'investigacao',    label: 'Investigação',        attr: 'atIntelecto'},
-    { id: 'magia',           label: 'Magia',               attr: 'atIntelecto'},
-    { id: 'medicinal',       label: 'Medicinal',           attr: 'atIntelecto'},
-    { id: 'mecanismos',      label: 'Mecanismos',          attr: 'atIntelecto'},
-    { id: 'musica',          label: 'Música',              attr: 'atPresenca' },
-    { id: 'navegacao',       label: 'Navegação',           attr: 'atIntelecto'},
-    { id: 'ocultismo',       label: 'Ocultismo',           attr: 'atIntelecto'},
-    { id: 'percepcao',       label: 'Percepção',           attr: 'atPercepao' },
-    { id: 'persuasao',       label: 'Persuasão',           attr: 'atPresenca' },
-    { id: 'pilotagem',       label: 'Pilotagem',           attr: 'atDestreza' },
-    { id: 'prestidigitacao', label: 'Prestidigitação',     attr: 'atDestreza' },
-    { id: 'sutil',           label: 'Sutil',               attr: 'atAgilidade'},
-    { id: 'tecnologia',      label: 'Tecnologia',          attr: 'atIntelecto'},
-    { id: 'tratamento',      label: 'Tratamento',          attr: 'atIntelecto'},
-    { id: 'veiculos',        label: 'Veículos',            attr: 'atDestreza' },
+    { id: 'acrobacia',       label: 'Acrobacia',            attr: 'atAgilidade' },
+    { id: 'atletismo',       label: 'Atletismo',            attr: 'atForca'     },
+    { id: 'combateCC',       label: 'Combate Corp. a Corp.',attr: 'atLuta'      },
+    { id: 'combateDist',     label: 'Combate à Distância',  attr: 'atDestreza'  },
+    { id: 'conducao',        label: 'Condução',             attr: 'atDestreza'  },
+    { id: 'enganacao',       label: 'Enganação',            attr: 'atPresenca'  },
+    { id: 'especialidade',   label: 'Especialidade',        attr: 'atIntelecto' },
+    { id: 'escavacao',       label: 'Escavação',            attr: 'atForca'     },
+    { id: 'furtividade',     label: 'Furtividade',          attr: 'atAgilidade' },
+    { id: 'intuicao',        label: 'Intuição',             attr: 'atPercepao'  },
+    { id: 'intimidacao',     label: 'Intimidação',          attr: 'atPresenca'  },
+    { id: 'investigacao',    label: 'Investigação',         attr: 'atIntelecto' },
+    { id: 'magia',           label: 'Magia',                attr: 'atIntelecto' },
+    { id: 'medicinal',       label: 'Medicinal',            attr: 'atIntelecto' },
+    { id: 'mecanismos',      label: 'Mecanismos',           attr: 'atIntelecto' },
+    { id: 'musica',          label: 'Música',               attr: 'atPresenca'  },
+    { id: 'navegacao',       label: 'Navegação',            attr: 'atIntelecto' },
+    { id: 'ocultismo',       label: 'Ocultismo',            attr: 'atIntelecto' },
+    { id: 'percepcao',       label: 'Percepção',            attr: 'atPercepao'  },
+    { id: 'persuasao',       label: 'Persuasão',            attr: 'atPresenca'  },
+    { id: 'pilotagem',       label: 'Pilotagem',            attr: 'atDestreza'  },
+    { id: 'prestidigitacao', label: 'Prestidigitação',      attr: 'atDestreza'  },
+    { id: 'sutil',           label: 'Sutil',                attr: 'atAgilidade' },
+    { id: 'tecnologia',      label: 'Tecnologia',           attr: 'atIntelecto' },
+    { id: 'tratamento',      label: 'Tratamento',           attr: 'atIntelecto' },
+    { id: 'veiculos',        label: 'Veículos',             attr: 'atDestreza'  },
 ];
+
+const ATTR_LABEL = {
+    atForca:     'FOR',
+    atVigor:     'VIG',
+    atAgilidade: 'AGI',
+    atDestreza:  'DES',
+    atLuta:      'LUT',
+    atIntelecto: 'INT',
+    atPercepao:  'PER',
+    atPresenca:  'PRE',
+};
 
 // ─────────────────────────────────────────────
 //  ESTADO DA FICHA
@@ -43,137 +54,121 @@ const MM_SKILLS = [
 const MM_STORAGE_KEY = 'mm_character_active';
 const MM_LIST_KEY    = 'mm_character_list';
 
-let mmSaveTimer = null;
+let mmSaveTimer  = null;
+let mmEditMode   = false;
 
 // ─────────────────────────────────────────────
 //  UTILITÁRIOS
 // ─────────────────────────────────────────────
-function mmVal(id)    { return parseInt(document.getElementById(id)?.value) || 0; }
-function mmSet(id, v) { const el = document.getElementById(id); if (el) el.value = v; }
-function mmFmt(n)     { return n >= 0 ? `+${n}` : `${n}`; }
 
-function mmSign(id) {
-    // Exibe o valor como string com sinal no campo
-    const el = document.getElementById(id);
-    if (!el) return;
-    const v = parseInt(el.value) || 0;
-    el.value = v >= 0 ? `+${v}` : `${v}`;
+/** Lê o valor numérico de um input pelo id */
+function mmVal(id) { return parseInt(document.getElementById(id)?.value) || 0; }
+
+/** Seta .value em um input/textarea/select */
+function mmSet(id, v) { const el = document.getElementById(id); if (el) el.value = v; }
+
+/** Seta textContent em qualquer elemento (display divs, spans, etc.) */
+function mmText(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+
+/** Formata número com sinal */
+function mmFmt(n) { return n >= 0 ? `+${n}` : `${n}`; }
+
+// ─────────────────────────────────────────────
+//  MODO EDIÇÃO
+// ─────────────────────────────────────────────
+function mmToggleEdit() {
+    mmEditMode = !mmEditMode;
+    const editSection    = document.getElementById('editSection');
+    const displaySection = document.getElementById('displaySection');
+    const btn            = document.getElementById('editToggleBtn');
+
+    if (editSection)    editSection.style.display    = mmEditMode ? 'block' : 'none';
+    if (displaySection) displaySection.style.display = mmEditMode ? 'none'  : 'block';
+    if (btn) {
+        btn.textContent = mmEditMode ? '🔒 Fechar Edição' : '✏️ Editar Ficha';
+        btn.className   = mmEditMode ? 'btn btn-danger'   : 'btn btn-secondary';
+    }
 }
 
 // ─────────────────────────────────────────────
 //  CÁLCULOS PRINCIPAIS
 // ─────────────────────────────────────────────
 function mmCalculateAll() {
+
     // --- Atributos: rank = modificador no M&M ---
     const attrs = ['Forca','Vigor','Agilidade','Destreza','Luta','Intelecto','Percepao','Presenca'];
     attrs.forEach(a => {
-        const rank = mmVal(`at${a}`);
-        const displayEl = document.getElementById(`display-mod${a}`);
-        if (displayEl) displayEl.textContent = mmFmt(rank);
+        mmText(`display-mod${a}`, mmFmt(mmVal(`at${a}`)));
     });
 
-    // --- Defesas (novo sistema) ---
-    // Esquiva: Agilidade + ranks (CA de D&D)
-    // Resistência Física: 10 + ranks
-    // Resistência Mental: 10 + ranks
-    // Resistência Elemental: 10 + ranks
+    // --- Defesas ---
+    const agl            = mmVal('atAgilidade');
+    const esquivaRanks   = mmVal('defEsquivaRanks');
+    const esquivaMisc    = mmVal('defEsquivaMisc');
+    const esquivaTotal   = agl + esquivaRanks + esquivaMisc;
 
-    const agl = mmVal('atAgilidade');
-    const esquivaRanks = mmVal('defEsquivaRanks');
-    const esquivaMisc = mmVal('defEsquivaMisc');
-    const esquivaTotal = agl + esquivaRanks + esquivaMisc;
-    const defEsquivaEl = document.getElementById('display-defEsquivaTotal');
-    if (defEsquivaEl) defEsquivaEl.textContent = mmFmt(esquivaTotal);
+    mmText('display-defEsquivaTotal', mmFmt(esquivaTotal));
+    mmText('display-esquiva',         mmFmt(esquivaTotal)); // combate display
 
-    // Resistências - base 10 + ranks
-    const defFisicaRanks = mmVal('defFisicaRanks');
-    const defFisicaMisc = mmVal('defFisicaMisc');
-    const defFisica = 10 + defFisicaRanks + defFisicaMisc;
-    const defFisicaEl = document.getElementById('display-defFisica');
-    if (defFisicaEl) defFisicaEl.textContent = defFisica;
+    const defFisicaRanks   = mmVal('defFisicaRanks');
+    const defFisicaMisc    = mmVal('defFisicaMisc');
+    const defFisica        = 10 + defFisicaRanks + defFisicaMisc;
+    mmText('display-defFisica', defFisica);
 
-    const defMentalRanks = mmVal('defMentalRanks');
-    const defMentalMisc = mmVal('defMentalMisc');
-    const defMental = 10 + defMentalRanks + defMentalMisc;
-    const defMentalEl = document.getElementById('display-defMental');
-    if (defMentalEl) defMentalEl.textContent = defMental;
+    const defMentalRanks   = mmVal('defMentalRanks');
+    const defMentalMisc    = mmVal('defMentalMisc');
+    const defMental        = 10 + defMentalRanks + defMentalMisc;
+    mmText('display-defMental', defMental);
 
     const defElementalRanks = mmVal('defElementalRanks');
-    const defElementalMisc = mmVal('defElementalMisc');
-    const defElemental = 10 + defElementalRanks + defElementalMisc;
-    const defElementalEl = document.getElementById('display-defElemental');
-    if (defElementalEl) defElementalEl.textContent = defElemental;
+    const defElementalMisc  = mmVal('defElementalMisc');
+    const defElemental      = 10 + defElementalRanks + defElementalMisc;
+    mmText('display-defElemental', defElemental);
 
-    let totalDefRanks = esquivaRanks + defFisicaRanks + defMentalRanks + defElementalRanks;
+    const totalDefRanks = esquivaRanks + defFisicaRanks + defMentalRanks + defElementalRanks;
 
-    // --- Vida Máxima (Vigor + Vitalidade) ---
-    const vigor = mmVal('atVigor');
-    const vitalidade = mmVal('vitalidade');
-    const vidaMaximaCalculada = Math.max(1, (vigor || 0) * 5 + (vitalidade || 0) * 5 + 10);
-    mmSet('display-vidaMaxima', vidaMaximaCalculada);
-    mmSet('vidaMaxima', vidaMaximaCalculada);
+    // --- Vida Máxima (Vigor × 5 + 10) ---
+    const vigor              = mmVal('atVigor');
+    const vidaMaximaCalc     = Math.max(1, vigor * 5 + 10);
+    mmSet('vidaMaxima',  vidaMaximaCalc);
+    mmText('display-vidaMaxima', vidaMaximaCalc);
 
-    // --- Combate ---
-    const luta = mmVal('atLuta');
-    const dest = mmVal('atDestreza');
-    const exCC   = mmVal('extraBonusCC');
-    const exDist = mmVal('extraBonusDist');
-    const displayInit = document.getElementById('display-iniciativa');
-    if (displayInit) displayInit.textContent = mmFmt(agl);
-    const displayCC = document.getElementById('display-bonusCorpoCorpo');
-    if (displayCC) displayCC.textContent = mmFmt(luta + exCC);
-    const displayDist = document.getElementById('display-bonusDistancia');
-    if (displayDist) displayDist.textContent = mmFmt(dest + exDist);
-
-    // --- Perícias: total = atributo + ranks ---
+    // --- Perícias base: sincroniza coluna Base e recalcula Total ---
     MM_SKILLS.forEach(s => {
-        const attrVal = mmVal(s.attr);
-        const ranksEl = document.getElementById(`skill_ranks_${s.id}`);
-        const totalEl = document.getElementById(`skill_total_${s.id}`);
+        const attrVal  = mmVal(s.attr);
+        const baseEl   = document.getElementById(`skill_base_${s.id}`);
+        const ranksEl  = document.getElementById(`skill_ranks_${s.id}`);
+        const totalEl  = document.getElementById(`skill_total_${s.id}`);
         if (!ranksEl || !totalEl) return;
-        const ranks = parseInt(ranksEl.value) || 0;
-        totalEl.value = attrVal + ranks;
+        if (baseEl) baseEl.value = attrVal;
+        totalEl.value = attrVal + (parseInt(ranksEl.value) || 0);
     });
 
-    // Extras de especialidade
+    // --- Perícias extras ---
     document.querySelectorAll('.mm-extra-skill-row').forEach(row => {
         const attrSel = row.querySelector('.mm-extra-skill-attr');
         const ranksIn = row.querySelector('.mm-extra-skill-ranks');
         const totalIn = row.querySelector('.mm-extra-skill-total');
         if (!attrSel || !ranksIn || !totalIn) return;
-        const attrVal = mmVal(attrSel.value);
-        const ranks   = parseInt(ranksIn.value) || 0;
-        totalIn.value = attrVal + ranks;
+        totalIn.value = mmVal(attrSel.value) + (parseInt(ranksIn.value) || 0);
     });
 
-    // --- Pontos ---
+    // --- Pontos e displays ---
     mmCalculatePoints(totalDefRanks);
-    
-    // --- Atualizar displays ---
     mmUpdateDisplays();
 }
 
 function mmCalculatePoints(totalDefRanks) {
-    const np = mmVal('nivelPoder');
+    const np      = mmVal('nivelPoder');
     const ptLimit = np * 15;
-    const displayLimit = document.getElementById('display-ptLimit');
-    if (displayLimit) displayLimit.textContent = ptLimit;
-    mmSet('ptLimit', ptLimit);
+    mmText('display-ptLimit', ptLimit);
 
-    // Atributos: soma de todos os ranks × 2
     const attrFields = ['atForca','atVigor','atAgilidade','atDestreza','atLuta','atIntelecto','atPercepao','atPresenca'];
-    const sumAttrs = attrFields.reduce((acc, f) => acc + mmVal(f), 0);
-    const ptAttrs = sumAttrs * 2;
-    mmSet('ptAtributos', ptAttrs);
-    const displayAttrs = document.getElementById('display-ptAtributos');
-    if (displayAttrs) displayAttrs.textContent = ptAttrs;
+    const ptAttrs    = attrFields.reduce((acc, f) => acc + mmVal(f), 0) * 2;
+    mmText('display-ptAtributos', ptAttrs);
 
-    // Defesas: soma dos ranks adicionados pelo usuário
-    mmSet('ptDefesas', totalDefRanks);
-    const displayDefesas = document.getElementById('display-ptDefesas');
-    if (displayDefesas) displayDefesas.textContent = totalDefRanks;
+    mmText('display-ptDefesas', totalDefRanks);
 
-    // Perícias: total de ranks / 2 (arredondado para cima)
     let totalSkillRanks = 0;
     MM_SKILLS.forEach(s => {
         const el = document.getElementById(`skill_ranks_${s.id}`);
@@ -183,34 +178,50 @@ function mmCalculatePoints(totalDefRanks) {
         totalSkillRanks += parseInt(el.value) || 0;
     });
     const ptSkills = Math.ceil(totalSkillRanks / 2);
-    mmSet('ptPericias', ptSkills);
-    const displaySkills = document.getElementById('display-ptPericias');
-    if (displaySkills) displaySkills.textContent = ptSkills;
+    mmText('display-ptPericias', ptSkills);
 
-    // Vantagens: contagem de itens
     const vantCount = document.querySelectorAll('.mm-advantage-row').length;
-    mmSet('ptVantagens', vantCount);
-    const displayVant = document.getElementById('display-ptVantagens');
-    if (displayVant) displayVant.textContent = vantCount;
+    mmText('display-ptVantagens', vantCount);
 
-    // Poderes: soma dos campos de custo
     let ptPow = 0;
-    document.querySelectorAll('.mm-power-cost').forEach(el => {
-        ptPow += parseInt(el.value) || 0;
-    });
-    mmSet('ptPoderes', ptPow);
-    const displayPow = document.getElementById('display-ptPoderes');
-    if (displayPow) displayPow.textContent = ptPow;
+    document.querySelectorAll('.mm-power-cost').forEach(el => { ptPow += parseInt(el.value) || 0; });
+    mmText('display-ptPoderes', ptPow);
 
-    const gasto = ptAttrs + totalDefRanks + ptSkills + vantCount + ptPow;
-    mmSet('ptGasto', gasto);
-    const displayGasto = document.getElementById('display-ptGasto');
-    if (displayGasto) displayGasto.textContent = gasto;
-
+    const gasto    = ptAttrs + totalDefRanks + ptSkills + vantCount + ptPow;
     const restante = ptLimit - gasto;
-    mmSet('ptRestante', restante);
-    const displayRestante = document.getElementById('display-ptRestante');
-    if (displayRestante) displayRestante.textContent = restante;
+    mmText('display-ptGasto',    gasto);
+    mmText('display-ptRestante', restante);
+}
+
+// ─────────────────────────────────────────────
+//  SINCRONIZAR DISPLAYS DE TEXTO FIXO
+// ─────────────────────────────────────────────
+function mmUpdateDisplays() {
+    const txt = (id, val) => mmText(id, val || '-');
+
+    txt('display-nomeHeroi',   document.getElementById('nomeHeroi')?.value);
+    txt('display-identidade',  document.getElementById('identidade')?.value);
+    txt('display-nomeJogador', document.getElementById('nomeJogador')?.value);
+    txt('display-grupo',       document.getElementById('grupo')?.value);
+    txt('display-base',        document.getElementById('base')?.value);
+    txt('display-origem',      document.getElementById('origem')?.value);
+
+    mmText('display-nivelPoder',    mmVal('nivelPoder'));
+    mmText('display-pontosHeroicos',mmVal('pontosHeroicos'));
+    mmText('display-xp',            mmVal('xp'));
+
+    // Vida
+    mmText('display-vidaAtual',      mmVal('vidaAtual'));
+    mmText('display-vidaTemporaria', mmVal('vidaTemporaria'));
+
+    // Estado
+    const estadoEl = document.getElementById('estado');
+    mmText('display-estado', estadoEl?.value || 'Normal');
+
+    // Deslocamentos (sem inputs no momento → mostram 0)
+    mmText('display-velocidade', 0);
+    mmText('display-voo',        0);
+    mmText('display-natacao',    0);
 }
 
 // ─────────────────────────────────────────────
@@ -300,40 +311,14 @@ function mmRenderPowers() {
     });
 }
 
-// Helper para obter total de ranks de defesa atual (sem recalcular tudo)
 function mmCurrentDefRanks() {
     return ['defEsquivaRanks','defFisicaRanks','defMentalRanks','defElementalRanks']
         .reduce((acc, id) => acc + mmVal(id), 0);
 }
 
 // ─────────────────────────────────────────────
-//  SINCRONIZAR DISPLAYS
+//  EQUIPAMENTOS
 // ─────────────────────────────────────────────
-function mmUpdateDisplays() {
-    // Atualizar displays de informações básicas
-    const setDisplay = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = val;
-    };
-    
-    setDisplay('display-nomeHeroi', document.getElementById('nomeHeroi')?.value || '-');
-    setDisplay('display-identidade', document.getElementById('identidade')?.value || '-');
-    setDisplay('display-nomeJogador', document.getElementById('nomeJogador')?.value || '-');
-    setDisplay('display-grupo', document.getElementById('grupo')?.value || '-');
-    setDisplay('display-base', document.getElementById('base')?.value || '-');
-    setDisplay('display-origem', document.getElementById('origem')?.value || '-');
-    
-    // Atualizar displays de valores
-    const np = mmVal('nivelPoder');
-    const vitalidade = mmVal('vitalidade');
-    const vidaAtual = mmVal('vidaAtual');
-    
-    setDisplay('display-nivelPoder', np);
-    setDisplay('display-pontosHeroicos', mmVal('pontosHeroicos'));
-    setDisplay('display-xp', mmVal('xp'));
-    setDisplay('display-vitalidade', vitalidade);
-    setDisplay('display-vidaAtual', vidaAtual);
-}
 let mmEquip = [];
 
 function mmAddEquip(data = {}) {
@@ -435,12 +420,9 @@ function mmRenderExtraSkills() {
     if (!list) return;
     list.innerHTML = '';
     mmExtraSkills.forEach(es => {
-        const attrOptions = [
-            'atForca','atVigor','atAgilidade','atDestreza','atLuta','atIntelecto','atPercepao','atPresenca'
-        ].map(a => {
-            const label = a.replace('at','');
-            return `<option value="${a}" ${es.attr === a ? 'selected' : ''}>${label}</option>`;
-        }).join('');
+        const attrOptions = Object.keys(ATTR_LABEL).map(a =>
+            `<option value="${a}" ${es.attr === a ? 'selected' : ''}>${ATTR_LABEL[a]}</option>`
+        ).join('');
 
         const row = document.createElement('div');
         row.className = 'mm-extra-skill-row';
@@ -455,7 +437,7 @@ function mmRenderExtraSkills() {
             <input type="number" class="mm-extra-skill-ranks" placeholder="0" value="${es.ranks || 0}" min="0"
                 oninput="mmExtraSkills.find(e=>e.id==${es.id}).ranks=this.value; mmCalculateAll(); mmAutoSave()"
                 style="text-align:center;">
-            <input type="number" class="mm-extra-skill-total" readonly value="0"
+            <input type="text" class="mm-extra-skill-total" readonly value="0"
                 style="background:var(--cor12);font-weight:700;color:var(--cor19);text-align:center;">
             <button class="btn btn-danger" style="padding:4px 8px;font-size:0.8em;"
                 onclick="mmRemoveExtraSkill(${es.id})">✕</button>
@@ -503,8 +485,7 @@ function mmRenderComplications() {
             <select onchange="mmComplications.find(c=>c.id==${c.id}).tipo=this.value; mmAutoSave()">
                 ${typeOptions}
             </select>
-            <textarea placeholder="Descreva a complicação..." rows="2"
-                style="resize:vertical;"
+            <textarea placeholder="Descreva a complicação..." rows="2" style="resize:vertical;"
                 oninput="mmComplications.find(c=>c.id==${c.id}).desc=this.value; mmAutoSave()">${c.desc || ''}</textarea>
             <button class="btn btn-danger" style="padding:4px 8px;font-size:0.8em;align-self:center;"
                 onclick="mmRemoveComplication(${c.id})">✕</button>
@@ -561,26 +542,19 @@ function mmRenderBaseSkills() {
     list.innerHTML = '';
     MM_SKILLS.forEach(s => {
         const row = document.createElement('div');
-        row.style.cssText = 'display:grid;grid-template-columns:2.5fr 0.8fr 0.8fr 0.8fr;gap:6px;margin-bottom:5px;align-items:center;';
+        row.style.cssText = 'display:grid;grid-template-columns:2.5fr 0.5fr 0.8fr 0.8fr 0.8fr;gap:6px;margin-bottom:5px;align-items:center;';
         row.innerHTML = `
             <label style="font-size:0.85em;font-weight:600;">${s.label}</label>
-            <input type="number" id="skill_base_${s.id}" readonly value="0"
+            <span style="font-size:0.72em;font-weight:700;color:var(--cor19);opacity:0.75;text-align:center;letter-spacing:0.04em;">${ATTR_LABEL[s.attr] ?? s.attr}</span>
+            <input type="text" id="skill_base_${s.id}" readonly value="0"
                 style="background:var(--cor12);font-weight:700;color:var(--cor19);text-align:center;padding:3px;border-radius:4px;">
             <input type="number" id="skill_ranks_${s.id}" value="0" min="0"
                 oninput="mmCalculateAll(); mmAutoSave()"
                 style="text-align:center;padding:3px;border-radius:4px;">
-            <input type="number" id="skill_total_${s.id}" readonly value="0"
+            <input type="text" id="skill_total_${s.id}" readonly value="0"
                 style="background:var(--cor12);font-weight:700;color:var(--cor19);text-align:center;padding:3px;border-radius:4px;">
         `;
         list.appendChild(row);
-    });
-}
-
-// Sincroniza os campos de base das perícias com os atributos atuais
-function mmSyncSkillBases() {
-    MM_SKILLS.forEach(s => {
-        const baseEl = document.getElementById(`skill_base_${s.id}`);
-        if (baseEl) baseEl.value = mmVal(s.attr);
     });
 }
 
@@ -595,32 +569,28 @@ function mmSetupImageUpload() {
         if (!file) return;
         const reader = new FileReader();
         reader.onload = function (ev) {
-            const img = document.getElementById('characterImage');
+            const img         = document.getElementById('characterImage');
             const placeholder = document.getElementById('imagePlaceholder');
-            const removeBtn = document.getElementById('removeImageBtn');
-            if (img) { img.src = ev.target.result; img.style.display = 'block'; }
-            if (placeholder) placeholder.style.display = 'none';
-            if (removeBtn) removeBtn.style.display = 'inline-block';
+            const removeBtn   = document.getElementById('removeImageBtn');
+            if (img)         { img.src = ev.target.result; img.style.display = 'block'; }
+            if (placeholder)   placeholder.style.display = 'none';
+            if (removeBtn)     removeBtn.style.display = 'inline-block';
             mmAutoSave();
         };
         reader.readAsDataURL(file);
     });
 
     const preview = document.getElementById('imagePreview');
-    if (preview) {
-        preview.addEventListener('click', function () {
-            upload.click();
-        });
-    }
+    if (preview) preview.addEventListener('click', () => upload.click());
 }
 
 function mmRemoveImage() {
-    const img = document.getElementById('characterImage');
+    const img         = document.getElementById('characterImage');
     const placeholder = document.getElementById('imagePlaceholder');
-    const removeBtn = document.getElementById('removeImageBtn');
-    if (img) { img.src = ''; img.style.display = 'none'; }
-    if (placeholder) placeholder.style.display = 'flex';
-    if (removeBtn) removeBtn.style.display = 'none';
+    const removeBtn   = document.getElementById('removeImageBtn');
+    if (img)         { img.src = ''; img.style.display = 'none'; }
+    if (placeholder)   placeholder.style.display = 'flex';
+    if (removeBtn)     removeBtn.style.display = 'none';
     mmAutoSave();
 }
 
@@ -630,72 +600,63 @@ function mmRemoveImage() {
 function mmCollectData() {
     const img = document.getElementById('characterImage');
     const data = {
-        // Info básica
-        nomeHeroi: document.getElementById('nomeHeroi')?.value || '',
-        identidade: document.getElementById('identidade')?.value || '',
-        nomeJogador: document.getElementById('nomeJogador')?.value || '',
-        grupo: document.getElementById('grupo')?.value || '',
-        base: document.getElementById('base')?.value || '',
-        origem: document.getElementById('origem')?.value || '',
-        nivelPoder: mmVal('nivelPoder'),
+        nomeHeroi:    document.getElementById('nomeHeroi')?.value    || '',
+        identidade:   document.getElementById('identidade')?.value   || '',
+        nomeJogador:  document.getElementById('nomeJogador')?.value  || '',
+        grupo:        document.getElementById('grupo')?.value        || '',
+        base:         document.getElementById('base')?.value         || '',
+        origem:       document.getElementById('origem')?.value       || '',
+        nivelPoder:   mmVal('nivelPoder'),
         pontosHeroicos: mmVal('pontosHeroicos'),
-        xp: mmVal('xp'),
+        xp:           mmVal('xp'),
 
-        // Vitalidade e Vida
-        vitalidade: mmVal('vitalidade'),
-        vidaMaxima: mmVal('vidaMaxima'),
-        vidaAtual: mmVal('vidaAtual'),
+        vidaMaxima:   mmVal('vidaMaxima'),
+        vidaAtual:    mmVal('vidaAtual'),
+        vidaTemporaria: mmVal('vidaTemporaria'),
 
-        // Atributos
-        atForca: mmVal('atForca'),
-        atVigor: mmVal('atVigor'),
-        atAgilidade: mmVal('atAgilidade'),
-        atDestreza: mmVal('atDestreza'),
-        atLuta: mmVal('atLuta'),
-        atIntelecto: mmVal('atIntelecto'),
-        atPercepao: mmVal('atPercepao'),
-        atPresenca: mmVal('atPresenca'),
+        atForca:      mmVal('atForca'),
+        atVigor:      mmVal('atVigor'),
+        atAgilidade:  mmVal('atAgilidade'),
+        atDestreza:   mmVal('atDestreza'),
+        atLuta:       mmVal('atLuta'),
+        atIntelecto:  mmVal('atIntelecto'),
+        atPercepao:   mmVal('atPercepao'),
+        atPresenca:   mmVal('atPresenca'),
 
-        // Defesas (novo sistema)
-        defEsquivaRanks: mmVal('defEsquivaRanks'),   defEsquivaMisc: mmVal('defEsquivaMisc'),
-        defFisicaRanks: mmVal('defFisicaRanks'),     defFisicaMisc: mmVal('defFisicaMisc'),
-        defMentalRanks: mmVal('defMentalRanks'),     defMentalMisc: mmVal('defMentalMisc'),
-        defElementalRanks: mmVal('defElementalRanks'), defElementalMisc: mmVal('defElementalMisc'),
+        defEsquivaRanks:  mmVal('defEsquivaRanks'),  defEsquivaMisc:    mmVal('defEsquivaMisc'),
+        defFisicaRanks:   mmVal('defFisicaRanks'),   defFisicaMisc:     mmVal('defFisicaMisc'),
+        defMentalRanks:   mmVal('defMentalRanks'),   defMentalMisc:     mmVal('defMentalMisc'),
+        defElementalRanks:mmVal('defElementalRanks'),defElementalMisc:  mmVal('defElementalMisc'),
 
-        // Combate extras
-        extraBonusCC: mmVal('extraBonusCC'),
+        extraBonusCC:   mmVal('extraBonusCC'),
         extraBonusDist: mmVal('extraBonusDist'),
 
-        // Perícias base
+        estado: document.getElementById('estado')?.value || 'Normal',
+
         skills: {},
-        extraSkills: mmExtraSkills,
+        extraSkills:    mmExtraSkills,
+        attacks:        mmAttacks,
+        powers:         mmPowers,
+        equip:          mmEquip,
+        advantages:     mmAdvantages,
+        complications:  mmComplications,
+        individuals:    mmIndividuals,
 
-        // Listas dinâmicas
-        attacks: mmAttacks,
-        powers: mmPowers,
-        equip: mmEquip,
-        advantages: mmAdvantages,
-        complications: mmComplications,
-        individuals: mmIndividuals,
+        mmIdiomas:     document.getElementById('mmIdiomas')?.value    || '',
+        mmVeiculosQG:  document.getElementById('mmVeiculosQG')?.value || '',
 
-        // Textos
-        mmIdiomas: document.getElementById('mmIdiomas')?.value || '',
-        mmVeiculosQG: document.getElementById('mmVeiculosQG')?.value || '',
+        idade:        document.getElementById('idade')?.value        || '',
+        altura:       document.getElementById('altura')?.value       || '',
+        peso:         document.getElementById('peso')?.value         || '',
+        olhos:        document.getElementById('olhos')?.value        || '',
+        cabelo:       document.getElementById('cabelo')?.value       || '',
+        genero:       document.getElementById('genero')?.value       || '',
+        aparencia:    document.getElementById('aparencia')?.value    || '',
+        personalidade:document.getElementById('personalidade')?.value|| '',
+        motivacao:    document.getElementById('motivacao')?.value    || '',
+        historia:     document.getElementById('historia')?.value     || '',
+        anotacoes:    document.getElementById('anotacoes')?.value    || '',
 
-        // Descrição
-        idade: document.getElementById('idade')?.value || '',
-        altura: document.getElementById('altura')?.value || '',
-        peso: document.getElementById('peso')?.value || '',
-        olhos: document.getElementById('olhos')?.value || '',
-        cabelo: document.getElementById('cabelo')?.value || '',
-        genero: document.getElementById('genero')?.value || '',
-        aparencia: document.getElementById('aparencia')?.value || '',
-        personalidade: document.getElementById('personalidade')?.value || '',
-        motivacao: document.getElementById('motivacao')?.value || '',
-        historia: document.getElementById('historia')?.value || '',
-        anotacoes: document.getElementById('anotacoes')?.value || '',
-
-        // Imagem
         characterImage: img?.src && img.src !== window.location.href ? img.src : '',
     };
 
@@ -712,48 +673,51 @@ function mmApplyData(data) {
 
     const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val ?? ''; };
 
-    setVal('nomeHeroi',     data.nomeHeroi);
-    setVal('identidade',    data.identidade);
-    setVal('nomeJogador',   data.nomeJogador);
-    setVal('grupo',         data.grupo);
-    setVal('base',          data.base);
-    setVal('origem',        data.origem);
-    setVal('nivelPoder',    data.nivelPoder ?? 10);
-    setVal('pontosHeroicos',data.pontosHeroicos ?? 1);
-    setVal('xp',            data.xp ?? 0);
+    setVal('nomeHeroi',      data.nomeHeroi);
+    setVal('identidade',     data.identidade);
+    setVal('nomeJogador',    data.nomeJogador);
+    setVal('grupo',          data.grupo);
+    setVal('base',           data.base);
+    setVal('origem',         data.origem);
+    setVal('nivelPoder',     data.nivelPoder     ?? 10);
+    setVal('pontosHeroicos', data.pontosHeroicos ?? 1);
+    setVal('xp',             data.xp             ?? 0);
 
-    // Vitalidade e Vida
-    setVal('vitalidade',  data.vitalidade ?? 0);
-    setVal('vidaMaxima',  data.vidaMaxima ?? 10);
-    setVal('vidaAtual',   data.vidaAtual ?? 10);
+    setVal('vidaAtual',      data.vidaAtual      ?? 10);
+    setVal('vidaTemporaria', data.vidaTemporaria ?? 0);
 
-    setVal('atForca',     data.atForca ?? 0);
-    setVal('atVigor',     data.atVigor ?? 0);
+    setVal('atForca',     data.atForca     ?? 0);
+    setVal('atVigor',     data.atVigor     ?? 0);
     setVal('atAgilidade', data.atAgilidade ?? 0);
-    setVal('atDestreza',  data.atDestreza ?? 0);
-    setVal('atLuta',      data.atLuta ?? 0);
+    setVal('atDestreza',  data.atDestreza  ?? 0);
+    setVal('atLuta',      data.atLuta      ?? 0);
     setVal('atIntelecto', data.atIntelecto ?? 0);
-    setVal('atPercepao',  data.atPercepao ?? 0);
-    setVal('atPresenca',  data.atPresenca ?? 0);
+    setVal('atPercepao',  data.atPercepao  ?? 0);
+    setVal('atPresenca',  data.atPresenca  ?? 0);
 
-    // Defesas (novo sistema)
-    setVal('defEsquivaRanks',  data.defEsquivaRanks ?? 0);  setVal('defEsquivaMisc',  data.defEsquivaMisc ?? 0);
-    setVal('defFisicaRanks',   data.defFisicaRanks ?? 0);   setVal('defFisicaMisc',   data.defFisicaMisc ?? 0);
-    setVal('defMentalRanks',   data.defMentalRanks ?? 0);   setVal('defMentalMisc',   data.defMentalMisc ?? 0);
-    setVal('defElementalRanks',data.defElementalRanks ?? 0); setVal('defElementalMisc',data.defElementalMisc ?? 0);
+    setVal('defEsquivaRanks',   data.defEsquivaRanks   ?? 0);
+    setVal('defEsquivaMisc',    data.defEsquivaMisc    ?? 0);
+    setVal('defFisicaRanks',    data.defFisicaRanks    ?? 0);
+    setVal('defFisicaMisc',     data.defFisicaMisc     ?? 0);
+    setVal('defMentalRanks',    data.defMentalRanks    ?? 0);
+    setVal('defMentalMisc',     data.defMentalMisc     ?? 0);
+    setVal('defElementalRanks', data.defElementalRanks ?? 0);
+    setVal('defElementalMisc',  data.defElementalMisc  ?? 0);
 
-    // Combate compatibilidade com sistema antigo (se existir)
-    if (data.defFortRanks !== undefined) setVal('defMentalRanks', data.defFortRanks);
-    if (data.defFortMisc !== undefined) setVal('defMentalMisc', data.defFortMisc);
-    if (data.defApararRanks !== undefined) setVal('defFisicaRanks', data.defApararRanks);
-    if (data.defApararMisc !== undefined) setVal('defFisicaMisc', data.defApararMisc);
-    if (data.defResistRanks !== undefined) setVal('defElementalRanks', data.defResistRanks);
-    if (data.defResistMisc !== undefined) setVal('defElementalMisc', data.defResistMisc);
+    // Compatibilidade com fichas antigas
+    if (data.defFortRanks    !== undefined) setVal('defMentalRanks',    data.defFortRanks);
+    if (data.defFortMisc     !== undefined) setVal('defMentalMisc',     data.defFortMisc);
+    if (data.defApararRanks  !== undefined) setVal('defFisicaRanks',    data.defApararRanks);
+    if (data.defApararMisc   !== undefined) setVal('defFisicaMisc',     data.defApararMisc);
+    if (data.defResistRanks  !== undefined) setVal('defElementalRanks', data.defResistRanks);
+    if (data.defResistMisc   !== undefined) setVal('defElementalMisc',  data.defResistMisc);
 
-    setVal('extraBonusCC',   data.extraBonusCC ?? 0);
+    setVal('extraBonusCC',   data.extraBonusCC   ?? 0);
     setVal('extraBonusDist', data.extraBonusDist ?? 0);
 
-    // Perícias base
+    const estadoEl = document.getElementById('estado');
+    if (estadoEl && data.estado) estadoEl.value = data.estado;
+
     if (data.skills) {
         MM_SKILLS.forEach(s => {
             const el = document.getElementById(`skill_ranks_${s.id}`);
@@ -761,18 +725,15 @@ function mmApplyData(data) {
         });
     }
 
-    // Extras
-    mmExtraSkills = data.extraSkills || [];
+    mmExtraSkills   = data.extraSkills   || [];
+    mmAttacks       = data.attacks       || [];
+    mmPowers        = data.powers        || [];
+    mmEquip         = data.equip         || [];
+    mmAdvantages    = data.advantages    || [];
+    mmComplications = data.complications || [];
+    mmIndividuals   = data.individuals   || [];
+
     mmRenderExtraSkills();
-
-    // Listas
-    mmAttacks      = data.attacks      || [];
-    mmPowers       = data.powers       || [];
-    mmEquip        = data.equip        || [];
-    mmAdvantages   = data.advantages   || [];
-    mmComplications= data.complications|| [];
-    mmIndividuals  = data.individuals  || [];
-
     mmRenderAttacks();
     mmRenderPowers();
     mmRenderEquip();
@@ -780,42 +741,42 @@ function mmApplyData(data) {
     mmRenderComplications();
     mmRenderIndividuals();
 
-    // Textos
-    setVal('mmIdiomas',    data.mmIdiomas);
-    setVal('mmVeiculosQG', data.mmVeiculosQG);
-    setVal('idade',        data.idade);
-    setVal('altura',       data.altura);
-    setVal('peso',         data.peso);
-    setVal('olhos',        data.olhos);
-    setVal('cabelo',       data.cabelo);
-    setVal('genero',       data.genero);
-    setVal('aparencia',    data.aparencia);
-    setVal('personalidade',data.personalidade);
-    setVal('motivacao',    data.motivacao);
-    setVal('historia',     data.historia);
-    setVal('anotacoes',    data.anotacoes);
+    setVal('mmIdiomas',     data.mmIdiomas);
+    setVal('mmVeiculosQG',  data.mmVeiculosQG);
+    setVal('idade',         data.idade);
+    setVal('altura',        data.altura);
+    setVal('peso',          data.peso);
+    setVal('olhos',         data.olhos);
+    setVal('cabelo',        data.cabelo);
+    setVal('genero',        data.genero);
+    setVal('aparencia',     data.aparencia);
+    setVal('personalidade', data.personalidade);
+    setVal('motivacao',     data.motivacao);
+    setVal('historia',      data.historia);
+    setVal('anotacoes',     data.anotacoes);
 
-    // Imagem
     if (data.characterImage) {
-        const img = document.getElementById('characterImage');
+        const img         = document.getElementById('characterImage');
         const placeholder = document.getElementById('imagePlaceholder');
-        const removeBtn = document.getElementById('removeImageBtn');
-        if (img) { img.src = data.characterImage; img.style.display = 'block'; }
-        if (placeholder) placeholder.style.display = 'none';
-        if (removeBtn) removeBtn.style.display = 'inline-block';
+        const removeBtn   = document.getElementById('removeImageBtn');
+        if (img)         { img.src = data.characterImage; img.style.display = 'block'; }
+        if (placeholder)   placeholder.style.display = 'none';
+        if (removeBtn)     removeBtn.style.display = 'inline-block';
     }
 
     mmCalculateAll();
 }
 
+// ─────────────────────────────────────────────
+//  AUTO-SAVE
+// ─────────────────────────────────────────────
 function mmSave() {
     const data = mmCollectData();
     localStorage.setItem(MM_STORAGE_KEY, JSON.stringify(data));
 
-    // Lista de fichas salvas
     let list = JSON.parse(localStorage.getItem(MM_LIST_KEY) || '[]');
-    const nome = data.nomeHeroi || 'Herói sem nome';
-    const idx  = list.findIndex(c => c.nome === nome);
+    const nome  = data.nomeHeroi || 'Herói sem nome';
+    const idx   = list.findIndex(c => c.nome === nome);
     const entry = { nome, timestamp: Date.now(), data };
     if (idx >= 0) list[idx] = entry; else list.push(entry);
     localStorage.setItem(MM_LIST_KEY, JSON.stringify(list));
@@ -886,7 +847,7 @@ function mmImportJSON(event) {
 //  MODAL DE CARREGAR
 // ─────────────────────────────────────────────
 function mmShowLoadModal() {
-    const modal = document.getElementById('loadModal');
+    const modal  = document.getElementById('loadModal');
     const listEl = document.getElementById('mmCharacterList');
     if (!modal || !listEl) return;
 
@@ -898,7 +859,7 @@ function mmShowLoadModal() {
     } else {
         list.slice().reverse().forEach(entry => {
             const date = new Date(entry.timestamp).toLocaleString('pt-BR');
-            const row = document.createElement('div');
+            const row  = document.createElement('div');
             row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:10px;border-bottom:1px solid var(--cor10,#ccc);gap:8px;';
             row.innerHTML = `
                 <div>
@@ -923,7 +884,7 @@ function mmHideLoadModal() {
 }
 
 function mmLoadEntry(nome) {
-    const list = JSON.parse(localStorage.getItem(MM_LIST_KEY) || '[]');
+    const list  = JSON.parse(localStorage.getItem(MM_LIST_KEY) || '[]');
     const entry = list.find(c => c.nome === nome);
     if (!entry) return;
     mmApplyData(entry.data);
@@ -940,14 +901,14 @@ function mmDeleteEntry(nome) {
 }
 
 // ─────────────────────────────────────────────
-//  SISTEMA DE ABAS (compatível com o projeto)
+//  SISTEMA DE ABAS
 // ─────────────────────────────────────────────
 function switchTab(tabId) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     const tab = document.getElementById(tabId);
     if (tab) tab.classList.add('active');
-    const idx = parseInt(tabId.replace('tab','')) - 1;
+    const idx  = parseInt(tabId.replace('tab','')) - 1;
     const btns = document.querySelectorAll('.tab-btn');
     if (btns[idx]) btns[idx].classList.add('active');
 }
@@ -964,23 +925,16 @@ function toggleDarkMode() {
 //  INICIALIZAÇÃO
 // ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-    // Renderiza as perícias base na aba 2
     mmRenderBaseSkills();
-
-    // Carrega ficha salva
     mmLoad();
-
-    // Configura upload de imagem
     mmSetupImageUpload();
 
-    // Dark mode
     if (localStorage.getItem('mm_darkMode') === 'true') {
         document.body.classList.add('dark-mode');
         const cb = document.getElementById('toggleDarkMode');
         if (cb) cb.checked = true;
     }
 
-    // Fecha modal ao clicar fora
     window.addEventListener('click', function (e) {
         const modal = document.getElementById('loadModal');
         if (modal && e.target === modal) mmHideLoadModal();

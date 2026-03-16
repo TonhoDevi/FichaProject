@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <base href="/Homebrew-Tatania-RPG/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compêndio de Raças - D&D 5e Homebrew</title>
+    <title>Compêndio de Talentos - D&D 5e Homebrew</title>
 
     <!-- Fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=MedievalSharp&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
     <!-- CSS existente -->
     <link rel="stylesheet" href="css/1-variables.css">
     <link rel="stylesheet" href="css/2-base.css">
     <link rel="stylesheet" href="css/3-components.css">
     <link rel="stylesheet" href="css/4-navbar.css">
-    <link rel="stylesheet" href="css/6-character.css">
-    <link rel="stylesheet" href="css/compendium/races.css">
     <link rel="stylesheet" href="css/8-responsive.css">
-
+    <link rel="stylesheet" href="css/compendium/talents.css">
 </head>
 <body>
 
@@ -30,8 +28,9 @@
             <ul class="navbar-menu">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="html/sheet/character-sheet.html">Ficha de Personagem</a></li>
-                <li><a href="html/compendium/compendium-races.html" class="active">Compêndio de Raças</a></li>
+                <li><a href="html/compendium/compendium-races.html">Compêndio de Raças</a></li>
                 <li><a href="html/compendium/compendium-classes.html">Compêndio de Classes</a></li>
+                <li><a href="html/compendium/compendium-talents.html" class="active">Compêndio de Talentos</a></li>
             </ul>
             <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
         </div>
@@ -41,12 +40,12 @@
          HERO
     ========================================= -->
     <header class="compendio-hero">
-        <span class="hero-rune-left">⚔</span>
-        <span class="hero-rune-right">🐉</span>
-        <span class="hero-eyebrow">Tomo das Origens</span>
-        <h1>Compêndio de Raças</h1>
+        <span class="hero-rune-left">✦</span>
+        <span class="hero-rune-right">✦</span>
+        <span class="hero-eyebrow">Tomo das Capacidades</span>
+        <h1>Compêndio de Talentos</h1>
         <div class="hero-divider"><div class="hero-divider-gem"></div></div>
-        <p>Explore as linhagens, culturas e poderes de cada povo do mundo homebrew</p>
+        <p>Descubra habilidades que definem e diferenciam cada herói do mundo homebrew</p>
     </header>
 
     <!-- =========================================
@@ -56,28 +55,33 @@
         <div class="stats-bar-inner">
             <div class="stat-pill">
                 <span class="stat-pill-icon">📜</span>
-                <span class="stat-pill-num" id="totalRacas">0</span>
-                <span>Raças Totais</span>
-            </div>
-            <div class="stat-pill" style="--c:var(--cat-global)">
-                <span class="stat-pill-icon">🌍</span>
-                <span class="stat-pill-num" id="countGlobal">0</span>
-                <span>Globais</span>
+                <span class="stat-pill-num" id="totalTalentos">0</span>
+                <span>Talentos Totais</span>
             </div>
             <div class="stat-pill">
-                <span class="stat-pill-icon">🌿</span>
-                <span class="stat-pill-num" id="countTribal">0</span>
-                <span>Tribais</span>
+                <span class="stat-pill-icon">🗡️</span>
+                <span class="stat-pill-num" id="countCombate">0</span>
+                <span>Combate</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-pill-icon">🛡️</span>
+                <span class="stat-pill-num" id="countDefesa">0</span>
+                <span>Defesa</span>
             </div>
             <div class="stat-pill">
                 <span class="stat-pill-icon">✨</span>
-                <span class="stat-pill-num" id="countMistica">0</span>
-                <span>Místicas</span>
+                <span class="stat-pill-num" id="countMagia">0</span>
+                <span>Magia</span>
             </div>
             <div class="stat-pill">
-                <span class="stat-pill-icon">🌙</span>
-                <span class="stat-pill-num" id="countSobrenatural">0</span>
-                <span>Sobrenaturais</span>
+                <span class="stat-pill-icon">🎯</span>
+                <span class="stat-pill-num" id="countHabilidade">0</span>
+                <span>Habilidade</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-pill-icon">⚖️</span>
+                <span class="stat-pill-num" id="countGeral">0</span>
+                <span>Geral</span>
             </div>
         </div>
     </div>
@@ -91,19 +95,22 @@
             <!-- Abas de categoria -->
             <div class="category-tabs" role="tablist">
                 <button class="cat-tab active" data-cat="" role="tab">
-                    Todas <span class="cat-count" id="tab-count-all">0</span>
+                    Todos <span class="cat-count" id="tab-count-all">0</span>
                 </button>
-                <button class="cat-tab" data-cat="global" role="tab">
-                    🌍 Globais <span class="cat-count" id="tab-count-global">0</span>
+                <button class="cat-tab" data-cat="combate" role="tab">
+                    🗡️ Combate <span class="cat-count" id="tab-count-combate">0</span>
                 </button>
-                <button class="cat-tab" data-cat="tribal" role="tab">
-                    🌿 Tribais <span class="cat-count" id="tab-count-tribal">0</span>
+                <button class="cat-tab" data-cat="defesa" role="tab">
+                    🛡️ Defesa <span class="cat-count" id="tab-count-defesa">0</span>
                 </button>
-                <button class="cat-tab" data-cat="mistica" role="tab">
-                    ✨ Místicas <span class="cat-count" id="tab-count-mistica">0</span>
+                <button class="cat-tab" data-cat="magia" role="tab">
+                    ✨ Magia <span class="cat-count" id="tab-count-magia">0</span>
                 </button>
-                <button class="cat-tab" data-cat="sobrenatural" role="tab">
-                    🌙 Sobrenaturais <span class="cat-count" id="tab-count-sobrenatural">0</span>
+                <button class="cat-tab" data-cat="habilidade" role="tab">
+                    🎯 Habilidade <span class="cat-count" id="tab-count-habilidade">0</span>
+                </button>
+                <button class="cat-tab" data-cat="geral" role="tab">
+                    ⚖️ Geral <span class="cat-count" id="tab-count-geral">0</span>
                 </button>
             </div>
 
@@ -113,18 +120,17 @@
                     <span class="search-icon">🔍</span>
                     <input
                         type="text"
-                        id="searchRace"
+                        id="searchTalent"
                         class="search-input-v2"
-                        placeholder="Buscar por nome, habilidade ou traço..."
+                        placeholder="Buscar por nome, benefício ou pré-requisito..."
                         autocomplete="off"
                     >
                 </div>
 
-                <select id="filterSize" class="filter-select-v2" title="Filtrar por tamanho">
-                    <option value="">Todos os tamanhos</option>
-                    <option value="pequeno">Pequeno</option>
-                    <option value="medio">Médio</option>
-                    <option value="grande">Grande</option>
+                <select id="filterPrereq" class="filter-select-v2" title="Filtrar por pré-requisito">
+                    <option value="">Todos os talentos</option>
+                    <option value="nao">✅ Sem pré-requisito</option>
+                    <option value="sim">⚠️ Com pré-requisito</option>
                 </select>
 
                 <select id="sortBy" class="filter-select-v2" title="Ordenar por">
@@ -132,19 +138,17 @@
                     <option value="az">A → Z</option>
                     <option value="za">Z → A</option>
                     <option value="categoria">Por categoria</option>
-                    <option value="tamanho">Por tamanho</option>
+                    <option value="prereq">Sem prereq. primeiro</option>
                 </select>
 
-                <!-- Toggle de visualização -->
                 <div class="view-toggle" title="Alternar visualização">
                     <button class="view-btn active" id="viewGrid" onclick="setView('grid')" title="Grade">⊞</button>
                     <button class="view-btn" id="viewList" onclick="setView('list')" title="Lista">☰</button>
                 </div>
             </div>
 
-            <!-- Tags dos filtros ativos -->
+            <!-- Tags de filtros ativos -->
             <div class="active-filters" id="activeFilters"></div>
-
         </div>
     </div>
 
@@ -153,16 +157,16 @@
     ========================================= -->
     <div class="results-header">
         <p class="results-count" id="resultsCount">
-            Mostrando <strong>0</strong> raças
+            Mostrando <strong>0</strong> talentos
         </p>
     </div>
 
     <!-- =========================================
-         GRADE DE RAÇAS
+         GRADE DE TALENTOS
     ========================================= -->
-    <section class="racas-section-v2">
-        <div class="racas-container">
-            <div class="racas-grid-v2" id="racasGrid">
+    <section class="talentos-section">
+        <div class="talentos-container">
+            <div class="talentos-grid" id="talentosGrid">
                 <!-- preenchido pelo JS -->
             </div>
         </div>
@@ -171,47 +175,44 @@
     <!-- =========================================
          MODAL
     ========================================= -->
-    <div class="modal-overlay" id="racaModal" role="dialog" aria-modal="true">
+    <div class="modal-overlay" id="talentModal" role="dialog" aria-modal="true">
         <div class="modal-v2">
 
             <!-- Botão fechar -->
-            <button class="modal-close-btn" onclick="closeRacaModal()" title="Fechar (ESC)">✕</button>
+            <button class="modal-close-btn" onclick="closeTalentModal()" title="Fechar (ESC)">✕</button>
 
-            <!-- Imagem hero do modal -->
-            <div class="modal-hero" id="modalHero">
-                <img id="modalHeroImg" src="" alt="">
-                <div class="modal-hero-gradient"></div>
-                <div class="modal-hero-info">
-                    <h2 class="modal-hero-name" id="modalHeroName"></h2>
-                    <span class="modal-hero-badge" id="modalHeroBadge"></span>
+            <!-- Header com ícone -->
+            <div class="modal-talent-header">
+                <div class="modal-talent-icon-wrap">
+                    <span id="modalTalentIcon">⚔️</span>
+                </div>
+                <div class="modal-talent-info">
+                    <h2 class="modal-hero-name" id="modalTalentName"></h2>
+                    <span class="modal-hero-badge" id="modalTalentBadge"></span>
+                    <p class="modal-prereq-line" id="modalPrereq"></p>
                 </div>
             </div>
 
             <!-- Quick stats -->
-            <div class="modal-quick-stats" id="modalQuickStats">
-                <div class="quick-stat">
-                    <span class="quick-stat-label">Tamanho</span>
-                    <span class="quick-stat-value" id="qsTamanho">—</span>
-                </div>
-                <div class="quick-stat">
-                    <span class="quick-stat-label">Deslocamento</span>
-                    <span class="quick-stat-value" id="qsDeslocamento">—</span>
-                </div>
+            <div class="modal-quick-stats">
                 <div class="quick-stat">
                     <span class="quick-stat-label">Categoria</span>
                     <span class="quick-stat-value" id="qsCategoria">—</span>
                 </div>
                 <div class="quick-stat">
-                    <span class="quick-stat-label">Habilidades</span>
-                    <span class="quick-stat-value" id="qsHabilidades">—</span>
+                    <span class="quick-stat-label">Benefícios</span>
+                    <span class="quick-stat-value" id="qsBeneficios">—</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="quick-stat-label">Pré-requisito</span>
+                    <span class="quick-stat-value" id="qsPrereq">—</span>
                 </div>
             </div>
 
             <!-- Abas -->
             <div class="modal-tabs" id="modalTabs">
-                <button class="modal-tab active" data-tab="geral">📖 Visão Geral</button>
-                <button class="modal-tab" data-tab="tracos">🛡 Traços</button>
-                <button class="modal-tab" data-tab="habilidades">⚔ Habilidades</button>
+                <button class="modal-tab active" data-tab="geral">📖 Descrição</button>
+                <button class="modal-tab" data-tab="beneficios">✦ Benefícios</button>
             </div>
 
             <!-- Corpo com abas -->
@@ -219,11 +220,8 @@
                 <div class="tab-pane active" id="tab-geral">
                     <p class="modal-descricao" id="modalDescricao"></p>
                 </div>
-                <div class="tab-pane" id="tab-tracos">
-                    <ul class="tracos-list" id="modalTracos"></ul>
-                </div>
-                <div class="tab-pane" id="tab-habilidades">
-                    <div class="habilidades-list" id="modalHabilidades"></div>
+                <div class="tab-pane" id="tab-beneficios">
+                    <ul class="tracos-list" id="modalBeneficios"></ul>
                 </div>
             </div>
 
@@ -241,14 +239,15 @@
             <a href="html/sheet/character-sheet.html">Ficha</a>
             <a href="html/compendium/compendium-races.html">Raças</a>
             <a href="html/compendium/compendium-classes.html">Classes</a>
+            <a href="html/compendium/compendium-talents.html">Talentos</a>
         </nav>
     </footer>
 
     <!-- =========================================
          JAVASCRIPT
     ========================================= -->
-    <script src="js/compendium/data-races.js"></script>
-    <script src="js/compendium/compendium-races.js"></script>
+    <script src="js/compendium/data-talents.js"></script>
+    <script src="js/compendium/compendium-talents.js"></script>
     <script src="js/shared/navbar.js"></script>
 
 </body>

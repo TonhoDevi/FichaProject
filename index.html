@@ -3,29 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sistema completo de D&D 5e com fichas interativas e comp�ndio homebrew">
-    <title>🐉 Homebrew - Sistema Completo</title>
+    <meta name="description" content="Sistema completo de D&D 5e com fichas interativas e compêndio homebrew">
+    <title>🐉 Templo de Tatânea - Sistema Completo</title>
     
-    <!-- Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- CSS -->
     <link rel="stylesheet" href="./css/1-variables.css">
     <link rel="stylesheet" href="./css/2-base.css">
     <link rel="stylesheet" href="./css/3-components.css">
     <link rel="stylesheet" href="./css/4-navbar.css">
     <link rel="stylesheet" href="./css/5-home.css">
-    <link rel="stylesheet" href="./css/6-character.css">
     <link rel="stylesheet" href="./css/compendium/races.css">
     <link rel="stylesheet" href="./css/8-responsive.css">
 </head>
 <body>
-    <!-- Navbar -->
+
+    <!-- ═══════════════════════════════════════
+         PANEL: FICHAS
+    ═══════════════════════════════════════ -->
+    <div class="panel-overlay" id="panel-fichas" onclick="closePanel(event, 'panel-fichas')">
+        <div class="tome-panel" role="dialog" aria-modal="true" aria-label="Fichas de Personagem">
+            <button class="tome-close" onclick="closePanelById('panel-fichas')" aria-label="Fechar">✕</button>
+            <div class="tome-header">
+                <span class="tome-header-rune">📜</span>
+                <h2>Fichas de Personagem</h2>
+                <p>Escolha o tipo de ficha para o seu aventureiro</p>
+            </div>
+            <div class="tome-divider"><span>✦</span></div>
+            <div class="tome-grid">
+
+                <a href="./html/sheet/character-sheet.html" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">⚔️</div>
+                    <div class="tome-card-title">Ficha Completa</div>
+                    <div class="tome-card-desc">Todos os atributos, perícias, magias e equipamentos.</div>
+                    <div class="tome-card-arrow">ABRIR →</div>
+                </a>
+
+                <a href="./html/sheet/character-sheet.html#combat" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">🛡️</div>
+                    <div class="tome-card-title">Combate</div>
+                    <div class="tome-card-desc">Ataques, CA, iniciativa, slots de magia e recursos.</div>
+                    <div class="tome-card-arrow">ABRIR →</div>
+                </a>
+
+                <a href="./html/sheet/character-sheet.html#inventory" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">🎒</div>
+                    <div class="tome-card-title">Inventário</div>
+                    <div class="tome-card-desc">Equipamentos, itens mágicos e gestão de moedas.</div>
+                    <div class="tome-card-arrow">ABRIR →</div>
+                </a>
+
+                <a href="./html/sheet/character-sheet.html#spells" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">✨</div>
+                    <div class="tome-card-title">Grimório</div>
+                    <div class="tome-card-desc">Lista de magias, preparadas, conjuradas e truques.</div>
+                    <div class="tome-card-arrow">ABRIR →</div>
+                </a>
+
+                <a href="./html/sheet/character-sheet.html#lore" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">📖</div>
+                    <div class="tome-card-title">História & Lore</div>
+                    <div class="tome-card-desc">Antecedente, personalidade, ideais, vínculos e falhas.</div>
+                    <div class="tome-card-arrow">ABRIR →</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">🐉</div>
+                    <div class="tome-card-title">Ficha de Monstro</div>
+                    <div class="tome-card-desc">Block stat completo para criaturas e NPCs.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">🏰</div>
+                    <div class="tome-card-title">Ficha do Mestre</div>
+                    <div class="tome-card-desc">Encontros, NPCs, recompensas e anotações de sessão.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-wip">WIP</span>
+                    <div class="tome-card-icon">🔮</div>
+                    <div class="tome-card-title">Ficha de Pact Magic</div>
+                    <div class="tome-card-desc">Sistema de magia de pacto para Warlocks e variantes.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         PANEL: COMPÊNDIOS
+    ═══════════════════════════════════════ -->
+    <div class="panel-overlay" id="panel-compendios" onclick="closePanel(event, 'panel-compendios')">
+        <div class="tome-panel" role="dialog" aria-modal="true" aria-label="Compêndios">
+            <button class="tome-close" onclick="closePanelById('panel-compendios')" aria-label="Fechar">✕</button>
+            <div class="tome-header">
+                <span class="tome-header-rune">📚</span>
+                <h2>Compêndios</h2>
+                <p>Toda a sabedoria do mundo de Tatânea reunida</p>
+            </div>
+            <div class="tome-divider"><span>✦</span></div>
+            <div class="tome-grid">
+
+                <a href="./html/compendium/compendium-races.html" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">🧝</div>
+                    <div class="tome-card-title">Raças</div>
+                    <div class="tome-card-desc">Todas as raças homebrew com traços e habilidades raciais.</div>
+                    <div class="tome-card-arrow">VER →</div>
+                </a>
+
+                <a href="./html/compendium/compendium-classes.html" class="tome-card">
+                    <span class="tome-card-badge badge-ready">Pronto</span>
+                    <div class="tome-card-icon">⚔️</div>
+                    <div class="tome-card-title">Classes</div>
+                    <div class="tome-card-desc">Guerreiro, Mago, Ladino e todas as classes disponíveis.</div>
+                    <div class="tome-card-arrow">VER →</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">📿</div>
+                    <div class="tome-card-title">Subclasses</div>
+                    <div class="tome-card-desc">Arquétipos, tradições arcanas e caminhos sagrados.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">✨</div>
+                    <div class="tome-card-title">Magias</div>
+                    <div class="tome-card-desc">Feitiços, truques e magia homebrew por escola e nível.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">⚗️</div>
+                    <div class="tome-card-title">Itens Mágicos</div>
+                    <div class="tome-card-desc">Artefatos, poções, pergaminhos e relíquias de Tatânea.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-soon">Em breve</span>
+                    <div class="tome-card-icon">🐉</div>
+                    <div class="tome-card-title">Bestiário</div>
+                    <div class="tome-card-desc">Criaturas, monstros e feras do mundo homebrew.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-wip">WIP</span>
+                    <div class="tome-card-icon">🌍</div>
+                    <div class="tome-card-title">Lore do Mundo</div>
+                    <div class="tome-card-desc">Cosmologia, divindades, facções e história de Tatânea.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+                <a href="#" class="tome-card" style="pointer-events:none; opacity:0.5;">
+                    <span class="tome-card-badge badge-wip">WIP</span>
+                    <div class="tome-card-icon">🎭</div>
+                    <div class="tome-card-title">Antecedentes</div>
+                    <div class="tome-card-desc">Backgrounds customizados para o cenário homebrew.</div>
+                    <div class="tome-card-arrow">EM BREVE</div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         NAVBAR
+    ═══════════════════════════════════════ -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="./index.html" class="navbar-logo">
-               Templo de Tatânea
-            </a>
+            <a href="./index.html" class="navbar-logo">Templo de Tatânea</a>
             <ul class="navbar-menu">
                 <li><a href="./index.html" class="active">Início</a></li>
                 <li><a href="./html/sheet/character-sheet.html">Ficha de Personagem</a></li>
@@ -36,87 +198,80 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
     <section class="home-hero-section">
         <div class="home-hero-content">
             <h1 class="home-hero-title">Templo de Tatânea</h1>
             <p class="home-hero-subtitle">Sistema Completo de Fichas e Compêndios</p>
             <div class="home-hero-buttons">
-                <a href="./html/sheet/character-sheet.html" class="btn btn-primary btn-large">
-                    Criar Ficha
-                </a>
-                <a href="./html/compendium/compendium-races.html" class="btn btn-secondary btn-large">
-                    Ver Raças
-                </a>
+                <button class="btn-panel btn-panel-primary" onclick="openPanel('panel-fichas')">
+                    📜 &nbsp;Fichas de Personagem
+                </button>
+                <button class="btn-panel btn-panel-secondary" onclick="openPanel('panel-compendios')">
+                    📚 &nbsp;Compêndios
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- ═══════════════════════════════════════
+         FEATURES
+    ═══════════════════════════════════════ -->
     <section class="home-features-section">
         <div class="home-container">
             <h2 class="home-section-title">Funcionalidades</h2>
-            
             <div class="home-features-grid">
                 <div class="home-feature-card">
                     <div class="home-feature-icon">🎲</div>
                     <h3>Ficha Interativa</h3>
                     <p>Sistema completo de ficha de personagem com cálculos automáticos, salvamento local e exportação JSON.</p>
-                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Criar Ficha ?</a>
+                    <a href="#" class="home-feature-link" onclick="openPanel('panel-fichas'); return false;">Ver Fichas →</a>
                 </div>
-
                 <div class="home-feature-card">
                     <div class="home-feature-icon">📚</div>
-                        <h3>Compêndio de Raças</h3>
-                        <p>Todas as raças homebrew com descrições detalhadas, características e habilidades especiais.</p>
-                        <a href="./html/compendium/compendium-races.html" class="home-feature-link">Ver Raças ?</a>
-                    </div>
-
+                    <h3>Compêndio de Raças</h3>
+                    <p>Todas as raças homebrew com descrições detalhadas, características e habilidades especiais.</p>
+                    <a href="#" class="home-feature-link" onclick="openPanel('panel-compendios'); return false;">Ver Compêndios →</a>
+                </div>
                 <div class="home-feature-card">
                     <div class="home-feature-icon">⚔️</div>
                     <h3>Sistema de Combate</h3>
                     <p>Gerencie ataques, magias, slots de magia e recursos de combate de forma intuitiva.</p>
-                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Começar ?</a>
+                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Começar →</a>
                 </div>
-
                 <div class="home-feature-card">
                     <div class="home-feature-icon">🎒</div>
                     <h3>Inventário Avançado</h3>
                     <p>Sistema completo de gerenciamento de equipamentos, itens mágicos e moedas.</p>
-                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Explorar ?</a>
+                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Explorar →</a>
                 </div>
-
                 <div class="home-feature-card">
                     <div class="home-feature-icon">📖</div>
                     <h3>História e Personalidade</h3>
-                    <p>Registre a histria completa do seu personagem, caractersticas e conhecidos importantes.</p>
-                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Criar ?</a>
+                    <p>Registre a história completa do seu personagem, características e conhecidos importantes.</p>
+                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Criar →</a>
                 </div>
-
                 <div class="home-feature-card">
                     <div class="home-feature-icon">💾</div>
                     <h3>Salvar e Exportar</h3>
                     <p>Salve localmente, exporte como JSON ou imprima sua ficha em formato profissional.</p>
-                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Começar ?</a>
+                    <a href="./html/sheet/character-sheet.html" class="home-feature-link">Começar →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ═══════════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════════ -->
     <section class="home-about-section">
         <div class="home-container">
             <h2 class="home-section-title">Sobre o Projeto</h2>
             <div class="home-about-content">
-                <p>
-                    Sistema completo de D&D 5e com foco em conteúdo homebrew. 
-                    Desenvolvido para facilitar a criação e gerenciamento de personagens, 
-                    com interface intuitiva e recursos avançados para jogadores e mestres.
-                </p>
-                <p>
-                    Todas as fichas são salvas localmente no seu navegador e podem ser 
-                    exportadas como arquivos JSON para backup ou compartilhamento.
-                </p>
+                <p>Sistema completo de D&D 5e com foco em conteúdo homebrew. Desenvolvido para facilitar a criação e gerenciamento de personagens, com interface intuitiva e recursos avançados para jogadores e mestres.</p>
+                <p>Todas as fichas são salvas localmente no seu navegador e podem ser exportadas como arquivos JSON para backup ou compartilhamento.</p>
             </div>
         </div>
     </section>
@@ -135,9 +290,50 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script src="./js/shared/navbar.js"></script>
+    <script>
+        // ═══════════════════════════════
+        //  Panel Controls
+        // ═══════════════════════════════
+        function openPanel(id) {
+            const overlay = document.getElementById(id);
+            if (!overlay) return;
+
+            // Reset card animations so they replay on each open
+            const cards = overlay.querySelectorAll('.tome-card');
+            cards.forEach(c => {
+                c.style.animation = 'none';
+                c.offsetHeight; // reflow
+                c.style.animation = '';
+            });
+
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePanelById(id) {
+            const overlay = document.getElementById(id);
+            if (!overlay) return;
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closePanel(event, id) {
+            // Only close if clicking the dark overlay itself, not the panel
+            if (event.target === event.currentTarget) {
+                closePanelById(id);
+            }
+        }
+
+        // ESC key closes any open panel
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.panel-overlay.active').forEach(el => {
+                    el.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
 </body>
 </html>
-
-

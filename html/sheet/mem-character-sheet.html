@@ -9,15 +9,11 @@
     <meta name="theme-color" content="#4a3728">
     <title>Ficha M&M 3e</title>
 
-    <!-- Mesmas fontes do projeto -->
     <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-    <!-- Mesmos CSS do projeto -->
     <link rel="stylesheet" href="css/1-variables.css">
     <link rel="stylesheet" href="css/2-base.css">
-    <link rel="stylesheet" href="css/3-components.css">
     <link rel="stylesheet" href="css/4-navbar.css">
-    <link rel="stylesheet" href="css/5-home.css">
     <link rel="stylesheet" href="css/8-responsive.css">
     <link rel="stylesheet" href="css/9-dice-roller.css">
     <link rel="stylesheet" href="css/10-mutantes-malfeitores.css">
@@ -31,7 +27,7 @@
             <ul class="navbar-menu">
                 <li><a href="index.html">Início</a></li>
                 <li><a href="html/sheet/character-sheet.html">Ficha D&D</a></li>
-                <li><a href="html/sheet/mem-character-sheet.html" class="active">Ficha M&M</a></li>              
+                <li><a href="html/sheet/mem-character-sheet.html" class="active">Ficha M&M</a></li>
                 <li><a href="#" id="openDiceBtn">Dados</a></li>
             </ul>
             <button class="navbar-toggle" onclick="toggleNavbar()">☰</button>
@@ -44,8 +40,7 @@
             <p>Mutantes &amp; Malfeitores 3ª Edição</p>
         </div>
 
-        <input type="file" id="importFileInput" accept=".json" onchange="mmImportJSON(event)" style="display: none;">
-
+        <input type="file" id="importFileInput" accept=".json" onchange="mmImportJSON(event)" style="display:none;">
         <div class="save-indicator" id="saveIndicator">✓ Salvo automaticamente</div>
 
         <!-- ABAS -->
@@ -56,262 +51,399 @@
                 <button class="tab-btn" onclick="switchTab('tab3')">✨ Poderes</button>
                 <button class="tab-btn" onclick="switchTab('tab4')">📖 Descrição</button>
                 <button class="tab-btn" onclick="switchTab('tab5')">⚙️ Sistema</button>
-                <button class="tab-btn" onclick="switchTab('tab6')">✏️ Editar</button>
             </div>
 
             <!-- =============================================
-                 ABA 1 — PRINCIPAL (VISUALIZAÇÃO)
+                 ABA 1 — PRINCIPAL
             ============================================= -->
             <div class="tab-content active" id="tab1">
                 <div class="sheet-container">
 
-                    <!-- Informações Básicas - DISPLAY ONLY -->
-                    <div class="character-info-grid">
-                        <div class="info-display">
-                            <label class="input-label">Nome do Herói / Codinome</label>
-                            <div class="display-value" id="display-nomeHeroi">-</div>
-                        </div>
-                        <div class="info-display">
-                            <label class="input-label">Identidade Secreta</label>
-                            <div class="display-value" id="display-identidade">-</div>
-                        </div>
-                        <div class="info-display">
-                            <label class="input-label">Nome do Jogador</label>
-                            <div class="display-value" id="display-nomeJogador">-</div>
-                        </div>
+                    <!-- Botão de edição -->
+                    <div style="display:flex; justify-content:flex-end; margin-bottom:12px;">
+                        <button class="btn btn-secondary" id="editToggleBtn" onclick="mmToggleEdit()">
+                            ✏️ Editar Ficha
+                        </button>
                     </div>
 
-                    <!-- Segunda linha - DISPLAY ONLY -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 15px; margin-bottom: 20px;">
-                        <div class="info-display">
-                            <label class="input-label">Grupo / Afiliação</label>
-                            <div class="display-value" id="display-grupo">-</div>
-                        </div>
-                        <div class="info-display">
-                            <label class="input-label">Base de Operações</label>
-                            <div class="display-value" id="display-base">-</div>
-                        </div>
-                        <div class="info-display">
-                            <label class="input-label">Origem</label>
-                            <div class="display-value" id="display-origem">-</div>
-                        </div>
+                    <!-- ══════════════════════════════════
+                         SEÇÃO DE EDIÇÃO (oculta por padrão)
+                    ══════════════════════════════════ -->
+                    <div id="editSection" style="display:none;">
 
-                        <!-- Bloco NP / Pontos Heroicos / XP - DISPLAY -->
-                        <div class="bonus-box">
-                            <div class="bonus-item">
-                                <div class="bonus-value-display" id="display-nivelPoder">10</div>
-                                <label class="bonus-label">Nível de Poder</label>
+                        <!-- Informações Básicas -->
+                        <div class="section">
+                            <div class="section-title">Informações Básicas</div>
+                            <div class="character-info-grid">
+                                <div class="input-group">
+                                    <label class="input-label">Nome do Herói / Codinome</label>
+                                    <input type="text" id="nomeHeroi" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Identidade Secreta</label>
+                                    <input type="text" id="identidade" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Nome do Jogador</label>
+                                    <input type="text" id="nomeJogador" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
                             </div>
-                            <div class="bonus-item">
-                                <div class="bonus-value-display" id="display-pontosHeroicos">1</div>
-                                <label class="bonus-label">P. Heroicos</label>
-                            </div>
-                            <div class="bonus-item">
-                                <div class="bonus-value-display" id="display-xp">0</div>
-                                <label class="bonus-label">Experiência</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Combate - DISPLAY -->
-                    <div class="section">
-                        <div class="section-title">⚔️ Combate</div>
-                        
-                        <!-- Linha 1: Vida -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="info-display">
-                                <label class="input-label">Vida Máxima</label>
-                                <div class="display-value" id="display-vidaMaxima">10</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Vida Atual</label>
-                                <div class="display-value" id="display-vidaAtual">10</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Vida Temporária</label>
-                                <div class="display-value" id="display-vidaTemporaria">0</div>
-                            </div>
-                        </div>
-
-                        <!-- Linha 2: Resistências -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;">
-                            <div class="info-display">
-                                <label class="input-label">Resistência Física</label>
-                                <div class="display-value" id="display-resistenciaFisica">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Resistência Mágica</label>
-                                <div class="display-value" id="display-resistenciaMagica">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Resistência Mental</label>
-                                <div class="display-value" id="display-resistenciaMental">0</div>
-                            </div>
-                        </div>
-
-                        <!-- Linha 3: Combate -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;">
-                            <div class="info-display">
-                                <label class="input-label">Esquiva</label>
-                                <div class="display-value" id="display-esquiva">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Iniciativa</label>
-                                <div class="display-value" id="display-iniciativa">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Estado</label>
-                                <div class="display-value" id="display-estado">Normal</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pontos totais - DISPLAY -->
-                    <div class="section">
-                        <div class="section-title">Controle de Pontos</div>
-                        <div class="combat-grid" style="grid-template-columns: repeat(6, 1fr);">
-                            <div class="info-display">
-                                <label class="input-label">Limite (NP×15)</label>
-                                <div class="display-value" id="display-ptLimit">150</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Atributos</label>
-                                <div class="display-value" id="display-ptAtributos">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Defesas</label>
-                                <div class="display-value" id="display-ptDefesas">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Perícias</label>
-                                <div class="display-value" id="display-ptPericias">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Vantagens</label>
-                                <div class="display-value" id="display-ptVantagens">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Poderes</label>
-                                <div class="display-value" id="display-ptPoderes">0</div>
-                            </div>
-                        </div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:8px;">
-                            <div class="info-display">
-                                <label class="input-label">Total Gasto</label>
-                                <div class="display-value" id="display-ptGasto">0</div>
-                            </div>
-                            <div class="info-display">
-                                <label class="input-label">Pontos Restantes</label>
-                                <div class="display-value" id="display-ptRestante">150</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sheet-grid">
-                        <!-- Coluna Esquerda -->
-                        <div>
-                            <!-- Atributos - DISPLAY -->
-                            <div class="section">
-                                <div class="section-title">Atributos</div>
-                                <div class="stats-grid">
-                                    <!-- Força -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Força</div>
-                                        <div class="stat-value" id="display-modForca">+0</div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 2fr; gap:15px; margin-top:15px;">
+                                <div class="input-group">
+                                    <label class="input-label">Grupo / Afiliação</label>
+                                    <input type="text" id="grupo" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Base de Operações</label>
+                                    <input type="text" id="base" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Origem</label>
+                                    <input type="text" id="origem" placeholder="Mutante, Tecnologia..." oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="bonus-box">
+                                    <div class="bonus-item">
+                                        <input type="number" class="bonus-value" id="nivelPoder" value="10" min="1" max="20"
+                                            oninput="mmCalculateAll(); mmAutoSave(); mmUpdateDisplays()">
+                                        <label class="bonus-label">Nível de Poder</label>
                                     </div>
-                                    <!-- Vigor -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Vigor</div>
-                                        <div class="stat-value" id="display-modVigor">+0</div>
+                                    <div class="bonus-item">
+                                        <input type="number" class="bonus-value" id="pontosHeroicos" value="1" min="0"
+                                            oninput="mmAutoSave(); mmUpdateDisplays()">
+                                        <label class="bonus-label">P. Heroicos</label>
                                     </div>
-                                    <!-- Agilidade -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Agilidade</div>
-                                        <div class="stat-value" id="display-modAgilidade">+0</div>
-                                    </div>
-                                    <!-- Destreza -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Destreza</div>
-                                        <div class="stat-value" id="display-modDestreza">+0</div>
-                                    </div>
-                                    <!-- Luta -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Luta</div>
-                                        <div class="stat-value" id="display-modLuta">+0</div>
-                                    </div>
-                                    <!-- Intelecto -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Intelecto</div>
-                                        <div class="stat-value" id="display-modIntelecto">+0</div>
-                                    </div>
-                                    <!-- Percepção (Awareness) -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Percepção</div>
-                                        <div class="stat-value" id="display-modPercepao">+0</div>
-                                    </div>
-                                    <!-- Presença -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Presença</div>
-                                        <div class="stat-value" id="display-modPresenca">+0</div>
+                                    <div class="bonus-item">
+                                        <input type="number" class="bonus-value" id="xp" value="0" min="0"
+                                            oninput="mmAutoSave(); mmUpdateDisplays()">
+                                        <label class="bonus-label">Experiência</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Coluna Direita -->
-                        <div>
-                            <!-- Defesas - DISPLAY -->
-                            <div class="section">
-                                <div class="section-title">Defesas</div>
+                        <!-- Vida & Estado -->
+                        <div class="section">
+                            <div class="section-title">⚔️ Vida & Estado</div>
+                            <div class="combat-grid" style="grid-template-columns:repeat(3,1fr);">
+                                <div class="input-group">
+                                    <label class="input-label">Vida Atual</label>
+                                    <input type="number" id="vidaAtual" value="10" min="0"
+                                        oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Vida Temporária</label>
+                                    <input type="number" id="vidaTemporaria" value="0" min="0"
+                                        oninput="mmAutoSave(); mmUpdateDisplays()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Estado</label>
+                                    <select id="estado" oninput="mmAutoSave(); mmUpdateDisplays()">
+                                        <option value="Normal">Normal</option>
+                                        <option value="Enjoado">Enjoado</option>
+                                        <option value="Aterrorizado">Aterrorizado</option>
+                                        <option value="Paralisado">Paralisado</option>
+                                        <option value="Incapacitado">Incapacitado</option>
+                                        <option value="Morto">Morto</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                                <!-- Cabeçalho das colunas -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:6px; margin-bottom:4px; padding: 0 2px;">
-                                    <div style="font-size:0.7em; opacity:0.6; font-weight:600;">Defesa</div>
-                                    <div style="font-size:0.7em; opacity:0.6; font-weight:600; text-align:center;">Total</div>
-                                </div>
-
-                                <!-- Esquiva -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Esquiva</label>
-                                    <div class="display-value" style="text-align:center;" id="display-defEsquivaTotal">+0</div>
-                                </div>
-                                <!-- Resistência Física -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Física</label>
-                                    <div class="display-value" style="text-align:center;" id="display-defFisica">10</div>
-                                </div>
-                                <!-- Resistência Mental -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Mental</label>
-                                    <div class="display-value" style="text-align:center;" id="display-defMental">10</div>
-                                </div>
-                                <!-- Resistência Elemental -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Elemental</label>
-                                    <div class="display-value" style="text-align:center;" id="display-defElemental">10</div>
+                        <div class="sheet-grid">
+                            <!-- Coluna Esquerda — Atributos -->
+                            <div>
+                                <div class="section">
+                                    <div class="section-title">Atributos <small style="font-size:0.7em;opacity:0.7;">(Custo: valor × 2 pts)</small></div>
+                                    <div class="stats-grid">
+                                        <div class="stat-box">
+                                            <div class="stat-label">Força</div>
+                                            <input type="number" class="stat-input" id="atForca" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Vigor</div>
+                                            <input type="number" class="stat-input" id="atVigor" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Agilidade</div>
+                                            <input type="number" class="stat-input" id="atAgilidade" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Destreza</div>
+                                            <input type="number" class="stat-input" id="atDestreza" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Luta</div>
+                                            <input type="number" class="stat-input" id="atLuta" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Intelecto</div>
+                                            <input type="number" class="stat-input" id="atIntelecto" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Percepção</div>
+                                            <input type="number" class="stat-input" id="atPercepao" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="stat-box">
+                                            <div class="stat-label">Presença</div>
+                                            <input type="number" class="stat-input" id="atPresenca" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Combate - DISPLAY -->
-                            <div class="section">
-                                <div class="section-title">Combate</div>
-                                <div class="combat-grid">
-                                    <div class="info-display">
-                                        <label class="input-label">Iniciativa</label>
-                                        <div class="display-value" id="display-iniciativa">+0</div>
+                            <!-- Coluna Direita — Defesas & Combate -->
+                            <div>
+                                <div class="section">
+                                    <div class="section-title">Defesas <small style="font-size:0.7em;opacity:0.7;">(Custo: valor em pts)</small></div>
+
+                                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-bottom:4px;padding:0 2px;">
+                                        <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Defesa</div>
+                                        <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Ranks</div>
+                                        <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Misc</div>
                                     </div>
-                                    <div class="info-display">
-                                        <label class="input-label">Bônus Corp. a Corp.</label>
-                                        <div class="display-value" id="display-bonusCorpoCorpo">+0</div>
+
+                                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                        <label class="input-label" style="margin:0;">Esquiva</label>
+                                        <input type="number" id="defEsquivaRanks" value="0" min="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                        <input type="number" id="defEsquivaMisc" value="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
                                     </div>
-                                    <div class="info-display">
-                                        <label class="input-label">Bônus À Distância</label>
-                                        <div class="display-value" id="display-bonusDistancia">+0</div>
+                                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                        <label class="input-label" style="margin:0;">Resistência Física</label>
+                                        <input type="number" id="defFisicaRanks" value="0" min="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                        <input type="number" id="defFisicaMisc" value="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                        <label class="input-label" style="margin:0;">Resistência Mental</label>
+                                        <input type="number" id="defMentalRanks" value="0" min="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                        <input type="number" id="defMentalMisc" value="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                    </div>
+                                    <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                        <label class="input-label" style="margin:0;">Resistência Elemental</label>
+                                        <input type="number" id="defElementalRanks" value="0" min="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                        <input type="number" id="defElementalMisc" value="0"
+                                            oninput="mmCalculateAll(); mmAutoSave()"
+                                            style="text-align:center;padding:4px;border-radius:4px;">
+                                    </div>
+                                </div>
+
+                                <div class="section">
+                                    <div class="section-title">Combate</div>
+                                    <div class="combat-grid">
+                                        <div class="input-group">
+                                            <label class="input-label">Bônus Extra C.C.</label>
+                                            <input type="number" id="extraBonusCC" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Bônus Extra Dist.</label>
+                                            <input type="number" id="extraBonusDist" value="0"
+                                                oninput="mmCalculateAll(); mmAutoSave()">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><!-- /editSection -->
+
+                    <!-- ══════════════════════════════════
+                         SEÇÃO DE VISUALIZAÇÃO
+                    ══════════════════════════════════ -->
+                    <div id="displaySection">
+
+                        <!-- Informações Básicas -->
+                        <div class="character-info-grid">
+                            <div class="info-display">
+                                <label class="input-label">Nome do Herói / Codinome</label>
+                                <div class="display-value" id="display-nomeHeroi">-</div>
+                            </div>
+                            <div class="info-display">
+                                <label class="input-label">Identidade Secreta</label>
+                                <div class="display-value" id="display-identidade">-</div>
+                            </div>
+                            <div class="info-display">
+                                <label class="input-label">Nome do Jogador</label>
+                                <div class="display-value" id="display-nomeJogador">-</div>
+                            </div>
+                        </div>
+
+                        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 2fr;gap:15px;margin-bottom:20px;">
+                            <div class="info-display">
+                                <label class="input-label">Grupo / Afiliação</label>
+                                <div class="display-value" id="display-grupo">-</div>
+                            </div>
+                            <div class="info-display">
+                                <label class="input-label">Base de Operações</label>
+                                <div class="display-value" id="display-base">-</div>
+                            </div>
+                            <div class="info-display">
+                                <label class="input-label">Origem</label>
+                                <div class="display-value" id="display-origem">-</div>
+                            </div>
+                            <div class="bonus-box">
+                                <div class="bonus-item">
+                                    <div class="bonus-value-display" id="display-nivelPoder">10</div>
+                                    <label class="bonus-label">Nível de Poder</label>
+                                </div>
+                                <div class="bonus-item">
+                                    <div class="bonus-value-display" id="display-pontosHeroicos">1</div>
+                                    <label class="bonus-label">P. Heroicos</label>
+                                </div>
+                                <div class="bonus-item">
+                                    <div class="bonus-value-display" id="display-xp">0</div>
+                                    <label class="bonus-label">Experiência</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Controle de Pontos -->
+                        <div class="section">
+                            <div class="section-title">Controle de Pontos</div>
+                            <div class="combat-grid" style="grid-template-columns:repeat(6,1fr);">
+                                <div class="info-display">
+                                    <label class="input-label">Limite (NP×15)</label>
+                                    <div class="display-value" id="display-ptLimit">150</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Atributos</label>
+                                    <div class="display-value" id="display-ptAtributos">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Defesas</label>
+                                    <div class="display-value" id="display-ptDefesas">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Perícias</label>
+                                    <div class="display-value" id="display-ptPericias">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Vantagens</label>
+                                    <div class="display-value" id="display-ptVantagens">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Poderes</label>
+                                    <div class="display-value" id="display-ptPoderes">0</div>
+                                </div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                                <div class="info-display">
+                                    <label class="input-label">Total Gasto</label>
+                                    <div class="display-value" id="display-ptGasto">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Pontos Restantes</label>
+                                    <div class="display-value" id="display-ptRestante">150</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Atributos -->
+                        <div class="section">
+                            <div class="section-title">Atributos</div>
+                            <div class="stats-grid">
+                                <div class="stat-box"><div class="stat-label">Força</div><div class="stat-value" id="display-modForca">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Vigor</div><div class="stat-value" id="display-modVigor">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Agilidade</div><div class="stat-value" id="display-modAgilidade">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Destreza</div><div class="stat-value" id="display-modDestreza">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Luta</div><div class="stat-value" id="display-modLuta">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Intelecto</div><div class="stat-value" id="display-modIntelecto">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Percepção</div><div class="stat-value" id="display-modPercepao">+0</div></div>
+                                <div class="stat-box"><div class="stat-label">Presença</div><div class="stat-value" id="display-modPresenca">+0</div></div>
+                            </div>
+                        </div>
+
+                        <!-- Combate -->
+                        <div class="section">
+                            <div class="section-title">⚔️ Combate</div>
+                            <div class="combat-grid" style="grid-template-columns:repeat(3,1fr);">
+                                <div class="info-display">
+                                    <label class="input-label">Vida Máxima</label>
+                                    <div class="display-value" id="display-vidaMaxima">10</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Vida Atual</label>
+                                    <div class="display-value" id="display-vidaAtual">10</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Vida Temporária</label>
+                                    <div class="display-value" id="display-vidaTemporaria">0</div>
+                                </div>
+                            </div>
+                            <div class="combat-grid" style="grid-template-columns:repeat(3,1fr);margin-top:15px;">
+                                <div class="info-display">
+                                    <label class="input-label">Esquiva</label>
+                                    <div class="display-value" id="display-esquiva">+0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Estado</label>
+                                    <div class="display-value" id="display-estado">Normal</div>
+                                </div>
+                            </div>
+                            <div class="combat-grid" style="grid-template-columns:repeat(3,1fr);margin-top:15px;">
+                                <div class="info-display">
+                                    <label class="input-label">Deslocamento de Caminhada</label>
+                                    <div class="display-value" id="display-velocidade">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Deslocamento de Voo</label>
+                                    <div class="display-value" id="display-voo">0</div>
+                                </div>
+                                <div class="info-display">
+                                    <label class="input-label">Deslocamento de Natação</label>
+                                    <div class="display-value" id="display-natacao">0</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Defesas -->
+                        <div class="section">
+                            <div class="section-title">Defesas</div>
+                            <div style="display:grid;grid-template-columns:2fr 1fr;gap:6px;margin-bottom:4px;padding:0 2px;">
+                                <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Defesa</div>
+                                <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Total</div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:2fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                <label class="input-label" style="margin:0;">Esquiva</label>
+                                <div class="display-value" style="text-align:center;" id="display-defEsquivaTotal">+0</div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:2fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                <label class="input-label" style="margin:0;">Resistência Física</label>
+                                <div class="display-value" style="text-align:center;" id="display-defFisica">10</div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:2fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                <label class="input-label" style="margin:0;">Resistência Mental</label>
+                                <div class="display-value" style="text-align:center;" id="display-defMental">10</div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:2fr 1fr;gap:6px;align-items:center;margin-bottom:6px;">
+                                <label class="input-label" style="margin:0;">Resistência Elemental</label>
+                                <div class="display-value" style="text-align:center;" id="display-defElemental">10</div>
+                            </div>
+                        </div>
+
+                    </div><!-- /displaySection -->
+
                 </div>
             </div>
 
@@ -326,17 +458,18 @@
                             <div class="section">
                                 <div class="section-title">Perícias <small style="font-size:0.7em;opacity:0.7;">(1 pt = 2 ranks)</small></div>
 
-                                <!-- Cabeçalho -->
-                                <div style="display:grid; grid-template-columns: 2.5fr 0.8fr 0.8fr 0.8fr; gap:6px; margin-bottom:6px; padding:0 2px;">
+                                <!-- Cabeçalho — 5 colunas, igual ao grid do JS -->
+                                <div style="display:grid;grid-template-columns:2.5fr 0.5fr 0.8fr 0.8fr 0.8fr;gap:6px;margin-bottom:6px;padding:0 2px;">
                                     <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Perícia</div>
-                                    <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Atrib.</div>
+                                    <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Attr.</div>
+                                    <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Base</div>
                                     <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Ranks</div>
                                     <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Total</div>
                                 </div>
 
                                 <div id="mmSkillsList"></div>
 
-                                <!-- Perícias extras (Especialização / Expertise) -->
+                                <!-- Especializações -->
                                 <div style="margin-top:12px;">
                                     <div class="section-title" style="font-size:0.85em;">Especializações de Especialidade</div>
                                     <div id="mmExtraSkillsList"></div>
@@ -353,7 +486,6 @@
                                 <button class="btn btn-secondary" onclick="mmAddAdvantage()" style="width:100%;margin-top:10px;">+ Adicionar Vantagem</button>
                             </div>
 
-                            <!-- Proficiências / Idiomas -->
                             <div class="section">
                                 <div class="section-title">Idiomas & Proficiências</div>
                                 <textarea id="mmIdiomas" oninput="mmAutoSave()" placeholder="Idiomas conhecidos, proficiências especiais..."></textarea>
@@ -372,15 +504,12 @@
                     <!-- Ataques -->
                     <div class="section">
                         <div class="section-title">Ataques</div>
-
-                        <!-- Cabeçalho -->
-                        <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap:6px; margin-bottom:4px; padding:0 2px;">
+                        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 2fr;gap:6px;margin-bottom:4px;padding:0 2px;">
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Nome</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Bônus</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Alcance</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Efeito / Resistência</div>
                         </div>
-
                         <div class="attack-list" id="mmAttackList"></div>
                         <button class="btn btn-secondary" onclick="mmAddAttack()" style="width:100%;margin-top:10px;">+ Adicionar Ataque</button>
                     </div>
@@ -388,16 +517,13 @@
                     <!-- Poderes -->
                     <div class="section">
                         <div class="section-title">Poderes</div>
-
-                        <!-- Cabeçalho -->
-                        <div style="display:grid; grid-template-columns: 2fr 1fr 0.7fr 3fr 0.5fr; gap:6px; margin-bottom:4px; padding:0 2px;">
+                        <div style="display:grid;grid-template-columns:2fr 1fr 0.7fr 3fr 0.5fr;gap:6px;margin-bottom:4px;padding:0 2px;">
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Nome</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Rank</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">Custo</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Descrição / Modificadores</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">✕</div>
                         </div>
-
                         <div id="mmPowersList"></div>
                         <button class="btn btn-secondary" onclick="mmAddPower()" style="width:100%;margin-top:10px;">+ Adicionar Poder</button>
                     </div>
@@ -405,15 +531,12 @@
                     <!-- Equipamentos -->
                     <div class="section">
                         <div class="section-title">Equipamentos <small style="font-size:0.7em;opacity:0.7;">(5 itens EP = 1 pt Vantagem Equipamento)</small></div>
-
-                        <!-- Cabeçalho -->
-                        <div style="display:grid; grid-template-columns: 2fr 0.8fr 3fr 0.5fr; gap:6px; margin-bottom:4px; padding:0 2px;">
+                        <div style="display:grid;grid-template-columns:2fr 0.8fr 3fr 0.5fr;gap:6px;margin-bottom:4px;padding:0 2px;">
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Nome</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">EP</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;">Propriedades</div>
                             <div style="font-size:0.7em;opacity:0.6;font-weight:600;text-align:center;">✕</div>
                         </div>
-
                         <div id="mmEquipList"></div>
                         <button class="btn btn-secondary" onclick="mmAddEquip()" style="width:100%;margin-top:10px;">+ Adicionar Equipamento</button>
                     </div>
@@ -432,7 +555,6 @@
             <div class="tab-content" id="tab4">
                 <div class="sheet-container">
 
-                    <!-- Imagem e Detalhes -->
                     <div class="section">
                         <div class="sheet-grid-details">
                             <!-- Imagem -->
@@ -458,38 +580,18 @@
                             <div>
                                 <div class="section-title">Detalhes Físicos</div>
                                 <div class="combat-grid">
-                                    <div class="input-group">
-                                        <label class="input-label">Idade</label>
-                                        <input type="text" id="idade" oninput="mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Altura</label>
-                                        <input type="text" id="altura" oninput="mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Peso</label>
-                                        <input type="text" id="peso" oninput="mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Olhos</label>
-                                        <input type="text" id="olhos" oninput="mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Cabelo</label>
-                                        <input type="text" id="cabelo" oninput="mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Gênero</label>
-                                        <input type="text" id="genero" oninput="mmAutoSave()">
-                                    </div>
+                                    <div class="input-group"><label class="input-label">Idade</label><input type="text" id="idade" oninput="mmAutoSave()"></div>
+                                    <div class="input-group"><label class="input-label">Altura</label><input type="text" id="altura" oninput="mmAutoSave()"></div>
+                                    <div class="input-group"><label class="input-label">Peso</label><input type="text" id="peso" oninput="mmAutoSave()"></div>
+                                    <div class="input-group"><label class="input-label">Olhos</label><input type="text" id="olhos" oninput="mmAutoSave()"></div>
+                                    <div class="input-group"><label class="input-label">Cabelo</label><input type="text" id="cabelo" oninput="mmAutoSave()"></div>
+                                    <div class="input-group"><label class="input-label">Gênero</label><input type="text" id="genero" oninput="mmAutoSave()"></div>
                                 </div>
-
                                 <div class="input-group" style="margin-top:10px;">
                                     <label class="input-label">Aparência</label>
                                     <textarea id="aparencia" oninput="mmAutoSave()" style="min-height:80px;" placeholder="Descrição física detalhada..."></textarea>
                                 </div>
-
-                                <div class="combat-grid" style="grid-template-columns: 1fr 1fr; margin-top:10px;">
+                                <div class="combat-grid" style="grid-template-columns:1fr 1fr;margin-top:10px;">
                                     <div class="input-group">
                                         <label class="input-label">Personalidade</label>
                                         <textarea id="personalidade" oninput="mmAutoSave()" style="min-height:80px;" placeholder="Como o herói age e pensa..."></textarea>
@@ -506,7 +608,7 @@
                     <!-- Complicações -->
                     <div class="section">
                         <div class="section-title">Complicações</div>
-                        <p style="font-size:0.8em; opacity:0.7; margin-bottom:8px;">Complicações são a fonte dos Pontos Heroicos. Cada complicação deve ter um tipo e uma descrição.</p>
+                        <p style="font-size:0.8em;opacity:0.7;margin-bottom:8px;">Complicações são a fonte dos Pontos Heroicos. Cada complicação deve ter um tipo e uma descrição.</p>
                         <div id="mmComplicationsList"></div>
                         <button class="btn btn-secondary" onclick="mmAddComplication()" style="width:100%;margin-top:10px;">+ Adicionar Complicação</button>
                     </div>
@@ -542,7 +644,7 @@
                             <div class="section">
                                 <div class="section-title">Ações Rápidas</div>
                                 <div class="section-content">
-                                    <div class="controls" style="flex-direction:column; gap:10px;">
+                                    <div class="controls" style="flex-direction:column;gap:10px;">
                                         <button class="btn btn-secondary" onclick="mmSave()">💾 Salvar</button>
                                         <button class="btn btn-danger" onclick="mmNewSheet()">➕ Nova Ficha</button>
                                         <button class="btn btn-primary" onclick="mmExportJSON()">💾 Baixar Ficha (.json)</button>
@@ -559,272 +661,6 @@
                                 <div class="section-content">
                                     <div class="input-group">
                                         <label><input type="checkbox" id="toggleDarkMode" onchange="toggleDarkMode()"> Modo Escuro</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- =============================================
-                 ABA 6 — EDITAR
-            ============================================= -->
-            <div class="tab-content" id="tab6">
-                <div class="sheet-container">
-
-                    <!-- Informações Básicas - EDIÇÃO -->
-                    <div class="section">
-                        <div class="section-title">Informações Básicas</div>
-                        <div class="character-info-grid">
-                            <div class="input-group">
-                                <label class="input-label">Nome do Herói / Codinome</label>
-                                <input type="text" id="nomeHeroi" oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Identidade Secreta</label>
-                                <input type="text" id="identidade" oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Nome do Jogador</label>
-                                <input type="text" id="nomeJogador" oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                        </div>
-
-                        <!-- Segunda linha -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 15px; margin-bottom: 20px; margin-top: 15px;">
-                            <div class="input-group">
-                                <label class="input-label">Grupo / Afiliação</label>
-                                <input type="text" id="grupo" oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Base de Operações</label>
-                                <input type="text" id="base" oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Origem</label>
-                                <input type="text" id="origem" placeholder="Mutante, Tecnologia..." oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-
-                            <!-- Bloco NP / Pontos Heroicos / XP -->
-                            <div class="bonus-box">
-                                <div class="bonus-item">
-                                    <input type="number" class="bonus-value" id="nivelPoder" value="10" min="1" max="20"
-                                        oninput="mmCalculateAll(); mmAutoSave(); mmUpdateDisplays()">
-                                    <label class="bonus-label">Nível de Poder</label>
-                                </div>
-                                <div class="bonus-item">
-                                    <input type="number" class="bonus-value" id="pontosHeroicos" value="1" min="0"
-                                        oninput="mmAutoSave(); mmUpdateDisplays()">
-                                    <label class="bonus-label">P. Heroicos</label>
-                                </div>
-                                <div class="bonus-item">
-                                    <input type="number" class="bonus-value" id="xp" value="0" min="0"
-                                        oninput="mmAutoSave(); mmUpdateDisplays()">
-                                    <label class="bonus-label">Experiência</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Combate - EDIÇÃO -->
-                    <div class="section">
-                        <div class="section-title">⚔️ Combate</div>
-                        
-                        <!-- Linha 1: Vida -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="input-group">
-                                <label class="input-label">Vida Máxima</label>
-                                <input type="number" id="vidaMaxima" value="10" min="1"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Vida Atual</label>
-                                <input type="number" id="vidaAtual" value="10" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Vida Temporária</label>
-                                <input type="number" id="vidaTemporaria" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                        </div>
-
-                        <!-- Linha 2: Resistências -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;">
-                            <div class="input-group">
-                                <label class="input-label">Resistência Física</label>
-                                <input type="number" id="resistenciaFisica" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Resistência Mágica</label>
-                                <input type="number" id="resistenciaMagica" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Resistência Mental</label>
-                                <input type="number" id="resistenciaMental" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                        </div>
-
-                        <!-- Linha 3: Combate -->
-                        <div class="combat-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 15px;">
-                            <div class="input-group">
-                                <label class="input-label">Esquiva</label>
-                                <input type="number" id="esquiva" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Iniciativa</label>
-                                <input type="number" id="iniciativa" value="0" min="0"
-                                    oninput="mmAutoSave(); mmUpdateDisplays()">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">Estado</label>
-                                <select id="estado" oninput="mmAutoSave(); mmUpdateDisplays()">
-                                    <option value="Normal">Normal</option>
-                                    <option value="Enjoado">Enjoado</option>
-                                    <option value="Aterrorizado">Aterrorizado</option>
-                                    <option value="Paralisado">Paralisado</option>
-                                    <option value="Incapacitado">Incapacitado</option>
-                                    <option value="Morto">Morto</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="sheet-grid">
-                        <!-- Coluna Esquerda -->
-                        <div>
-                            <!-- Atributos - EDIÇÃO -->
-                            <div class="section">
-                                <div class="section-title">Atributos <small style="font-size:0.7em;opacity:0.7;">(Custo: valor × 2 pts)</small></div>
-                                <div class="stats-grid">
-                                    <!-- Força -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Força</div>
-                                        <input type="number" class="stat-input" id="atForca" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Vigor -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Vigor</div>
-                                        <input type="number" class="stat-input" id="atVigor" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Agilidade -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Agilidade</div>
-                                        <input type="number" class="stat-input" id="atAgilidade" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Destreza -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Destreza</div>
-                                        <input type="number" class="stat-input" id="atDestreza" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Luta -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Luta</div>
-                                        <input type="number" class="stat-input" id="atLuta" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Intelecto -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Intelecto</div>
-                                        <input type="number" class="stat-input" id="atIntelecto" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Percepção (Awareness) -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Percepção</div>
-                                        <input type="number" class="stat-input" id="atPercepao" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <!-- Presença -->
-                                    <div class="stat-box">
-                                        <div class="stat-label">Presença</div>
-                                        <input type="number" class="stat-input" id="atPresenca" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Coluna Direita -->
-                        <div>
-                            <!-- Defesas - EDIÇÃO -->
-                            <div class="section">
-                                <div class="section-title">Defesas <small style="font-size:0.7em;opacity:0.7;">(Custo: valor em pts)</small></div>
-
-                                <!-- Cabeçalho das colunas -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:6px; margin-bottom:4px; padding: 0 2px;">
-                                    <div style="font-size:0.7em; opacity:0.6; font-weight:600;">Defesa</div>
-                                    <div style="font-size:0.7em; opacity:0.6; font-weight:600; text-align:center;">Ranks</div>
-                                    <div style="font-size:0.7em; opacity:0.6; font-weight:600; text-align:center;">Misc</div>
-                                </div>
-
-                                <!-- Esquiva (CA) -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Esquiva</label>
-                                    <input type="number" id="defEsquivaRanks" value="0" min="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                    <input type="number" id="defEsquivaMisc" value="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                </div>
-
-                                <!-- Resistência Física -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Física</label>
-                                    <input type="number" id="defFisicaRanks" value="0" min="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                    <input type="number" id="defFisicaMisc" value="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                </div>
-
-                                <!-- Resistência Mental -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Mental</label>
-                                    <input type="number" id="defMentalRanks" value="0" min="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                    <input type="number" id="defMentalMisc" value="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                </div>
-
-                                <!-- Resistência Elemental -->
-                                <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:6px; align-items:center; margin-bottom:6px;">
-                                    <label class="input-label" style="margin:0;">Resistência Elemental</label>
-                                    <input type="number" id="defElementalRanks" value="0" min="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                    <input type="number" id="defElementalMisc" value="0"
-                                        oninput="mmCalculateAll(); mmAutoSave()"
-                                        style="text-align:center;padding:4px;border-radius:4px;">
-                                </div>
-                            </div>
-
-                            <!-- Combate - EDIÇÃO -->
-                            <div class="section">
-                                <div class="section-title">Combate</div>
-                                <div class="combat-grid">
-                                    <div class="input-group">
-                                        <label class="input-label">Bônus Extra C.C.</label>
-                                        <input type="number" id="extraBonusCC" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
-                                    </div>
-                                    <div class="input-group">
-                                        <label class="input-label">Bônus Extra Dist.</label>
-                                        <input type="number" id="extraBonusDist" value="0"
-                                            oninput="mmCalculateAll(); mmAutoSave()">
                                     </div>
                                 </div>
                             </div>
@@ -861,11 +697,11 @@
                     </div>
                     <label>Tipo</label>
                     <div class="dice-type-buttons" id="diceType">
-                        <button class="die-btn die-d4" data-sides="4">d4</button>
-                        <button class="die-btn die-d6" data-sides="6">d6</button>
-                        <button class="die-btn die-d8" data-sides="8">d8</button>
-                        <button class="die-btn die-d10" data-sides="10">d10</button>
-                        <button class="die-btn die-d12" data-sides="12">d12</button>
+                        <button class="die-btn die-d4"   data-sides="4">d4</button>
+                        <button class="die-btn die-d6"   data-sides="6">d6</button>
+                        <button class="die-btn die-d8"   data-sides="8">d8</button>
+                        <button class="die-btn die-d10"  data-sides="10">d10</button>
+                        <button class="die-btn die-d12"  data-sides="12">d12</button>
                         <button class="die-btn die-d20 active" data-sides="20">d20</button>
                         <button class="die-btn die-d100" data-sides="100">d100</button>
                     </div>
@@ -895,11 +731,8 @@
         </div>
     </footer>
 
-    <!-- JavaScript compartilhado -->
     <script src="js/shared/navbar.js"></script>
     <script src="js/shared/dice-roller.js"></script>
-
-    <!-- JavaScript da ficha M&M -->
     <script src="js/character/mm-character.js"></script>
 </body>
 </html>

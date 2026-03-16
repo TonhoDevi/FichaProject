@@ -1,0 +1,1003 @@
+/* ============================================================
+   COMPÊNDIO DE TALENTOS — ESTILOS
+   Arquivo: css/compendium/talents.css
+
+   Herda a estrutura visual de races.css.
+   Sem cores hardcoded — tudo via variáveis de 1-variables.css.
+
+   ÍNDICE:
+   1.  Reset & Body
+   2.  Hero do Compêndio
+   3.  Barra de Estatísticas
+   4.  Painel de Filtros
+   5.  Abas de Categoria
+   6.  Controles de Filtro
+   7.  Tags de Filtros Ativos
+   8.  Contador de Resultados
+   9.  Grid de Talentos
+   10. Card de Talento
+   11. Modo Lista
+   12. Modal — Overlay & Container
+   13. Modal — Header / Quick Stats
+   14. Modal — Abas & Corpo
+   15. Rodapé
+   16. Animações
+   17. Responsivo
+============================================================ */
+
+/* ============================================================
+   1. RESET & BODY
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+    background-color: var(--cor1);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%,
+            var(--transp-marrom) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+    min-height: 100vh;
+    font-family: 'Crimson Text', Georgia, serif;
+    color: var(--cor8);
+}
+
+/* ============================================================
+   2. HERO DO COMPÊNDIO
+============================================================ */
+.compendio-hero {
+    position: relative;
+    padding: 80px 20px 60px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.compendio-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 60% 80% at 50% 0%,
+        var(--brilho-crimson-medio) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.hero-rune-left,
+.hero-rune-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    opacity: .04;
+    color: var(--cor3);
+    pointer-events: none;
+    user-select: none;
+}
+.hero-rune-left  { left: 2%; }
+.hero-rune-right { right: 2%; }
+
+.hero-eyebrow {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: .72rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--cor3);
+    margin-bottom: 12px;
+    opacity: .8;
+}
+
+.compendio-hero h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    color: var(--cor19);
+    line-height: 1.1;
+    margin: 0 0 16px;
+    text-shadow:
+        0 0 40px var(--sombra-crimson),
+        0 2px 8px var(--sombra-preta);
+    letter-spacing: .04em;
+}
+
+.hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0 auto 18px;
+    max-width: 420px;
+}
+.hero-divider::before,
+.hero-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+}
+.hero-divider::before { background: linear-gradient(90deg, transparent, var(--cor14)); }
+.hero-divider::after  { background: linear-gradient(90deg, var(--cor14), transparent); }
+
+.hero-divider-gem {
+    width: 8px;
+    height: 8px;
+    background: var(--cor3);
+    transform: rotate(45deg);
+    box-shadow: 0 0 8px var(--cor3);
+}
+
+.compendio-hero p {
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--cor10);
+    margin: 0;
+}
+
+/* ============================================================
+   3. BARRA DE ESTATÍSTICAS
+============================================================ */
+.stats-bar {
+    background: linear-gradient(180deg, var(--cor5) 0%, var(--cor1) 100%);
+    border-top: 1px solid var(--cor11);
+    border-bottom: 1px solid var(--cor11);
+    padding: 14px 20px;
+}
+
+.stats-bar-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--brilho-crimson-medio);
+    border: 1px solid var(--brilho-crimson-forte);
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    color: var(--cor3);
+}
+.stat-pill-icon { font-size: 1rem; }
+.stat-pill-num  { font-size: 1rem; font-weight: 700; color: var(--cor19); }
+
+/* ============================================================
+   4. PAINEL DE FILTROS
+============================================================ */
+.filtros-panel {
+    background: var(--cor5);
+    border-bottom: 2px solid var(--cor11);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px var(--sombra-preta);
+}
+
+.filtros-panel-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================================
+   5. ABAS DE CATEGORIA
+============================================================ */
+.category-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--cor11);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.cat-tab {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 14px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--cor10);
+    cursor: pointer;
+    position: relative;
+    transition: color .25s ease;
+    white-space: nowrap;
+}
+.cat-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 2px;
+    background: var(--cor3);
+    transform: scaleX(0);
+    transition: transform .25s ease;
+}
+.cat-tab:hover        { color: var(--cor8); }
+.cat-tab.active       { color: var(--cor19); }
+.cat-tab.active::after{ transform: scaleX(1); }
+
+.cat-count {
+    display: inline-block;
+    background: var(--brilho-crimson-medio);
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-size: .65rem;
+    margin-left: 5px;
+    color: var(--cor3);
+}
+.cat-tab.active .cat-count { background: var(--brilho-crimson-forte); }
+
+/* ============================================================
+   6. CONTROLES DE FILTRO
+============================================================ */
+.filter-controls {
+    padding: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-wrap {
+    position: relative;
+    flex: 1;
+    min-width: 220px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--cor10);
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.search-input-v2 {
+    width: 100%;
+    background: var(--brilho-vermelho-leve);
+    border: 1px solid var(--cor11);
+    border-radius: 6px;
+    padding: 9px 12px 9px 36px;
+    color: var(--cor8);
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+.search-input-v2::placeholder { color: var(--cor10); }
+.search-input-v2:focus {
+    border-color: var(--cor14);
+    box-shadow: 0 0 0 3px var(--brilho-crimson-medio);
+}
+
+.filter-select-v2 {
+    background-color: var(--brilho-vermelho-leve);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239c8055'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    border: 1px solid var(--cor11);
+    border-radius: 6px;
+    padding: 9px 32px 9px 12px;
+    color: var(--cor8);
+    font-family: 'Cinzel', serif;
+    font-size: .72rem;
+    letter-spacing: .05em;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    transition: border-color .25s ease;
+}
+.filter-select-v2 option { background: var(--cor15); }
+.filter-select-v2:focus  { border-color: var(--cor14); }
+
+.view-toggle {
+    display: flex;
+    gap: 2px;
+    background: var(--transp-preto);
+    border: 1px solid var(--cor11);
+    border-radius: 6px;
+    padding: 3px;
+    flex-shrink: 0;
+}
+
+.view-btn {
+    background: none;
+    border: none;
+    padding: 5px 10px;
+    color: var(--cor10);
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: color .25s ease, background .25s ease;
+}
+.view-btn:hover { color: var(--cor8); }
+.view-btn.active {
+    background: var(--brilho-crimson-forte);
+    color: var(--cor3);
+}
+
+/* ============================================================
+   7. TAGS DE FILTROS ATIVOS
+============================================================ */
+.active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0 0 10px;
+}
+.active-filters:empty { display: none; }
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--brilho-crimson-medio);
+    border: 1px solid var(--brilho-crimson-forte);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-family: 'Crimson Text', serif;
+    font-size: .85rem;
+    color: var(--cor3);
+    animation: tagIn .2s ease;
+}
+
+.filter-tag-remove {
+    background: none;
+    border: none;
+    color: var(--cor14);
+    cursor: pointer;
+    font-size: .9rem;
+    padding: 0;
+    line-height: 1;
+    transition: color .25s ease;
+}
+.filter-tag-remove:hover { color: var(--cor19); }
+
+.clear-filters-btn {
+    background: none;
+    border: 1px solid var(--transp-vermelho);
+    border-radius: 20px;
+    padding: 3px 12px;
+    color: var(--cor7);
+    font-family: 'Cinzel', serif;
+    font-size: .65rem;
+    letter-spacing: .08em;
+    cursor: pointer;
+    transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.clear-filters-btn:hover {
+    background: var(--brilho-vermelho-medio);
+    color: var(--cor19);
+    border-color: var(--cor7);
+}
+
+/* ============================================================
+   8. CONTADOR DE RESULTADOS
+============================================================ */
+.results-header {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+}
+
+.results-count {
+    font-family: 'Cinzel', serif;
+    font-size: .72rem;
+    letter-spacing: .1em;
+    color: var(--cor10);
+}
+.results-count strong {
+    color: var(--cor3);
+    font-size: .9rem;
+}
+
+.no-results {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--cor10);
+    font-family: 'Crimson Text', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+}
+.no-results-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+    opacity: .4;
+}
+
+/* ============================================================
+   9. SEÇÃO E GRID DE TALENTOS
+============================================================ */
+.talentos-section {
+    padding: 20px 20px 60px;
+}
+
+.talentos-container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.talentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.talentos-grid.list-view {
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+/* ============================================================
+   10. CARD DE TALENTO — MODO GRADE
+============================================================ */
+.talent-card {
+    background: linear-gradient(160deg, var(--cor15) 0%, var(--cor5) 100%);
+    border: 1px solid var(--cor11);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    overflow: hidden;
+    position: relative;
+    animation: cardIn .3s ease both;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Reflexo no topo */
+.talent-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, var(--brilho-crimson-leve) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Barra de categoria */
+.talent-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    z-index: 1;
+}
+.talent-card[data-cat="combate"]::after    { background: var(--cor-cat-tribal);      }
+.talent-card[data-cat="defesa"]::after     { background: var(--cor-cat-global);      }
+.talent-card[data-cat="magia"]::after      { background: var(--cor-cat-mistica);     }
+.talent-card[data-cat="habilidade"]::after { background: var(--cor-cat-sobrenatural);}
+.talent-card[data-cat="geral"]::after      { background: var(--cor14);               }
+
+.talent-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px var(--sombra-preta), 0 0 0 1px var(--cor14);
+    border-color: var(--cor14);
+}
+
+/* Header com ícone */
+.talent-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 16px 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.talent-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px var(--sombra-preta));
+}
+
+.talent-cat-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: .58rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+}
+
+/* Badges por categoria */
+.talent-card[data-cat="combate"] .talent-cat-badge {
+    background: var(--cor-cat-tribal-bg);
+    border: 1px solid var(--cor-cat-tribal);
+    color: var(--cor-cat-tribal-text);
+}
+.talent-card[data-cat="defesa"] .talent-cat-badge {
+    background: var(--cor-cat-global-bg);
+    border: 1px solid var(--cor-cat-global);
+    color: var(--cor-cat-global-text);
+}
+.talent-card[data-cat="magia"] .talent-cat-badge {
+    background: var(--cor-cat-mistica-bg);
+    border: 1px solid var(--cor-cat-mistica);
+    color: var(--cor-cat-mistica-text);
+}
+.talent-card[data-cat="habilidade"] .talent-cat-badge {
+    background: var(--cor-cat-sob-bg);
+    border: 1px solid var(--cor-cat-sobrenatural);
+    color: var(--cor-cat-sobrenatural-text);
+}
+.talent-card[data-cat="geral"] .talent-cat-badge {
+    background: var(--brilho-crimson-medio);
+    border: 1px solid var(--cor14);
+    color: var(--cor3);
+}
+
+/* Corpo */
+.talent-card-body {
+    padding: 0 16px 16px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.talent-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cor19);
+    margin: 0 0 8px;
+    line-height: 1.2;
+}
+
+.talent-prereq {
+    font-family: 'Crimson Text', serif;
+    font-size: .82rem;
+    color: var(--cor10);
+    font-style: italic;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+.talent-prereq--none {
+    color: var(--cor-cat-global-text, #5fbd8e);
+    font-style: normal;
+    font-size: .8rem;
+}
+
+.talent-desc {
+    font-family: 'Crimson Text', serif;
+    font-size: .92rem;
+    color: var(--cor10);
+    line-height: 1.5;
+    margin-bottom: 14px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.talent-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.talent-bcount {
+    font-family: 'Cinzel', serif;
+    font-size: .62rem;
+    letter-spacing: .06em;
+    color: var(--cor10);
+}
+
+.card-btn {
+    background: none;
+    border: 1px solid var(--brilho-crimson-forte);
+    border-radius: 4px;
+    padding: 5px 14px;
+    color: var(--cor3);
+    font-family: 'Cinzel', serif;
+    font-size: .65rem;
+    letter-spacing: .1em;
+    cursor: pointer;
+    transition: background .25s ease, border-color .25s ease;
+    white-space: nowrap;
+}
+.card-btn:hover {
+    background: var(--brilho-crimson-forte);
+    border-color: var(--cor3);
+}
+
+/* ============================================================
+   11. CARD — MODO LISTA
+============================================================ */
+.talentos-grid.list-view .talent-card {
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.talentos-grid.list-view .talent-card-header {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    flex-shrink: 0;
+    padding: 12px 10px;
+    border-right: 1px solid var(--cor11);
+    gap: 6px;
+}
+
+.talentos-grid.list-view .talent-icon {
+    font-size: 1.8rem;
+}
+
+.talentos-grid.list-view .talent-cat-badge {
+    font-size: .5rem;
+    text-align: center;
+}
+
+.talentos-grid.list-view .talent-card-body {
+    padding: 12px 16px;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.talentos-grid.list-view .talent-name    { margin-bottom: 0; flex: 1; font-size: .9rem; }
+.talentos-grid.list-view .talent-prereq  { display: none; }
+.talentos-grid.list-view .talent-desc    { display: none; }
+.talentos-grid.list-view .talent-card-footer { margin-top: 0; }
+.talentos-grid.list-view .talent-bcount  { display: none; }
+
+/* ============================================================
+   12. MODAL — OVERLAY & CONTAINER
+============================================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--transp-preto-total);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .3s ease, visibility .3s ease;
+}
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-v2 {
+    background: linear-gradient(160deg, var(--cor15) 0%, var(--cor1) 100%);
+    border: 1px solid var(--cor11);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 680px;
+    max-height: 88vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 24px 80px var(--sombra-preta-forte),
+        0 0 0 1px var(--brilho-crimson-medio);
+    transform: translateY(20px) scale(.97);
+    transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+}
+.modal-overlay.active .modal-v2 {
+    transform: translateY(0) scale(1);
+}
+
+/* ============================================================
+   13. MODAL — HEADER / QUICK STATS
+============================================================ */
+.modal-talent-header {
+    position: relative;
+    padding: 32px 24px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid var(--cor11);
+    flex-shrink: 0;
+    background: linear-gradient(160deg, var(--brilho-crimson-medio) 0%, transparent 60%);
+}
+
+.modal-talent-icon-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--transp-preto);
+    border: 2px solid var(--cor14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 24px var(--sombra-crimson);
+}
+
+.modal-talent-info { flex: 1; }
+
+.modal-hero-name {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.8rem;
+    color: var(--cor19);
+    line-height: 1.1;
+    text-shadow: 0 2px 12px var(--sombra-preta-forte);
+    margin: 0 0 8px;
+}
+
+.modal-hero-badge {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: .68rem;
+    letter-spacing: .12em;
+    display: inline-block;
+}
+
+/* Badge cores por categoria */
+.talent-badge--combate    { background: var(--cor-cat-tribal-bg);   border: 1px solid var(--cor-cat-tribal);      color: var(--cor-cat-tribal-text);       }
+.talent-badge--defesa     { background: var(--cor-cat-global-bg);   border: 1px solid var(--cor-cat-global);      color: var(--cor-cat-global-text);       }
+.talent-badge--magia      { background: var(--cor-cat-mistica-bg);  border: 1px solid var(--cor-cat-mistica);     color: var(--cor-cat-mistica-text);      }
+.talent-badge--habilidade { background: var(--cor-cat-sob-bg);      border: 1px solid var(--cor-cat-sobrenatural);color: var(--cor-cat-sobrenatural-text); }
+.talent-badge--geral      { background: var(--brilho-crimson-medio);border: 1px solid var(--cor14);               color: var(--cor3);                      }
+
+.modal-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--transp-preto);
+    border: 1px solid var(--brilho-crimson-forte);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    color: var(--cor8);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+    z-index: 2;
+}
+.modal-close-btn:hover {
+    background: var(--brilho-crimson-forte);
+    border-color: var(--cor3);
+    color: var(--cor3);
+}
+
+/* Pré-requisito no header */
+.modal-prereq-line {
+    font-family: 'Crimson Text', serif;
+    font-size: .9rem;
+    color: var(--cor10);
+    margin-top: 8px;
+}
+.prereq-label { color: var(--cor3); font-weight: 600; }
+.prereq-none  { color: var(--cor-cat-global-text, #5fbd8e); }
+
+/* Quick stats */
+.modal-quick-stats {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--cor11);
+    flex-shrink: 0;
+}
+
+.quick-stat {
+    flex: 1;
+    min-width: 100px;
+    padding: 10px 16px;
+    text-align: center;
+    border-right: 1px solid var(--cor11);
+}
+.quick-stat:last-child { border-right: none; }
+
+.quick-stat-label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: .6rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--cor10);
+    margin-bottom: 3px;
+}
+
+.quick-stat-value {
+    display: block;
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    color: var(--cor19);
+    font-weight: 600;
+}
+
+/* ============================================================
+   14. MODAL — ABAS & CORPO
+============================================================ */
+.modal-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--cor11);
+    flex-shrink: 0;
+    background: var(--transp-preto);
+}
+
+.modal-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--cor10);
+    cursor: pointer;
+    position: relative;
+    transition: color .25s ease;
+}
+.modal-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20%; right: 20%;
+    height: 2px;
+    background: var(--cor3);
+    transform: scaleX(0);
+    transition: transform .25s ease;
+}
+.modal-tab:hover       { color: var(--cor8); }
+.modal-tab.active      { color: var(--cor19); }
+.modal-tab.active::after { transform: scaleX(1); }
+
+.modal-body {
+    overflow-y: auto;
+    flex: 1;
+    padding: 20px;
+}
+.modal-body::-webkit-scrollbar       { width: 6px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--cor11); border-radius: 3px; }
+
+.tab-pane        { display: none; animation: fadeIn .2s ease; }
+.tab-pane.active { display: block; }
+
+.modal-descricao {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.08rem;
+    color: var(--cor13);
+    line-height: 1.75;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Lista de benefícios */
+.tracos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.traco-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: var(--transp-preto);
+    border: 1px solid var(--brilho-crimson-medio);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: 'Crimson Text', serif;
+    font-size: 1rem;
+    color: var(--cor13);
+    line-height: 1.5;
+    transition: border-color .25s ease;
+}
+.traco-item:hover { border-color: var(--brilho-crimson-forte); }
+
+.traco-bullet {
+    color: var(--cor3);
+    font-size: .7rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+/* ============================================================
+   15. RODAPÉ
+============================================================ */
+.footer-v2 {
+    background: var(--cor1);
+    border-top: 1px solid var(--cor11);
+    padding: 28px 20px;
+    text-align: center;
+}
+.footer-v2 p {
+    font-family: 'Crimson Text', serif;
+    font-size: .9rem;
+    color: var(--cor10);
+    margin: 0 0 12px;
+}
+.footer-links-v2 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.footer-links-v2 a {
+    font-family: 'Cinzel', serif;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    color: var(--cor14);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color .25s ease;
+}
+.footer-links-v2 a:hover { color: var(--cor3); }
+
+/* ============================================================
+   16. ANIMAÇÕES
+============================================================ */
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0);   }
+}
+@keyframes tagIn {
+    from { opacity: 0; transform: scale(.85); }
+    to   { opacity: 1; transform: scale(1);   }
+}
+
+/* ============================================================
+   17. RESPONSIVO
+============================================================ */
+@media (max-width: 900px) {
+    .talentos-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+@media (max-width: 600px) {
+    .cat-tab { padding: 12px 14px; font-size: .65rem; }
+    .filter-controls { gap: 8px; }
+    .search-wrap { min-width: 100%; order: -1; }
+    .talentos-grid { grid-template-columns: 1fr; }
+
+    .modal-talent-header { flex-direction: column; text-align: center; padding: 40px 16px 16px; }
+    .modal-talent-icon-wrap { width: 60px; height: 60px; font-size: 2rem; }
+    .modal-hero-name { font-size: 1.5rem; }
+
+    .modal-quick-stats { flex-wrap: wrap; }
+    .quick-stat { min-width: 50%; border-bottom: 1px solid var(--cor11); }
+
+    .hero-rune-left, .hero-rune-right { display: none; }
+    .stats-bar-inner { gap: 10px; }
+    .stat-pill { padding: 5px 12px; font-size: .65rem; }
+}
+
+@media (max-width: 420px) {
+    .modal-tab { padding: 10px 6px; font-size: .6rem; letter-spacing: .05em; }
+    .talentos-grid.list-view .talent-card-header { width: 70px; }
+}
