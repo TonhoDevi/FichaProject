@@ -21,8 +21,7 @@
 /* ════════════════════════════════════════════════════════════
    01. INFORMAÇÕES GERAIS
 ════════════════════════════════════════════════════════════ */
-.character-info-grid,
-.info-grid {
+.character-info-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
@@ -32,15 +31,13 @@
 /* ════════════════════════════════════════════════════════════
    02. ATRIBUTOS
 ════════════════════════════════════════════════════════════ */
-.character-stats-grid,
-.stats-grid {
+.character-stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
 }
 
-.character-attribute-box,
-.stat-box {
+.character-attribute-box {
     text-align: center;
     padding: 14px 10px;
     background: linear-gradient(160deg, #0c1040, #080b24);
@@ -54,8 +51,7 @@
         inset 0 0 16px rgba(60, 40, 140, 0.08);
 }
 
-.character-attribute-box:hover,
-.stat-box:hover {
+.character-attribute-box:hover {
     border-color: rgba(200, 188, 232, 0.70);
     box-shadow:
         0 0 25px rgba(100, 80, 200, 0.30),
@@ -63,8 +59,7 @@
     transform: translateY(-1px);
 }
 
-.character-attribute-box.proficient,
-.stat-box.proficient {
+.character-attribute-box.proficient {
     background: linear-gradient(160deg, #1a0d42, #0e0828);
     border: 2px solid rgba(180, 144, 240, 0.70);
     box-shadow:
@@ -73,8 +68,7 @@
 }
 
 /* Check de proficiência */
-.character-proficiency-check,
-.stat-prof-check {
+.character-proficiency-check {
     appearance: none;
     position: absolute;
     top: 47.5px;
@@ -88,15 +82,13 @@
     transition: all 0.3s ease;
 }
 
-.character-proficiency-check:checked,
-.stat-prof-check:checked {
+.character-proficiency-check:checked {
     background: rgba(100, 80, 200, 0.55);
     border-color: rgba(200, 188, 232, 0.80);
     transform: rotate(180deg);
 }
 
-.character-proficiency-check:checked::after,
-.stat-prof-check:checked::after {
+.character-proficiency-check:checked::after {
     content: '⚔';
     position: absolute;
     top: 50%;
@@ -107,8 +99,7 @@
 }
 
 /* Labels e valores dos atributos */
-.character-attribute-label,
-.stat-label {
+.character-attribute-label {
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -118,8 +109,7 @@
     font-family: 'Cinzel', serif;
 }
 
-.character-attribute-input,
-.stat-input {
+.character-attribute-input {
     text-align: center;
     margin-bottom: 6px;
     font-size: 2.0rem;
@@ -134,8 +124,7 @@
     text-shadow: 0 0 10px rgba(140, 110, 240, 0.40);
 }
 
-.character-attribute-modifier,
-.stat-value {
+.character-attribute-modifier {
     font-size: 1.8rem;
     font-weight: 700;
     font-family: 'Cinzel', serif;
@@ -143,8 +132,7 @@
     text-shadow: 0 0 12px rgba(140, 110, 240, 0.50);
 }
 
-.character-saving-throw,
-.stat-save {
+.character-saving-throw {
     font-size: 0.95rem;
     color: var(--cosmos-text-dim);
     margin-top: 4px;
@@ -161,15 +149,13 @@
 /* ════════════════════════════════════════════════════════════
    03. PERÍCIAS
 ════════════════════════════════════════════════════════════ */
-.character-skills-grid,
-.skills-grid {
+.character-skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 6px;
 }
 
-.character-skill-item,
-.skill-item {
+.character-skill-item {
     display: flex;
     align-items: center;
     gap: 7px;
@@ -180,14 +166,12 @@
     transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.character-skill-item:hover,
-.skill-item:hover {
+.character-skill-item:hover {
     background: rgba(15, 19, 50, 0.85);
     border-left-color: rgba(200, 188, 232, 0.75);
 }
 
-.character-skill-prof-select,
-.skill-prof-select {
+.character-skill-prof-select {
     width: auto;
     min-width: 90px;
     padding: 4px 8px;
@@ -198,15 +182,13 @@
     color: var(--cosmos-text-dim);
 }
 
-.character-skill-name,
-.skill-name {
+.character-skill-name {
     flex: 1;
     font-size: 1.05rem;
     color: var(--cosmos-text);
 }
 
-.character-skill-value,
-.skill-value {
+.character-skill-value {
     font-weight: 700;
     font-size: 1.05rem;
     color: var(--cosmos-silver);
@@ -221,8 +203,7 @@
 ════════════════════════════════════════════════════════════ */
 
 /* ── Container das linhas de widgets ── */
-.character-combat-row,
-.combat-hero-row {
+.character-combat-row {
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -231,8 +212,7 @@
     flex-wrap: wrap;
 }
 
-.character-combat-stat,
-.combat-hero-stat {
+.character-combat-stat {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -240,8 +220,7 @@
 }
 
 /* ── Shape wrapper ── */
-.character-combat-shape,
-.combat-hero-shape {
+.character-combat-shape {
     position: relative;
     display: flex;
     align-items: center;
@@ -250,8 +229,7 @@
 }
 
 /* ── SVG shape-bg ── */
-.character-combat-shape svg.shape-bg,
-.combat-hero-shape svg.shape-bg {
+.character-combat-shape svg.shape-bg {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 100%;
@@ -259,15 +237,13 @@
     transition: filter 0.25s ease, transform 0.2s ease;
 }
 
-.character-combat-shape:hover svg.shape-bg,
-.combat-hero-shape:hover svg.shape-bg {
+.character-combat-shape:hover svg.shape-bg {
     filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.80));
     transform: translateY(-2px);
 }
 
 /* ── Shape inner (conteúdo) ── */
-.character-combat-shape .shape-inner,
-.combat-hero-shape .shape-inner {
+.character-combat-shape .shape-inner {
     position: relative;
     z-index: 2;
     display: flex;
@@ -322,8 +298,7 @@
 }
 
 /* ── Labels abaixo dos widgets ── */
-.character-combat-label,
-.combat-hero-label {
+.character-combat-label {
     font-family: 'Cinzel', serif;
     font-size: 0.65em;
     font-weight: 700;
@@ -339,65 +314,34 @@
 }
 
 /* ── Tamanhos das formas ── */
-.character-heart-main,
 .shape-vida       { width: 138px; height: 130px; }
-
-.character-heart-max,
 .shape-vida-max   { width: 80px;  height: 79px;  }
-
-.character-heart-temp,
 .shape-vida-temp  { width: 80px;  height: 79px;  }
-
-.character-shield-shape,
 .shape-ca         { width: 108px; height: 122px; }
-
-.character-lightning-shape,
 .shape-init       { width: 86px;  height: 122px; }
 
 /* ── Ordenação dos corações ── */
-.character-combat-stat.small-heart,
-.combat-hero-stat.small-heart {
-    align-self: center;
-}
+.character-combat-stat.small-heart { align-self: center; }
+.character-combat-stat.main-heart  { align-self: flex-end; order: 1; }
 
-.character-combat-stat.main-heart,
-.combat-hero-stat.main-heart {
-    align-self: flex-end;
-    order: 1;
-}
+.character-combat-row .small-heart:first-child { order: 0; }
+.character-combat-row .small-heart:last-child  { order: 2; }
 
-.character-combat-row .small-heart:first-child,
-.combat-hero-row .small-heart:first-child {
-    order: 0;
-}
-
-.character-combat-row .small-heart:last-child,
-.combat-hero-row .small-heart:last-child {
-    order: 2;
-}
-
-.small-val {
-    font-size: 1.2em !important;
-}
+.small-val { font-size: 1.2em !important; }
 
 /* ── Glow on focus ── */
-.shape-ca .hero-main-val:focus,
 .shape-ca .character-combat-value:focus {
     text-shadow: 0 0 14px #90c8ff, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
-.shape-vida .hero-main-val:focus,
 .shape-vida .character-combat-value:focus {
     text-shadow: 0 0 14px #ff9090, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
-.shape-vida-max .hero-main-val:focus,
 .shape-vida-max .character-combat-value:focus {
     text-shadow: 0 0 12px #70b0f0, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
-.shape-vida-temp .hero-main-val:focus,
 .shape-vida-temp .character-combat-value:focus {
     text-shadow: 0 0 12px #f5d070, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
-.shape-init .hero-main-val:focus,
 .shape-init .character-combat-value:focus {
     text-shadow: 0 0 14px #ffe080, 0 2px 4px rgba(0,0,0,0.8) !important;
 }
@@ -414,8 +358,7 @@
 /* ════════════════════════════════════════════════════════════
    05. DESLOCAMENTO
 ════════════════════════════════════════════════════════════ */
-.character-displacement-grid,
-.displacement-grid {
+.character-displacement-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
@@ -423,8 +366,7 @@
 }
 
 @media (max-width: 768px) {
-    .character-displacement-grid,
-    .displacement-grid {
+    .character-displacement-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
@@ -432,8 +374,7 @@
 /* ════════════════════════════════════════════════════════════
    06. ATAQUES
 ════════════════════════════════════════════════════════════ */
-.character-attack-list,
-.attack-list {
+.character-attack-list {
     margin-top: 10px;
 }
 
@@ -448,8 +389,7 @@
 /* ════════════════════════════════════════════════════════════
    07. HABILIDADES
 ════════════════════════════════════════════════════════════ */
-.character-abilities-list,
-.abilities-list {
+.character-abilities-list {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -470,41 +410,37 @@
 /* ════════════════════════════════════════════════════════════
    08. MOEDAS / INVENTÁRIO
 ════════════════════════════════════════════════════════════ */
-.character-currency-grid,
-.moedas-grid {
+.character-currency-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-top: 10px;
 }
 
-.character-currency-item,
-.moeda-item {
+.character-currency-item {
     position: relative;
 }
 
-.moeda-item .input-label {
+.character-currency-item .input-label {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.character-currency-icon,
-.moeda-icon {
+.character-currency-icon {
     width: 18px;
     height: 18px;
     clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     display: inline-block;
 }
 
-.moeda-icon.cobre    { background: linear-gradient(135deg, #b87333, #8b4513); }
-.moeda-icon.prata    { background: linear-gradient(135deg, #c0c0c0, #808080); }
-.moeda-icon.electrum { background: linear-gradient(135deg, #4ff974, #376f24); }
-.moeda-icon.ouro     { background: linear-gradient(135deg, #ffd700, #daa520); }
-.moeda-icon.platina  { background: linear-gradient(135deg, #1cfcfc, #a8a8a8); }
+.character-currency-icon.cobre    { background: linear-gradient(135deg, #b87333, #8b4513); }
+.character-currency-icon.prata    { background: linear-gradient(135deg, #c0c0c0, #808080); }
+.character-currency-icon.electrum { background: linear-gradient(135deg, #4ff974, #376f24); }
+.character-currency-icon.ouro     { background: linear-gradient(135deg, #ffd700, #daa520); }
+.character-currency-icon.platina  { background: linear-gradient(135deg, #1cfcfc, #a8a8a8); }
 
-.character-inventory-list,
-.inventory-list {
+.character-inventory-list {
     margin-top: 10px;
 }
 
@@ -532,8 +468,7 @@
 /* ════════════════════════════════════════════════════════════
    09. ITENS MÁGICOS
 ════════════════════════════════════════════════════════════ */
-.character-magic-items-list,
-.magic-items-list {
+.character-magic-items-list {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -670,7 +605,7 @@
    10. SISTEMA DE MAGIAS
 ════════════════════════════════════════════════════════════ */
 
-/* ── Seção de Truques (com duplo prefixo "character-character-") ── */
+/* ── Seção de Truques (nível 0) ── */
 .character-character-spell-level-section {
     background: rgba(8, 11, 30, 0.55);
     border: 1px solid rgba(80, 65, 160, 0.30);
@@ -729,25 +664,26 @@
 
 .character-character-spell-expand-btn.active { transform: rotate(180deg); }
 
-/* ── Grid de slots de magia ── */
-.character-spell-slots-grid,
-.spell-slots-grid {
+/* ── Grid de slots de magia (níveis 1–9)
+   ATENÇÃO: o HTML usa .character-character-spell-slots-grid
+   Mantemos ambos os nomes para compatibilidade.
+═══════════════════════════════════════════════════════════ */
+.character-character-spell-slots-grid,
+.character-spell-slots-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
     margin-top: 20px;
 }
 
-.character-spell-level-section,
-.spell-level-section {
+.character-spell-level-section {
     background: rgba(8, 11, 30, 0.55);
     border: 1px solid rgba(80, 65, 160, 0.28);
     border-radius: 0;
     overflow: hidden;
 }
 
-.character-spell-level-header,
-.spell-level-header {
+.character-spell-level-header {
     padding: 11px 14px;
     background: linear-gradient(135deg, rgba(18,22,56,0.90), rgba(9,13,36,0.95));
     cursor: pointer;
@@ -757,21 +693,18 @@
     transition: all 0.3s ease;
 }
 
-.character-spell-level-header:hover,
-.spell-level-header:hover {
+.character-spell-level-header:hover {
     background: linear-gradient(135deg, rgba(24,28,66,0.95), rgba(14,18,50,0.98));
 }
 
-.character-spell-level-info,
-.spell-level-info {
+.character-spell-level-info {
     display: flex;
     flex-direction: column;
     gap: 7px;
     flex: 1;
 }
 
-.character-spell-level-title,
-.spell-level-title {
+.character-spell-level-title {
     font-family: 'Cinzel', serif;
     font-size: 0.90rem;
     font-weight: 700;
@@ -780,17 +713,14 @@
     letter-spacing: 1px;
 }
 
-.character-spell-slots,
-.spell-slots {
+.character-spell-slots {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
 .character-slot-current,
-.character-slot-max,
-.slot-current,
-.slot-max {
+.character-slot-max {
     width: 50px;
     text-align: center;
     padding: 5px;
@@ -802,15 +732,13 @@
     border-radius: 0;
 }
 
-.character-slot-separator,
-.slot-separator {
+.character-slot-separator {
     color: var(--cosmos-text-dim);
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-.character-spell-expand-btn,
-.spell-expand-btn {
+.character-spell-expand-btn {
     background: transparent;
     border: none;
     color: var(--cosmos-silver);
@@ -820,32 +748,24 @@
     transition: transform 0.3s ease;
 }
 
-.character-spell-expand-btn.active,
-.spell-expand-btn.active {
-    transform: rotate(180deg);
-}
+.character-spell-expand-btn.active { transform: rotate(180deg); }
 
-.character-spell-level-content,
-.spell-level-content {
+.character-spell-level-content {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
 }
 
-.character-spell-level-content.active,
-.spell-level-content.active {
-    max-height: 2000px;
-}
+.character-spell-level-content.active { max-height: 2000px; }
 
-.character-spell-list,
-.spell-list {
+.character-spell-list {
     padding: 14px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-/* ── Spell cards ── */
+/* ── Spell cards (gerados por JS) ── */
 .spell-card {
     background: rgba(5, 8, 22, 0.55);
     border: 1px solid rgba(80, 65, 160, 0.28);
@@ -1066,8 +986,7 @@
 /* ════════════════════════════════════════════════════════════
    12. INDIVÍDUOS / CONHECIDOS
 ════════════════════════════════════════════════════════════ */
-.character-individuals-list,
-.individuals-list {
+.character-individuals-list {
     margin-top: 10px;
     display: flex;
     flex-direction: column;

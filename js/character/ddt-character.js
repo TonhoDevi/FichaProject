@@ -64,16 +64,16 @@ function initSkills() {
     list.innerHTML = '';
     SKILLS.forEach(skill => {
         const div = document.createElement('div');
-        div.className = 'skill-item';
+        div.className = 'character-skill-item';
         div.innerHTML = `
-            <select class="skill-prof-select" id="skillProf_${skill.name}"
+            <select class="character-skill-prof-select" id="skillProf_${skill.name}"
                 onchange="updateSkillProf('${skill.name}', this.value)">
                 <option value="none">-</option>
                 <option value="proficient">Prof</option>
                 <option value="expert">Esp</option>
             </select>
-            <span class="skill-name">${skill.name}</span>
-            <span class="skill-value" id="skillValue_${skill.name}">+0</span>`;
+            <span class="character-skill-name">${skill.name}</span>
+            <span class="character-skill-value" id="skillValue_${skill.name}">+0</span>`;
         list.appendChild(div);
     });
 }

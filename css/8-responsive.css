@@ -29,15 +29,17 @@
         color: var(--impressao-preto) !important;
     }
     
-    .input-group input, .input-group textarea, .input-group select {
+    .input-group input,
+    .input-group textarea,
+    .input-group select {
         background-color: var(--impressao-branco) !important;
     }
 
-    .bonus-box {
+    .character-bonus-box {
         background: var(--cor13);
     }
 
-    .bonus-label {
+    .character-bonus-label {
         color: var(--impressao-preto) !important;
         text-shadow: none !important;
     }
@@ -46,15 +48,16 @@
         background: var(--impressao-branco);
     }
 
-    .stat-box {
+    .character-attribute-box {
         background: var(--cor13);
     }
 
-    .stat-box.proficient {
+    .character-attribute-box.proficient {
         background: var(--cor18);
     }
 
-    .stat-label, .stat-value {
+    .character-attribute-label,
+    .character-attribute-modifier {
         color: var(--impressao-preto) !important;
         text-shadow: none !important;
     }
@@ -116,8 +119,7 @@
         width: 100%;
         min-width: auto;
     }
-    
-    /* menu-toggle removido */
+
     .menu-toggle {
         top: 10px;
         right: 10px;
@@ -125,7 +127,6 @@
         font-size: 0.9rem;
     }
 
-    /* side-menu não utilizado */
     .side-menu {
         width: 280px;
         right: -300px;
@@ -162,13 +163,14 @@
         gap: 10px !important;
     }
 
-    .bonus-box {
+    /* ── Bonus Box ── */
+    .character-bonus-box {
         flex-direction: row;
         gap: 15px;
         padding: 15px 10px;
     }
 
-    .bonus-check {
+    .character-bonus-check {
         width: 45px;
         height: 45px;
     }
@@ -179,50 +181,52 @@
         font-size: 2rem;
     }
 
-    .bonus-label {
+    .character-bonus-label {
         font-size: 0.85rem;
     }
 
-    .stats-grid {
+    /* ── Atributos ── */
+    .character-stats-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
 
-    .stat-box {
+    .character-attribute-box {
         padding: 10px 10px;
     }
 
-    .stat-label {
+    .character-attribute-label {
         font-size: 0.65rem;
         margin-bottom: 5px;
     }
 
-    .stat-input {
+    .character-attribute-input {
         font-size: 1.5rem;
         padding: 4px;
         min-height: 35px;
     }
 
-    .stat-value {
+    .character-attribute-modifier {
         font-size: 1.4rem;
     }
 
-    .stat-save {
+    .character-saving-throw {
         font-size: 0.8rem;
         padding: 3px 6px;
     }
 
-    .stat-prof-check {
+    .character-proficiency-check {
         top: 32px;
         left: 250px;
         width: 25px;
         height: 25px;
     }
 
-    .stat-prof-check:checked::after {
+    .character-proficiency-check:checked::after {
         font-size: 18px;
     }
 
+    /* ── Seções ── */
     .section {
         padding: 12px;
         margin-bottom: 15px;
@@ -254,53 +258,53 @@
         min-height: 80px;
     }
 
-    .skills-grid {
+    /* ── Perícias ── */
+    .character-skills-grid {
         grid-template-columns: 1fr;
         gap: 8px;
     }
 
-    .skill-item {
+    .character-skill-item {
         padding: 10px;
         border-left: 4px solid var(--cor3);
     }
 
-    .skill-name {
+    .character-skill-name {
         font-size: 0.95rem;
     }
 
-    .skill-value {
+    .character-skill-value {
         font-size: 0.95rem;
         min-width: 45px;
     }
 
-    .skill-prof-select {
+    .character-skill-prof-select {
         min-width: 90px;
         font-size: 0.9rem;
         padding: 6px 10px;
         min-height: 44px;
     }
 
+    /* ── Combate (grids legados usados em HTML) ── */
     .combat-grid {
         grid-template-columns: 1fr;
         gap: 10px;
     }
 
-    .hp-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .moedas-grid {
+    /* ── Moedas ── */
+    .character-currency-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
     }
 
+    /* ── Inventário ── */
     .inventory-item {
         grid-template-columns: 80px 1fr auto;
         gap: 8px;
         padding: 8px;
     }
 
+    /* ── Ataques ── */
     .attack-item {
         grid-template-columns: 1fr;
         gap: 8px;
@@ -324,7 +328,9 @@
         min-height: 44px;
     }
 
-    .spell-slots-grid {
+    /* ── Magias ── */
+    .character-character-spell-slots-grid,
+    .character-spell-slots-grid {
         grid-template-columns: 1fr;
         gap: 10px;
     }
@@ -334,12 +340,13 @@
         gap: 8px;
     }
 
-    .slot-current,
-    .slot-max {
+    .character-slot-current,
+    .character-slot-max {
         width: 45px;
         font-size: 1rem;
     }
 
+    /* ── Abas ── */
     .tabs-header {
         flex-direction: column;
         gap: 8px;
@@ -351,6 +358,7 @@
         font-size: 0.9rem;
     }
 
+    /* ── Modal ── */
     .modal-content {
         padding: 20px;
         max-height: 85vh;
@@ -373,6 +381,7 @@
         min-height: 44px;
     }
 
+    /* ── Indicador de salvamento ── */
     .save-indicator {
         bottom: 20px;
         right: 20px;
@@ -380,6 +389,7 @@
         font-size: 0.85rem;
     }
 
+    /* ── Item Mágico ── */
     .magic-item-header {
         grid-template-columns: 1fr auto;
         gap: 8px;
@@ -393,6 +403,7 @@
         margin-top: 8px;
     }
 
+    /* ── Imagem do personagem ── */
     .image-preview {
         width: 250px;
         height: 330px;
@@ -422,7 +433,6 @@
         touch-action: manipulation;
         min-height: 44px;
     }
-     
 }
 
 /* ========================================
@@ -446,30 +456,30 @@
         padding: 10px 15px;
     }
 
-    .stats-grid {
+    .character-stats-grid {
         grid-template-columns: 1fr;
     }
 
-    .stat-box {
+    .character-attribute-box {
         padding: 12px;
     }
 
-    .stat-prof-check {
+    .character-proficiency-check {
         top: 82px;
         left: 250px;
         width: 44px;
         height: 44px;
     }
 
-    .stat-input {
+    .character-attribute-input {
         font-size: 1.8rem;
     }
 
-    .stat-value {
+    .character-attribute-modifier {
         font-size: 1.5rem;
     }
 
-    .moedas-grid {
+    .character-currency-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -477,16 +487,16 @@
         padding: 10px;
     }
 
-    .bonus-box {
+    .character-bonus-box {
         flex-direction: column;
         gap: 10px;
     }
 
-    .bonus-item {
+    .character-bonus-item {
         width: 100%;
     }
 
-    .bonus-check {
+    .character-bonus-check {
         width: 50px;
         height: 50px;
     }
@@ -529,20 +539,20 @@
         grid-template-columns: 1fr;
     }
 
-    .stats-grid {
+    .character-stats-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
     }
 
-    .stat-box {
+    .character-attribute-box {
         padding: 8px 5px;
     }
 
-    .stat-input {
+    .character-attribute-input {
         font-size: 1.3rem;
     }
 
-    .stat-value {
+    .character-attribute-modifier {
         font-size: 1.2rem;
     }
 }
@@ -559,7 +569,7 @@
         font-size: 16px !important;
     }
 
-    .stat-input {
+    .character-attribute-input {
         font-size: 1.5rem !important;
     }
 
@@ -567,9 +577,9 @@
         font-size: 2rem !important;
     }
 
-    .skill-prof-select,
-    .bonus-check,
-    .stat-prof-check,
+    .character-skill-prof-select,
+    .character-bonus-check,
+    .character-proficiency-check,
     .delete-btn,
     .btn {
         min-height: 44px;

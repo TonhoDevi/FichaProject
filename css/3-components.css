@@ -499,8 +499,7 @@ input[type="number"] {
     gap: 4px;
 }
 
-.character-bonus-check,
-.bonus-check {
+.character-bonus-check {
     appearance: none;
     width: 50px;
     height: 50px;
@@ -512,8 +511,12 @@ input[type="number"] {
     transition: all 0.3s ease;
 }
 
-.character-bonus-check:checked::after,
-.bonus-check:checked::after {
+.character-bonus-check:checked{
+    background: var(--cor2);
+    transform: rotate(405deg);
+}
+
+.character-bonus-check:checked::after {
     content: "👑";
     position: absolute;
     top: 50%;
@@ -532,7 +535,10 @@ input[type="number"] {
     text-align: center;
 }
 
-.bonus-box,
+/* ── Input de Bônus de Proficiência ──
+   NOTA: .bonus-value é uma classe separada usada apenas no input numérico.
+   Não deve ser agrupada com .bonus-box (container).
+═══════════════════════════════════════ */
 .bonus-value {
     width: 64px;
     height: 60px;
