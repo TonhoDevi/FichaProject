@@ -351,7 +351,7 @@ function showTalentDetails(index) {
         benefEl.innerHTML = talento.beneficios.map(b => `
             <li class="traco-item">
                 <span class="traco-bullet">◆</span>
-                <span>${b}</span>
+                <span class="traco-desc">${b}</span>
             </li>`).join('');
     }
 

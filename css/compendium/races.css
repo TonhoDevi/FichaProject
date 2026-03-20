@@ -929,7 +929,7 @@ body {
 .modal-descricao {
     font-family: 'Crimson Text', serif;
     font-size: 1.05rem;
-    color: var(--cor13);
+    color: var(--color-text-primary);
     line-height: 1.7;
     font-style: italic;
     margin: 0;
@@ -979,7 +979,7 @@ body {
     padding: 10px 14px;
     font-family: 'Crimson Text', serif;
     font-size: .98rem;
-    color: var(--cor13);
+    color: var(----color-text-primary);
     line-height: 1.5;
     transition: border-color .25s ease;
 }
@@ -988,8 +988,14 @@ body {
 }
 
 .traco-bullet {
-    color: var(--cor3);
+    color: var(--color-text-primary);
     font-size: .7rem;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+.traco-desc {
+    color: var(--color-text-primary3);
+    font-size: 1rem;
     flex-shrink: 0;
     margin-top: 4px;
 }
